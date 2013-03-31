@@ -3,8 +3,10 @@
  */
 package World;
 
+import Systems.AISystem;
 import Systems.MapRenderSystem;
 import Systems.MouseZoomSystem;
+import Systems.SpriteRenderSystem;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -24,10 +26,13 @@ public class World {
 		_world = new com.artemis.World();
 		_stage = new Stage();
 		_world.setSystem(new MapRenderSystem((OrthographicCamera) _stage.getCamera()));
+		_world.setSystem(new SpriteRenderSystem((OrthographicCamera) _stage.getCamera()));
 		_world.setSystem(new MouseZoomSystem((OrthographicCamera) _stage.getCamera()));
+		_world.setSystem(new AISystem(0.1f));
 		_world.initialize();
 		
 		_world.addEntity(EntityFactory.createMap(_world, "map.tmx"));
+		_world.addEntity(EntityFactory.createObject(_world, ""));
 	}
 
 	/**

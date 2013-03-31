@@ -13,6 +13,13 @@ public class SpriteComponent extends Component {
 	private int _spriteID;
 
 	/**
+	 * @param i
+	 */
+	public SpriteComponent(int ID) {
+		_spriteID = ID;
+	}
+
+	/**
 	 * @return the _spriteID
 	 */
 	public int getSpriteID() {
