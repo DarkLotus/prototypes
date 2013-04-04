@@ -5,6 +5,8 @@ import Screens.InGameScreen;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,6 +32,15 @@ public class GameEngine extends Game {
 			StaticRefrence = this;
 	}
 
+	public static void addInputHandler(InputProcessor inputProcessor){
+		if(Gdx.input.getInputProcessor() != null)
+		{
+			InputMultiplexer multiplexer = (InputMultiplexer) Gdx.input.getInputProcessor();
+			multiplexer.addProcessor(inputProcessor);
+		}
+		else
+			Gdx.input.setInputProcessor(new InputMultiplexer(inputProcessor));
+	}
 
 	@Override
 	public void dispose() {

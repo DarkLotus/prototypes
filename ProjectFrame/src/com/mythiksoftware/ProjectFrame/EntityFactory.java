@@ -5,6 +5,8 @@ package com.mythiksoftware.ProjectFrame;
 
 import com.artemis.Entity;
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
+
 import components.MapComponent;
 import components.SpriteComponent;
 import components.WorldPositionComponent;
@@ -29,6 +31,7 @@ public class EntityFactory {
 		Entity entity = world.createEntity();
 		entity.addComponent(new WorldPositionComponent(5,5));
 		entity.addComponent(new SpriteComponent(5));
+		//world.getManager(GroupManager.class).add(entity, "object");
 		return entity;
 	}
 }

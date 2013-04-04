@@ -104,4 +104,6 @@ public static GraphicsManager getManager() {
 	}
 	
 	public HashMap<String, TextureRegion> ObjectNames;
+	
+	
 }

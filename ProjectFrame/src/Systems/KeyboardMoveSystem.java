@@ -5,19 +5,21 @@ package Systems;
 
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.mythiksoftware.ProjectFrame.GameEngine;
 
 /**
  * @author James
  *
  */
-public class MouseZoomSystem extends VoidEntitySystem implements InputProcessor {
+public class KeyboardMoveSystem extends VoidEntitySystem implements InputProcessor {
 
 	private OrthographicCamera _camera;
 
-	public MouseZoomSystem(OrthographicCamera camera){
+	public KeyboardMoveSystem(OrthographicCamera camera){
 		_camera = camera;
 		GameEngine.addInputHandler(this);
 	}
@@ -28,16 +30,32 @@ public class MouseZoomSystem extends VoidEntitySystem implements InputProcessor 
 	 */
 	@Override
 	protected void processSystem() {
-		// TODO Auto-generated method stub
-		
+		_camera.translate(_camDir);
+		_camera.translate(_camDir);
+		_camera.translate(_camDir);
 	}
 
+	Vector2 _camDir = new Vector2();
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.InputProcessor#keyDown(int)
 	 */
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
+		switch(keycode){
+		case Input.Keys.UP:
+			_camDir.add(0, 1);
+			break;
+		case Input.Keys.DOWN:
+			_camDir.add(0, -1);
+			break;
+		case Input.Keys.RIGHT:
+			_camDir.add(1, 0);
+			break;
+		case Input.Keys.LEFT:
+			_camDir.add(-1, 0);
+			break;
+				
+		}
 		return false;
 	}
 
@@ -47,6 +65,7 @@ public class MouseZoomSystem extends VoidEntitySystem implements InputProcessor 
 	@Override
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
+		_camDir.set(0, 0);
 		return false;
 	}
 
