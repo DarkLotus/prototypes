@@ -76,6 +76,16 @@ public class World {
 				
 			}}));
 		
+		get_world().addEntity(EntityFactory.createButton(_world, "wipe and load", null, new ChangeListener(){
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Logger.Log("clicked add");
+				_world.deleteEntity(_world.getManager(GroupManager.class).getEntities("persist").get(0));
+				PersistenceManager.Load(_world, "save.xml");
+				
+			}}));
+		
 	}
 
 	/**

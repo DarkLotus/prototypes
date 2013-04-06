@@ -15,6 +15,10 @@ public class SpriteComponent extends Component {
 	/**
 	 * @param i
 	 */
+	public SpriteComponent() {
+		
+	}
+	
 	public SpriteComponent(int ID) {
 		_spriteID = ID;
 	}
