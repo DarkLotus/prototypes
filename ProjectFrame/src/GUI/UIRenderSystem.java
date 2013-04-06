@@ -27,9 +27,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+import com.mythiksoftware.ProjectFrame.GameEngine;
 import com.mythiksoftware.ProjectFrame.GraphicsManager;
 
 import components.MapComponent;
@@ -49,31 +52,30 @@ public class UIRenderSystem extends EntityProcessingSystem {
 	ComponentMapper<UIButtonComponent> bc;
 	
 
-	private OrthographicCamera _camera;
-	
-	/**
-	 * @param camera
-	 */
-
-
-	SpriteBatch batch;
-
+	Stage _stage;
+	Table _table;
 
 	private Skin _skin;
-	public UIRenderSystem(OrthographicCamera camera) {
+	public UIRenderSystem() {
 		super(Aspect.getAspectForOne(UIButtonComponent.class));
-		_camera = camera;
-		batch = new SpriteBatch();
+		
+		_stage = new Stage();
+		GameEngine.addInputHandler(_stage);
 		_uiElementsCache = new HashMap<Integer,Actor>();
 		_skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		_skin.getAtlas().getTextures().iterator().next().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		
+		_table = new Table(_skin);
+		_table.setFillParent(true);
+		_table.top();
+		_table.left();
+		_stage.addActor(_table);
+		// take a stage instead of a camera, handle objects as they are but add to a stage instead.
 	}
 	
 	 @Override
      protected void begin() {
-             batch.setProjectionMatrix(_camera.combined);
-             batch.begin();
+            // batch.setProjectionMatrix(_camera.combined);
+            // batch.begin();
      }
 	 
 	 
@@ -88,19 +90,23 @@ public class UIRenderSystem extends EntityProcessingSystem {
 			UIButtonComponent b = bc.getSafe(e);
 			if(!_uiElementsCache.containsKey(e.getId())){
 				TextButton button = new TextButton(b.getLabel(), _skin);
+				if(b.getLocation()!= null){
 				button.setX(b.getLocation().x);
 				button.setY(b.getLocation().y);
+				}
 				if(b.getListener() != null)
 				button.addListener(b.getListener());
 				_uiElementsCache.put(e.getId(), button);
+				_table.add(button);
 			}
-			_uiElementsCache.get(e.getId()).draw(batch, 1f);
+			//_uiElementsCache.get(e.getId()).draw(batch, 1f);
 		}
 		
 		}
 	@Override
 	protected void end() {
-        batch.end();
+        _stage.act();
+        _stage.draw();
 }
 
 	

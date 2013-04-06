@@ -5,6 +5,7 @@ package World;
 
 import GUI.InGameGUI;
 import GUI.UIRenderSystem;
+import Managers.PersistenceManager;
 import Systems.AISystem;
 import Systems.KeyboardMoveSystem;
 import Systems.MapRenderSystem;
@@ -12,6 +13,7 @@ import Systems.MouseZoomSystem;
 import Systems.SpriteRenderSystem;
 
 import com.artemis.Entity;
+import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -39,7 +41,7 @@ public class World {
 		set_world(new com.artemis.World());
 
 		
-		_guiGameGUI = new InGameGUI(_world);
+		//_guiGameGUI = new InGameGUI(_world);
 		_camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		_uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		_uiCamera.position.add(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/2), 0);
@@ -49,22 +51,30 @@ public class World {
 		get_world().setSystem(new SpriteRenderSystem(_camera));
 		get_world().setSystem(new MouseZoomSystem(_camera));
 		get_world().setSystem(new KeyboardMoveSystem(_camera));
-		//get_world().setSystem(new UIRenderSystem((OrthographicCamera) _uiStage.getCamera()));
+		get_world().setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));
+		get_world().setManager(new GroupManager());
 		get_world().initialize();
 		
 		get_world().addEntity(EntityFactory.createMap(get_world(), "map.tmx"));
 		//_world.addEntity(EntityFactory.createObject(_world, ""));
 		
-		Entity entity = get_world().createEntity();
-		entity.addComponent(new UIButtonComponent("Build Menu",new Vector2(0, 0),new ChangeListener(){
+		get_world().addEntity(EntityFactory.createButton(_world, "Save", null, new ChangeListener(){
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				Logger.Log("clicked");
+				Logger.Log("clicked save");
+				PersistenceManager.Persist(get_world());
 				
 			}}));
-		//get_world().addEntity(entity);
+		get_world().addEntity(EntityFactory.createButton(_world, "add item", null, new ChangeListener(){
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Logger.Log("clicked add");
+				_world.addEntity(EntityFactory.createObject(_world, "test"));
+				
+			}}));
 		
 	}
 
@@ -74,10 +84,10 @@ public class World {
 	public void render(float delta) {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		_camera.update();
-		_uiCamera.update();
+		//_uiCamera.update();
 		get_world().setDelta(delta);
 		get_world().process();
-		_guiGameGUI.render();
+		//_guiGameGUI.render();
 	}
 
 	/**

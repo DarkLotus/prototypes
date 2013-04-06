@@ -3,27 +3,19 @@
  */
 package components;
 
-import helpers.Persistant;
-
 import com.artemis.Component;
 
 /**
  * @author James
  *
  */
-public class WorldPositionComponent extends Component {
-	@Persistant
-	public float x;
-	@Persistant
-	public float y;
-	
+public class VelocityComponent extends Component {
+	private float x,y;
 
-	public WorldPositionComponent()
-	{
-		
-	}
+	public VelocityComponent()
+	{}
 	
-	public WorldPositionComponent(float x, float y){
+	public VelocityComponent(float x, float y){
 		this.x = x;
 		this.y = y;
 	}
