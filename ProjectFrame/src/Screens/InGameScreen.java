@@ -4,15 +4,17 @@ import GUI.InGameGUI;
 import World.World;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 
 public class InGameScreen implements Screen  {
 
 	World world;
-	InGameGUI gui;
+	private FPSLogger fpsLogger;
+	
 	public InGameScreen()
 	{
 		world = new World();
-		//gui = new InGameGUI(world.get_world());
+		fpsLogger = new FPSLogger();
 	}
 	
 	/* (non-Javadoc)
@@ -21,7 +23,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void render(float delta) {
 		world.render(delta);// TODO Auto-generated method stub
-		//gui.render();
+		fpsLogger.log();
 		
 	}
 

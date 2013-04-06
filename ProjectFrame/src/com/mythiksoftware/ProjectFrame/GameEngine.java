@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class GameEngine extends Game {
 
 	 GameEngine StaticRefrence;
-	
+	 
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
@@ -30,6 +30,7 @@ public class GameEngine extends Game {
 		setScreen(new InGameScreen());
 		if(StaticRefrence == null)
 			StaticRefrence = this;
+		
 	}
 
 	public static void addInputHandler(InputProcessor inputProcessor){
