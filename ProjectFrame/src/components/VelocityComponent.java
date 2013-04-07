@@ -3,6 +3,8 @@
  */
 package components;
 
+import helpers.Persistant;
+
 import com.artemis.Component;
 
 /**
@@ -10,7 +12,10 @@ import com.artemis.Component;
  *
  */
 public class VelocityComponent extends Component {
-	private float x,y;
+	@Persistant
+	public float x;
+	@Persistant
+	public float y;
 
 	public VelocityComponent()
 	{}
@@ -19,21 +24,5 @@ public class VelocityComponent extends Component {
 		this.x = x;
 		this.y = y;
 	}
-	public float getX() {
-		return x;
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	public float getY() {
-		return y;
-	}
-
-	public void setY(float y) {
-		this.y = y;
-	}
-	
-	
+		
 }

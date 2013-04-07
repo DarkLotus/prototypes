@@ -10,31 +10,17 @@ import com.artemis.Component;
  *
  */
 public class SpriteComponent extends Component {
-	private int _spriteID;
+	public int SpriteID;
 
-	/**
-	 * @param i
-	 */
 	public SpriteComponent() {
 		
 	}
 	
 	public SpriteComponent(int ID) {
-		_spriteID = ID;
+		SpriteID = ID;
 	}
 
-	/**
-	 * @return the _spriteID
-	 */
-	public int getSpriteID() {
-		return _spriteID;
-	}
-
-	/**
-	 * @param _spriteID the _spriteID to set
-	 */
-	public void setSpriteID(int _spriteID) {
-		this._spriteID = _spriteID;
-	}
+	
+	
 
 }

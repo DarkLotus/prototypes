@@ -12,8 +12,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import components.MapComponent;
+import components.PlayerComponent;
 import components.SpriteComponent;
 import components.UIButtonComponent;
+import components.VelocityComponent;
 import components.WorldPositionComponent;
 
 /**
@@ -40,6 +42,16 @@ public class EntityFactory {
 	{
 		Entity entity = world.createEntity();
 		entity.addComponent(new WorldPositionComponent(5,5));
+		entity.addComponent(new SpriteComponent(5));
+		world.getManager(GroupManager.class).add(entity, "persist");
+		return entity;
+	}
+	public static Entity createPlayer(World world, String name)
+	{
+		Entity entity = world.createEntity();
+		entity.addComponent(new WorldPositionComponent(5,5));
+		entity.addComponent(new VelocityComponent());
+		entity.addComponent(new PlayerComponent());
 		entity.addComponent(new SpriteComponent(5));
 		world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;

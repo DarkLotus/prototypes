@@ -10,28 +10,18 @@ import com.artemis.Component;
  *
  */
 public class MapComponent extends Component {
-	private String _mapNameString;
+	public String MapNameString;
 
 	/**
 	 * @param name
 	 */
 	public MapComponent(String name) {
-		_mapNameString = name;
+		MapNameString = name;
 	}
-
-	/**
-	 * @return the _mapNameString
-	 */
-	public String getMapName() {
-		return _mapNameString;
+	public MapComponent() {
+		
 	}
-
-	/**
-	 * @param _mapNameString the _mapNameString to set
-	 */
-	public void setMapName(String _mapNameString) {
-		this._mapNameString = _mapNameString;
-	}
+	
 
 	
 

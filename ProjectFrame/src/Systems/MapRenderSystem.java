@@ -52,7 +52,7 @@ public class MapRenderSystem extends EntityProcessingSystem {
 			
 			if(_map == null){
 				MapComponent m = mc.getSafe(e);
-				_map = new TmxMapLoader().load("data/" + m.getMapName());
+				_map = new TmxMapLoader().load("data/" + m.MapNameString);
 				_renderer = new OrthogonalTiledMapRenderer(_map, 1f);
 			}
 			_renderer.setView(_camera);

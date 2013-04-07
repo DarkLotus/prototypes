@@ -89,13 +89,13 @@ public class UIRenderSystem extends EntityProcessingSystem {
 		{
 			UIButtonComponent b = bc.getSafe(e);
 			if(!_uiElementsCache.containsKey(e.getId())){
-				TextButton button = new TextButton(b.getLabel(), _skin);
-				if(b.getLocation()!= null){
-				button.setX(b.getLocation().x);
-				button.setY(b.getLocation().y);
+				TextButton button = new TextButton(b.LabelString, _skin);
+				if(b.Location != null){
+				button.setX(b.Location.x);
+				button.setY(b.Location.y);
 				}
-				if(b.getListener() != null)
-				button.addListener(b.getListener());
+				if(b.Listener != null)
+				button.addListener(b.Listener);
 				_uiElementsCache.put(e.getId(), button);
 				_table.add(button);
 			}

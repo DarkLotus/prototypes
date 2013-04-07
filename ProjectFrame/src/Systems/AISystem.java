@@ -34,8 +34,8 @@ public class AISystem extends IntervalEntityProcessingSystem {
 	@Override
 	protected void process(Entity e) {
 		WorldPositionComponent w = wc.getSafe(e);
-		w.setX(w.getX()+1);
-		Logger.Log("set X to " + w.getX());
+		w.x +=1;
+		Logger.Log("set X to " + w.x);
 		
 	}
 

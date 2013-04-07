@@ -3,6 +3,9 @@
  */
 package Systems;
 
+import java.sql.Time;
+import java.util.Date;
+
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -27,7 +30,7 @@ public class MovementSystem extends IntervalEntityProcessingSystem {
 	 * @param interval
 	 */
 	public MovementSystem(float interval) {
-		super(Aspect.getAspectForAll(WorldPositionComponent.class), interval);
+		super(Aspect.getAspectForAll(WorldPositionComponent.class,VelocityComponent.class), interval);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,7 +41,9 @@ public class MovementSystem extends IntervalEntityProcessingSystem {
 	protected void process(Entity e) {
 		WorldPositionComponent w = wc.getSafe(e);
 		VelocityComponent v = vc.getSafe(e);
-		Logger.Log("set X to " + w.getX());
+		//Logger.Log("set X to " + w.x + "" + System.currentTimeMillis());
+		w.x += v.x/2;
+		w.y += v.y/2;
 		
 	}
 

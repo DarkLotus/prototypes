@@ -7,9 +7,11 @@ import GUI.InGameGUI;
 import GUI.UIRenderSystem;
 import Managers.PersistenceManager;
 import Systems.AISystem;
-import Systems.KeyboardMoveSystem;
+import Systems.KeyboardCameraMoveSystem;
+import Systems.KeyboardPlayerControllerInputSystem;
 import Systems.MapRenderSystem;
 import Systems.MouseZoomSystem;
+import Systems.MovementSystem;
 import Systems.SpriteRenderSystem;
 
 import com.artemis.Entity;
@@ -50,13 +52,18 @@ public class World {
 		get_world().setSystem(new MapRenderSystem(_camera));
 		get_world().setSystem(new SpriteRenderSystem(_camera));
 		get_world().setSystem(new MouseZoomSystem(_camera));
-		get_world().setSystem(new KeyboardMoveSystem(_camera));
+		//get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
+		get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));
+		get_world().setSystem(new MovementSystem(0.05f));
+		
 		get_world().setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));
 		get_world().setManager(new GroupManager());
 		get_world().initialize();
 		
+		
 		get_world().addEntity(EntityFactory.createMap(get_world(), "map.tmx"));
+		get_world().addEntity(EntityFactory.createPlayer(_world, "lotus"));
 		//_world.addEntity(EntityFactory.createObject(_world, ""));
 		
 		get_world().addEntity(EntityFactory.createButton(_world, "Save", null, new ChangeListener(){
@@ -95,6 +102,7 @@ public class World {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		_camera.update();
 		//_uiCamera.update();
+		
 		get_world().setDelta(delta);
 		get_world().process();
 		//_guiGameGUI.render();

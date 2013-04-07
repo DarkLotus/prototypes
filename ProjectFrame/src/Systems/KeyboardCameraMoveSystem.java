@@ -15,11 +15,11 @@ import com.mythiksoftware.ProjectFrame.GameEngine;
  * @author James
  *
  */
-public class KeyboardMoveSystem extends VoidEntitySystem implements InputProcessor {
+public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputProcessor {
 
 	private OrthographicCamera _camera;
 
-	public KeyboardMoveSystem(OrthographicCamera camera){
+	public KeyboardCameraMoveSystem(OrthographicCamera camera){
 		_camera = camera;
 		GameEngine.addInputHandler(this);
 	}
