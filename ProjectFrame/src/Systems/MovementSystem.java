@@ -42,9 +42,16 @@ public class MovementSystem extends IntervalEntityProcessingSystem {
 		WorldPositionComponent w = wc.getSafe(e);
 		VelocityComponent v = vc.getSafe(e);
 		//Logger.Log("set X to " + w.x + "" + System.currentTimeMillis());
-		w.x += v.x/2;
-		w.y += v.y/2;
-		
+		w.x += v.x;
+		w.y += v.y;
+		if(v.x != 0 || v.y != 0 )
+		{
+			v.x *= 1.1f;
+			v.y *= 1.1f;
+			
+		}
+		v.x = Math.max(Math.min(v.x, 10f), -10f);
+		v.y = Math.max(Math.min(v.y, 10f), -10f);
 	}
 
 }

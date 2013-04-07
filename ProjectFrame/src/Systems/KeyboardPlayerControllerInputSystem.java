@@ -49,14 +49,20 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 		// TODO Auto-generated method stub
 		VelocityComponent v = vc.getSafe(e);
 		WorldPositionComponent w = wc.getSafe(e);
+		_camera.position.set(w.x, w.y, 0);
+		if(!_usedBoolean){
 		v.x = _camDir.x;
 		v.y = _camDir.y;
-		_camera.position.set(w.x*64, w.y*64, 0);
-		Logger.Log(_camera.position.toString() + " player@ " + w.x + " " + w.y);
+		_usedBoolean = true;
+		}
+		
+		
+		//Logger.Log(_camera.position.toString() + " player@ " + w.x + " " + w.y);
 		
 	}
-	
+	Boolean _usedBoolean = false;
 	Vector2 _camDir = new Vector2();
+	
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.InputProcessor#keyDown(int)
 	 */
@@ -65,15 +71,16 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 		switch(keycode){
 		case Input.Keys.UP:
 			_camDir.add(0, 1);
+			_usedBoolean = false;
 			break;
 		case Input.Keys.DOWN:
-			_camDir.add(0, -1);
+			_camDir.add(0, -1);_usedBoolean = false;
 			break;
 		case Input.Keys.RIGHT:
-			_camDir.add(1, 0);
+			_camDir.add(1, 0);_usedBoolean = false;
 			break;
 		case Input.Keys.LEFT:
-			_camDir.add(-1, 0);
+			_camDir.add(-1, 0);_usedBoolean = false;
 			break;
 				
 		}
@@ -101,6 +108,7 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 			break;
 				
 		}
+		_usedBoolean = false;
 		return true;
 	}
 

@@ -41,7 +41,7 @@ public class EntityFactory {
 	public static Entity createObject(World world, String name)
 	{
 		Entity entity = world.createEntity();
-		entity.addComponent(new WorldPositionComponent(5,5));
+		entity.addComponent(new WorldPositionComponent(5*64,5*64));
 		entity.addComponent(new SpriteComponent(5));
 		world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
@@ -49,7 +49,7 @@ public class EntityFactory {
 	public static Entity createPlayer(World world, String name)
 	{
 		Entity entity = world.createEntity();
-		entity.addComponent(new WorldPositionComponent(5,5));
+		entity.addComponent(new WorldPositionComponent(5*64,5*64));
 		entity.addComponent(new VelocityComponent());
 		entity.addComponent(new PlayerComponent());
 		entity.addComponent(new SpriteComponent(5));

@@ -54,7 +54,7 @@ public class World {
 		get_world().setSystem(new MouseZoomSystem(_camera));
 		//get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
 		get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));
-		get_world().setSystem(new MovementSystem(0.05f));
+		get_world().setSystem(new MovementSystem(0.0f));
 		
 		get_world().setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));

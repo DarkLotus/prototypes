@@ -70,7 +70,7 @@ public class SpriteRenderSystem extends EntityProcessingSystem {
 			SpriteComponent s = sc.getSafe(e);
 			WorldPositionComponent w = wc.getSafe(e);
 			TextureRegion textureRegion = GraphicsManager.getManager().getSpriteWithXY(0, 0);
-			batch.draw(textureRegion, w.x * 64, w.y * 64);
+			batch.draw(textureRegion, w.x, w.y);
 		}
 		
 		}
