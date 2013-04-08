@@ -3,11 +3,16 @@
  */
 package Managers;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
 
 import helpers.Persistant;
+import helpers.Save;
+import helpers.SaveObject;
+
 
 import com.artemis.Component;
 import com.artemis.Entity;
@@ -20,6 +25,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.badlogic.gdx.utils.XmlWriter;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.Output;
 import com.mythiksoftware.ProjectFrame.Logger;
 
 /**
@@ -81,6 +89,51 @@ public class PersistenceManager  {
 		}
 	}
 	
+	private static Kryo kryo = new Kryo();
+	
+	public static void LoadFromKryo(World _world,Input in) {
+		Save save = kryo.readObject(in, Save.class);
+		in.close();
+		for (SaveObject saveObject : save.entities) {
+			Entity entity = _world.createEntity();
+			for (Component component : saveObject.components) {
+				entity.addComponent(component);
+			}
+			_world.getManager(GroupManager.class).add(entity, "persist");
+			_world.addEntity(entity);
+		}
+		
+	}
+	public static void PersistToKryo(World _world) {
+		Save save = new Save();
+		ImmutableBag<Entity> entities = _world.getManager(GroupManager.class).getEntities("persist");
+		for (int i = entities.size()-1;i >=0;i--) {
+			Entity entity = entities.get(i);
+			SaveObject saveObject = new SaveObject(entity.getId());
+			save.entities.add(saveObject);
+			
+			Bag<Component> components = new Bag<Component>();
+			_world.getComponentManager().getComponentsFor(entity, components);
+			for (int x = components.size()-1;x >=0;x--) {
+				Component component = components.get(x);	
+				saveObject.components.add(component);
+			}
+		}
+		FileHandle f = Gdx.files.external("save.bin");
+		Output output;
+		try {
+			output = new Output(new FileOutputStream(f.file()));
+			kryo.writeObject(output, save);
+			output.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
 	public static void Persist(World _world){
 		
 		Element root = new Element("root", null);
@@ -91,7 +144,7 @@ public class PersistenceManager  {
 			Bag<Component> components = new Bag<Component>();
 			_world.getComponentManager().getComponentsFor(entities.get(i), components);
 			for (int x = components.size()-1;x >=0;x--) {
-				Component component = components.get(x);
+				Component component = components.get(x);				
 				Element comp = new Element(component.getClass().getName(), childElement);
 				childElement.addChild(comp);
 				for (Field iterable_element : component.getClass().getFields()) {

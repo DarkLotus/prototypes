@@ -3,6 +3,9 @@
  */
 package World;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import GUI.InGameGUI;
 import GUI.UIRenderSystem;
 import Managers.PersistenceManager;
@@ -16,13 +19,16 @@ import Systems.SpriteRenderSystem;
 
 import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
+import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.esotericsoftware.kryo.io.Input;
 import com.mythiksoftware.ProjectFrame.EntityFactory;
 import com.mythiksoftware.ProjectFrame.Logger;
 
@@ -71,7 +77,7 @@ public class World {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				Logger.Log("clicked save");
-				PersistenceManager.Persist(get_world());
+				PersistenceManager.PersistToKryo(get_world());
 				
 			}}));
 		get_world().addEntity(EntityFactory.createButton(_world, "add item", null, new ChangeListener(){
@@ -83,16 +89,32 @@ public class World {
 				
 			}}));
 		
-		get_world().addEntity(EntityFactory.createButton(_world, "wipe and load", null, new ChangeListener(){
+		get_world().addEntity(EntityFactory.createButton(_world, "wipe", null, new ChangeListener(){
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				Logger.Log("clicked add");
-				_world.deleteEntity(_world.getManager(GroupManager.class).getEntities("persist").get(0));
-				PersistenceManager.Load(_world, "save.xml");
+				Logger.Log("clicked wipe");
+				ImmutableBag<Entity> entities = _world.getManager(GroupManager.class).getEntities("persist");
+				for (int i = entities.size()-1;i >=0;i--) {
+					entities.get(i).deleteFromWorld();
+				}
+				//PersistenceManager.Load(_world, "save.xml");
 				
 			}}));
-		
+		get_world().addEntity(EntityFactory.createButton(_world, "load", null, new ChangeListener(){
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Logger.Log("clicked load");
+				FileHandle f = Gdx.files.external("save.bin");
+				try {
+					PersistenceManager.LoadFromKryo(_world, new Input(new FileInputStream(f.file())));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}}));
 	}
 
 	/**
