@@ -15,6 +15,7 @@ import Systems.KeyboardPlayerControllerInputSystem;
 import Systems.MapRenderSystem;
 import Systems.MouseZoomSystem;
 import Systems.MovementSystem;
+import Systems.RoomBuildSystem;
 import Systems.SpriteRenderSystem;
 
 import com.artemis.Entity;
@@ -32,6 +33,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.mythiksoftware.ProjectFrame.EntityFactory;
 import com.mythiksoftware.ProjectFrame.Logger;
 
+import components.RoomComponent;
 import components.UIButtonComponent;
 
 /**
@@ -52,15 +54,21 @@ public class World {
 		//_guiGameGUI = new InGameGUI(_world);
 		_camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		_uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		//move the ui camera so 0,0 is at the corner, not centre.
 		_uiCamera.position.add(Gdx.graphics.getWidth()/2, (Gdx.graphics.getHeight()/2), 0);
+		
+		//move ingame camera, should be set to centre on map TODO
 		_camera.position.add(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);
-		//_stage.getCamera().translate(64*20, 64*10, 0);
+		
 		get_world().setSystem(new MapRenderSystem(_camera));
 		get_world().setSystem(new SpriteRenderSystem(_camera));
 		get_world().setSystem(new MouseZoomSystem(_camera));
 		//get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
-		get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));
-		get_world().setSystem(new MovementSystem(0.0f));
+		
+		
+		//get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));//Platformer controller
+		get_world().setSystem(new MovementSystem(0.0f)); //todo fix speed?
 		
 		get_world().setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));
@@ -115,6 +123,18 @@ public class World {
 				}
 				
 			}}));
+		
+		get_world().addEntity(EntityFactory.createButton(_world, "build a room", null, new ChangeListener(){
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Logger.Log("clicked room");
+				//TODO check for gold would be in this phase i guess.
+				get_world().getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
+				
+			}}));
+		
+		
 	}
 
 	/**

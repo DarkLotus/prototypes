@@ -35,7 +35,7 @@ import com.mythiksoftware.ProjectFrame.Logger;
  *
  */
 public class PersistenceManager  {
-
+	@Deprecated
 	public static void Load(World world, String name){
 		XmlReader reader = new XmlReader();
 		Element element;
@@ -68,7 +68,7 @@ public class PersistenceManager  {
 		}
 		
 	}
-	
+	@Deprecated
 	public static void Load(World _world,Element root) throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, InstantiationException{
 		for (int i = root.getChildCount()-1;i >=0;i--) {
 			Entity entity = _world.createEntity();
@@ -91,6 +91,8 @@ public class PersistenceManager  {
 	
 	private static Kryo kryo = new Kryo();
 	
+	
+	// TODO No groups persisted apart from "persist"
 	public static void LoadFromKryo(World _world,Input in) {
 		Save save = kryo.readObject(in, Save.class);
 		in.close();
@@ -100,6 +102,7 @@ public class PersistenceManager  {
 				entity.addComponent(component);
 			}
 			_world.getManager(GroupManager.class).add(entity, "persist");
+			
 			_world.addEntity(entity);
 		}
 		
@@ -134,6 +137,7 @@ public class PersistenceManager  {
 		
 	}
 	
+	@Deprecated
 	public static void Persist(World _world){
 		
 		Element root = new Element("root", null);

@@ -49,10 +49,10 @@ public class EntityFactory {
 	public static Entity createPlayer(World world, String name)
 	{
 		Entity entity = world.createEntity();
-		entity.addComponent(new WorldPositionComponent(5*64,5*64));
-		entity.addComponent(new VelocityComponent());
-		entity.addComponent(new PlayerComponent());
-		entity.addComponent(new SpriteComponent(5));
+		//entity.addComponent(new WorldPositionComponent(5*64,5*64));
+		//entity.addComponent(new VelocityComponent());
+		entity.addComponent(new PlayerComponent(0,0,10000));
+		//entity.addComponent(new SpriteComponent(5));
 		world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
