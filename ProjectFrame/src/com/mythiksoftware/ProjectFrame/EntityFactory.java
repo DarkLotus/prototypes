@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import components.MapComponent;
+import components.OnCursorComponent;
 import components.PlayerComponent;
 import components.SpriteComponent;
 import components.UIButtonComponent;
@@ -54,6 +55,20 @@ public class EntityFactory {
 		entity.addComponent(new PlayerComponent(0,0,10000));
 		//entity.addComponent(new SpriteComponent(5));
 		world.getManager(GroupManager.class).add(entity, "persist");
+		return entity;
+	}
+	/**
+	 * @param _world
+	 * @return
+	 */
+	public static Entity createMovable(World world) {
+		Entity entity = world.createEntity();
+		//entity.addComponent(new WorldPositionComponent(5*64,5*64));
+		//entity.addComponent(new VelocityComponent());
+		entity.addComponent(new WorldPositionComponent());
+		entity.addComponent(new OnCursorComponent());
+		entity.addComponent(new SpriteComponent(5));
+		//world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
 }

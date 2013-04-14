@@ -7,7 +7,7 @@ import com.artemis.Component;
 
 /**
  * @author James
- *
+ * Stores refrence to a mapname/id
  */
 public class MapComponent extends Component {
 	public String MapNameString;

@@ -9,7 +9,7 @@ import com.artemis.Component;
 
 /**
  * @author James
- *
+ * Provides Velocity for movable entities
  */
 public class VelocityComponent extends Component {
 	@Persistant

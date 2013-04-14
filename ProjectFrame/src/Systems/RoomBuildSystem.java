@@ -18,7 +18,7 @@ public class RoomBuildSystem extends EntityProcessingSystem {
 	 * @param aspect
 	 */
 	public RoomBuildSystem(Aspect aspect) {
-		super(Aspect.);
+		super(aspect);
 		// TODO Auto-generated constructor stub
 	}
 

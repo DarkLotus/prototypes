@@ -7,7 +7,7 @@ import com.artemis.Component;
 
 /**
  * @author James
- *
+ * Stores player data, Score,Lives,Money etc
  */
 public class PlayerComponent extends Component {
 

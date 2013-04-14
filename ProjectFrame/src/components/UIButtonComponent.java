@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 /**
  * @author James
- *
+ * Provides UIRendersystem information to render UI entities.
  */
 public class UIButtonComponent extends Component {
 	public String LabelString;

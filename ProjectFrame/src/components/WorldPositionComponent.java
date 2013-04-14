@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author James
- *
+ * provides a world position for drawable entities
  */
 public class WorldPositionComponent extends Component {
 	@Persistant

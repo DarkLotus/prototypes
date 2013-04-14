@@ -10,6 +10,7 @@ import GUI.InGameGUI;
 import GUI.UIRenderSystem;
 import Managers.PersistenceManager;
 import Systems.AISystem;
+import Systems.BuildSystem;
 import Systems.KeyboardCameraMoveSystem;
 import Systems.KeyboardPlayerControllerInputSystem;
 import Systems.MapRenderSystem;
@@ -66,7 +67,7 @@ public class World {
 		get_world().setSystem(new MouseZoomSystem(_camera));
 		//get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
 		
-		
+		get_world().setSystem(new BuildSystem(_camera));
 		//get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));//Platformer controller
 		get_world().setSystem(new MovementSystem(0.0f)); //todo fix speed?
 		
@@ -130,7 +131,8 @@ public class World {
 			public void changed(ChangeEvent event, Actor actor) {
 				Logger.Log("clicked room");
 				//TODO check for gold would be in this phase i guess.
-				get_world().getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
+				//get_world().getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
+				get_world().addEntity(EntityFactory.createMovable(_world));
 				
 			}}));
 		
