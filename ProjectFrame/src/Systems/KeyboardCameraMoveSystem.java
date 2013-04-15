@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.mythiksoftware.ProjectFrame.GameEngine;
+import com.mythiksoftware.ProjectFrame.Logger;
 
 /**
  * @author James
@@ -22,6 +23,7 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	public KeyboardCameraMoveSystem(OrthographicCamera camera){
 		_camera = camera;
 		GameEngine.addInputHandler(this);
+		_camDir.limit(1.4f);
 	}
 	
 		
@@ -30,11 +32,16 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	 */
 	@Override
 	protected void processSystem() {
+		if(_camDir.x < camSpeed && _camDir.x > -camSpeed)//_camDir.y < camSpeed && && _camDir.y > -camSpeed)
+			_camDir.mul(1.1f, 1);
+		if(_camDir.y < camSpeed && _camDir.y > -camSpeed)
+			_camDir.mul(1,1.1f);
 		_camera.translate(_camDir);
-		_camera.translate(_camDir);
-		_camera.translate(_camDir);
+		
+		//_camera.translate(_camDir);
+		//_camera.translate(_camDir);
 	}
-
+	float camSpeed = 15f;
 	Vector2 _camDir = new Vector2();
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.InputProcessor#keyDown(int)
@@ -65,7 +72,21 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	@Override
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
-		_camDir.set(0, 0);
+		switch(keycode){
+		case Input.Keys.UP:
+			_camDir.mul(1, 0);
+			break;
+		case Input.Keys.DOWN:
+			_camDir.mul(1, 0);
+			break;
+		case Input.Keys.RIGHT:
+			_camDir.mul(0, 1);
+			break;
+		case Input.Keys.LEFT:
+			_camDir.mul(0, 1);
+			break;
+				
+		}
 		return false;
 	}
 
