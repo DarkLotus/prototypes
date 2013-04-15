@@ -27,27 +27,29 @@ public class GraphicsManager {
 	private static GraphicsManager _man;
 	
 	public GraphicsManager() {
-		_tileSetTexture = new Texture(Gdx.files.internal("data/tileset.png"));
-		_tileSetTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		_objectsSeTexture = new Texture(Gdx.files.internal("data/objects.png"));
+		//_tileSetTexture = new Texture(Gdx.files.internal("data/tileset.png"));
+		//_tileSetTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		_objectsSeTexture = new Texture(Gdx.files.internal("data/citybuildings.png"));
 		_objectsSeTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		//this.ObjectNames = loadObjectNames("objects.data");
+		this.ObjectNames = loadObjectNames("citybuildings.txt");
 	}
 private HashMap<String, TextureRegion> loadObjectNames(String string) {
 	HashMap<String, TextureRegion> temp = new HashMap<String, TextureRegion>();
 	FileHandle fileHandle = Gdx.files.internal("data/"+string);
 		String[] objectsStrings = fileHandle.readString().split("[\r\n]");
 		for (String string2 : objectsStrings) {
-			if(string2.length() < 5)
-			continue;
-
-			int x = Integer.parseInt(string2.split(" ")[1]);
-			int y = Integer.parseInt(string2.split(" ")[2]);
-			int w = Integer.parseInt(string2.split(" ")[3]);
-			int h = Integer.parseInt(string2.split(" ")[4]);
-			TextureRegion textureRegion = new TextureRegion(_objectsSeTexture, x*32, y*32, w*32, h*32);
-			temp.put(string2.split(" ")[0], textureRegion);
+			if(string2.trim().startsWith("//") || string2.length() < 2)
+				continue;
+			String[] splitStrings = string2.split(":");
+			if(splitStrings.length < 5)
+				Logger.Log("Object name string malformed :" + string2);
+			int x = Integer.parseInt(splitStrings[1]);
+			int y = Integer.parseInt(splitStrings[2]);
+			int w = Integer.parseInt(splitStrings[3]);
+			int h = Integer.parseInt(splitStrings[4]);
+			TextureRegion textureRegion = new TextureRegion(_objectsSeTexture, x*64, y*64, w*64, h*64);
+			temp.put(string2.split(":")[0], textureRegion);
 		}
 		return temp;
 	}

@@ -53,6 +53,10 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 		GameEngine.addInputHandler(this);
 	}
 
+	private float Rnd(float x){
+		int xx = (int) (x/64);
+		return xx*64;
+	}
 	/* (non-Javadoc)
 	 * @see com.artemis.systems.EntityProcessingSystem#process(com.artemis.Entity)
 	 */
@@ -65,8 +69,8 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 		WorldPositionComponent w = wc.getSafe(e);
 		mouseLocVector2.set(Gdx.input.getX(),Gdx.input.getY(),0);
 		_camera.unproject(mouseLocVector2);
-		w.x = mouseLocVector2.x;
-		w.y = mouseLocVector2.y;
+		w.x = Rnd(mouseLocVector2.x);
+		w.y = Rnd(mouseLocVector2.y);
 		_entity = e;
 		_bBuilding = true;
 		if(_bCLicked)

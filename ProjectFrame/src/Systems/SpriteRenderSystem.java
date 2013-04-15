@@ -66,10 +66,16 @@ public class SpriteRenderSystem extends EntityProcessingSystem {
 	protected void process(Entity e) {
 		if(sc.has(e) && wc.has(e))
 		{
-			
+			TextureRegion textureRegion = null; // todo cache
 			SpriteComponent s = sc.getSafe(e);
 			WorldPositionComponent w = wc.getSafe(e);
-			TextureRegion textureRegion = GraphicsManager.getManager().getSpriteWithXY(0, 0);
+			if(s.SpriteID != 0)
+			textureRegion = GraphicsManager.getManager().getSpriteWithID(s.SpriteID);
+			else if(s.SpriteName != null)
+				textureRegion = GraphicsManager.getManager().ObjectNames.get(s.SpriteName);
+			else {
+				textureRegion = GraphicsManager.getManager().getSpriteWithXY(0, 0);
+			}
 			batch.draw(textureRegion, w.x, w.y);
 		}
 		

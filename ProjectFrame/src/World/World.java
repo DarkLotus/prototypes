@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import GUI.InGameGUI;
-import GUI.UIRenderSystem;
 import Managers.PersistenceManager;
 import Systems.AISystem;
 import Systems.BuildSystem;
@@ -18,6 +17,7 @@ import Systems.MouseZoomSystem;
 import Systems.MovementSystem;
 import Systems.RoomBuildSystem;
 import Systems.SpriteRenderSystem;
+import Systems.UIRenderSystem;
 
 import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
@@ -65,7 +65,7 @@ public class World {
 		get_world().setSystem(new MapRenderSystem(_camera));
 		get_world().setSystem(new SpriteRenderSystem(_camera));
 		get_world().setSystem(new MouseZoomSystem(_camera));
-		//get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
+		get_world().setSystem(new KeyboardCameraMoveSystem(_camera));
 		
 		get_world().setSystem(new BuildSystem(_camera));
 		//get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));//Platformer controller
@@ -77,7 +77,7 @@ public class World {
 		get_world().initialize();
 		
 		
-		get_world().addEntity(EntityFactory.createMap(get_world(), "map.tmx"));
+		get_world().addEntity(EntityFactory.createMap(get_world(), "world.tmx"));
 		get_world().addEntity(EntityFactory.createPlayer(_world, "lotus"));
 		//_world.addEntity(EntityFactory.createObject(_world, ""));
 		
@@ -132,7 +132,7 @@ public class World {
 				Logger.Log("clicked room");
 				//TODO check for gold would be in this phase i guess.
 				//get_world().getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
-				get_world().addEntity(EntityFactory.createMovable(_world));
+				get_world().addEntity(EntityFactory.createResidential(_world));
 				
 			}}));
 		

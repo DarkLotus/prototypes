@@ -1,0 +1,447 @@
+Accountant 56 46 2 2 RotateType 1
+
+Actor 56 40 2 2 RotateType 1
+
+Alert 35 12 2 2
+
+AlertElectrical 35 12 2 2
+
+Ambulance 40 15 4 10
+
+AnthonyClothes 48 48 2 2
+
+AnthonyIRL 48 60 2 2 RotateType 1
+
+Avatar 32 54 2 2
+
+BagOfDrugs 48 50 2 2
+
+Bathtub 18 56 5 3
+
+Bed 0 6 2 4 RotateType 1
+
+BedsideCab1 3 50 2 2
+
+BedsideCab2 3 52 2 2
+
+Benc 14 22 8 2 RotateType 2
+
+BigDesk 8 40 2 4 RotateType 4
+
+Bin 12 4 2 2 RotateType 3
+
+BlowTorc 50 30 2 2
+
+Bookshelf 0 12 2 2 RotateType 1
+
+Booze 48 8 2 2
+
+Boy 0 0 2 2
+
+Brick 48 6 2 2
+
+Bulldozer 50 34 2 2
+
+Candelabra 29 51 2 2
+
+Capacitor 6 44 2 2 RotateType 2
+
+Cctv 30 28 1 1 RotateType 6
+
+CctvMonitor 23 25 6 3 RotateType 1
+
+CctvMount 31 28 1 1 RotateType 1
+
+Chef 56 28 2 2 RotateType 1
+
+Chief 56 52 2 2 RotateType 1
+
+ChurchAltar 23 53 4 3
+
+ChurchPe 27 54 8 2
+
+ChurchStatue 27 51 2 2
+
+ChurchWindo 23 51 2 2 RotateType 2
+
+Cigs 48 10 2 2
+
+CleaningBrus 50 48 2 2
+
+Clipboard 48 46 2 2
+
+Concrete 50 6 2 2
+
+Cooker 0 15 4 3 RotateType 1
+
+Cup 52 48 2 2
+
+Cupboard 7 50 4 4
+
+DiningChair 18 59 2 2 RotateType 3
+
+DiningTable 33 48 3 6
+
+Doctor 56 24 2 2 RotateType 1
+
+Door 2 0 2 2 RotateType 1
+
+DoubleBed 0 50 3 4
+
+Drain 12 6 2 2
+
+Drill 50 46 2 2
+
+Drugs 50 18 2 2
+
+Edward 56 32 2 2 RotateType 1
+
+EdwardCivilian 56 42 2 2 RotateType 1
+
+EdwardsEnem 56 40 2 2 RotateType 1
+
+EdwardsWife 56 38 2 2 RotateType 1
+
+ElectricChair 6 46 4 4 RotateType 4
+
+ElectricalCable 18 48 1 1
+
+ElectricalSwitc 20 6 2 2 RotateType 1
+
+FilingCabinet 10 41 2 3 RotateType 3
+
+Fire 37 0 2 2
+
+FireEngine 40 2 4 13
+
+Fireman 40 48 2 2 RotateType 1
+
+Food1 48 36 2 2
+
+Food2 50 36 2 2
+
+Food3 50 38 2 2
+
+Food4 48 38 2 2
+
+FoodTra 17 16 2 2
+
+FoodTrayDirt 15 16 2 2
+
+Foreman 56 48 2 2 RotateType 1
+
+Fork 50 12 2 2
+
+Fridge 0 19 4 3 RotateType 1
+
+FridgeLid 0 27 4 2 RotateType 1
+
+Garbage 25 2 2 2
+
+Gardener 56 36 2 2 RotateType 1
+
+Girder 48 22 2 2
+
+GlassWindow 0 54 2 2 RotateType 2
+
+GrassTurf 50 26 2 2
+
+Guard 40 52 2 2 RotateType 1
+
+Guard2 40 54 2 2 RotateType 1
+
+Guard3 40 56 2 2 RotateType 1
+
+Gun 48 26 2 2
+
+Hammer 48 44 2 2
+
+HammerDrill 48 32 2 2
+
+Hand 48 0 2 2
+
+HandBaton 50 0 2 2
+
+HandEmpt 48 0 2 2
+
+HandKnife 48 2 2 2
+
+Head1 52 0 1 1 RotateType 1
+
+HeadLast 52 28 1 1 RotateType 1
+
+Henchman 40 62 2 2 RotateType 1
+
+HenchmanKnifed 40 60 2 2 RotateType 1
+
+Hose 48 42 2 2
+
+HouseDoor 7 54 4 2
+
+Ingredient1 50 40 2 2
+
+Ingredient2 48 40 2 2
+
+Ingredient3 50 38 2 2
+
+Ingredient4 48 38 2 2
+
+JailBars 10 4 2 2
+
+JailDoor 0 4 2 2 RotateType 2
+
+JailDoorLarge 4 4 4 2 RotateType 2
+
+JailKe 50 14 2 2
+
+Janitor 56 34 2 2 RotateType 1
+
+KitchenSink 17 50 4 3
+
+KitchenSink2 23 42 6 3 RotateType 1
+
+Knife 50 10 2 2
+
+Lawyer 56 50 2 2 RotateType 1
+
+LeatherChair 19 44 2 2 RotateType 2
+
+Light 35 10 2 2 RotateType 4
+
+LightOutdoor 27 0 2 2 RotateType 4
+
+Lighter 50 16 2 2
+
+LivingRoomTable 13 50 2 6
+
+LivingRoomTv 15 50 2 6
+
+LockNoPrisoners 0 2 2 2
+
+MedicalBed 23 29 4 4 RotateType 1
+
+Megaphone 50 4 2 2
+
+MetalDetector 30 61 4 3 RotateType 2
+
+Mirror 5 52 2 2
+
+MobilePhone 48 16 2 2
+
+Mop 48 24 2 2
+
+MorgueSlab 23 36 2 4 RotateType 1
+
+Needle 48 4 2 2
+
+Nico 56 56 2 2 RotateType 1
+
+NicoIRL 56 62 2 2 RotateType 1
+
+NicoNaked 48 54 2 2 RotateType 1
+
+Nothing 11 16 2 2
+
+OakBookshelf 19 46 4 4 RotateType 4
+
+OakDesk 23 48 4 2 RotateType 1
+
+OfficeChair 0 40 2 2 RotateType 1
+
+OfficeDesk 0 42 4 2 RotateType 1
+
+PalermoDaughter1 48 56 2 2 RotateType 1
+
+PalermoDaughter2 48 58 2 2 RotateType 1
+
+Paramedic 40 58 2 2 RotateType 1
+
+PhoneBoot 10 2 2 2 RotateType 1
+
+PianoWire 50 50 2 2
+
+PipeLarge 18 44 1 1
+
+PipeLargeCorner 17 45 1 1
+
+PipeLargeCross 17 47 1 1
+
+PipeLargeTJunction 17 46 1 1
+
+PipeLargeTerminator 17 48 1 1
+
+PipeSmall 16 44 1 1
+
+PipeSmallCorner 16 45 1 1
+
+PipeSmallCross 16 47 1 1
+
+PipeSmallTJunction 16 46 1 1
+
+PipeSmallTerminator 16 48 1 1
+
+PipeValve 17 49 1 1
+
+Poison 50 8 2 2
+
+PoolTable 8 60 6 4 RotateType 2
+
+PowerStation 0 44 6 6
+
+PowerSwitc 48 20 2 2
+
+PoweredIcon 35 0 2 2
+
+PoweredOffIcon 35 0 2 2
+
+Priest 56 30 2 2 RotateType 1
+
+Prisoner 56 0 2 2 RotateType 1
+
+Prisoner2 56 2 2 2 RotateType 1
+
+Prisoner3 56 4 2 2 RotateType 1
+
+Prisoner4 56 6 2 2 RotateType 1
+
+PrisonerNaked 56 14 2 2 RotateType 1
+
+PrisonerNaked2 56 16 2 2 RotateType 1
+
+PrisonerNaked3 56 18 2 2 RotateType 1
+
+PrisonerNaked4 56 20 2 2 RotateType 1
+
+Rake 50 24 2 2
+
+RiotGuard 40 50 2 2 RotateType 1
+
+RiotShield 50 2 2 2
+
+RiotVan 44 15 4 10
+
+Rubble1 14 56 1 1
+
+Rubble2 15 56 1 1
+
+Rubble3 14 57 1 1
+
+Rubble4 15 57 1 1
+
+Rubble5 14 56 2 2
+
+Saw 48 14 2 2
+
+Screwdriver 48 18 2 2
+
+ServingTable 0 37 10 3 RotateType 1
+
+ServingTableLid 16 40 8 2 RotateType 1
+
+Shackles 50 20 2 2
+
+Sheers 50 22 2 2
+
+ShowerHead 8 8 2 2 RotateType 1
+
+Shrink 56 44 2 2 RotateType 1
+
+Sink 5 54 2 2
+
+SledgeHammer 50 32 2 2
+
+Sofa 11 50 2 6
+
+SofaChair 17 54 2 2
+
+SolitaryDoor 2 2 2 2 RotateType 2
+
+Sonny 56 58 2 2 RotateType 1
+
+SonnyIRL 48 62 2 2 RotateType 1
+
+Spatula 50 44 2 2
+
+Spoon 48 12 2 2
+
+Sprinkler 16 49 1 1
+
+StackBrick 33 2 2 2
+
+StackCable 33 8 2 2
+
+StackConcrete 33 0 2 2
+
+StackFoodTrays 21 25 2 2 RotateType 4
+
+StackFoodTraysDirt 21 27 2 2 RotateType 4
+
+StackGirder 33 4 2 2
+
+StackGrass 33 6 2 2
+
+StackIngredients1 10 29 2 2 RotateType 4
+
+StackIngredients2 10 31 2 2 RotateType 4
+
+StackIngredients3 10 33 2 2 RotateType 4
+
+StackIngredients4 4 35 2 2 RotateType 4
+
+StackMeals1 10 35 2 2 RotateType 4
+
+StackMeals2 16 35 2 2 RotateType 4
+
+StackMeals3 16 31 2 2 RotateType 4
+
+StackMeals4 16 33 2 2 RotateType 4
+
+StackPipes 33 10 2 2
+
+SupplyTruck 44 0 4 15
+
+Switch 0 53 1 1
+
+Table 11 19 8 3 RotateType 2 TopAligned true
+
+TheDon 56 54 2 2 RotateType 1
+
+TheDonHurt 48 52 2 2 RotateType 1
+
+TheDonIRL 56 60 2 2 RotateType 1
+
+Toilet 0 10 2 2 RotateType 1
+
+ToiletNice 5 50 2 2
+
+Torch 48 34 2 2
+
+Tree 4 56 4 4 RotateType 4
+
+Tree2 0 56 4 4 RotateType 4
+
+TvLarge 18 62 3 2 RotateType 1
+
+TvSmall 4 6 2 2 RotateType 1
+
+VanityTable 19 53 4 3
+
+Warden 56 26 2 2 RotateType 1
+
+WaterIcon 35 4 2 2
+
+WaterOffIcon 35 4 2 2
+
+WaterStation 10 44 6 6
+
+Wave 35 8 2 2
+
+WeightsBenc 18 11 2 3 RotateType 1
+
+Window 6 10 2 2 RotateType 2
+
+WindowLarge 10 10 4 2 RotateType 2
+
+WoodenSpoon 50 42 2 2
+
+Workman 56 22 2 2 RotateType 1
