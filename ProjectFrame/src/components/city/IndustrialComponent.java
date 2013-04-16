@@ -11,19 +11,16 @@ import com.artemis.Component;
  */
 public class IndustrialComponent extends Component {
 
-	/**
-	 * @param i
-	 * @param j
-	 * @param k
-	 */
-	public IndustrialComponent(int i, int j, int k) {
-		Score = i;
-		Life = j;
-		Money = k;
-	}
-	public int Score;
-	public int Life;
-	public int Money;
+
+	// Comercial system adds residents to employees
+	public int Employees;
+	public int MaxEmployees = 100;
+	
+	//Which system, checks for nearby shops, adds a customer? maybe residential as part of the people cycle?
+	
+	public int Customers = 0;
+	
+	public int Tax;
 	
 	public IndustrialComponent()
 	{}

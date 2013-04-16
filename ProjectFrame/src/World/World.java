@@ -18,6 +18,7 @@ import Systems.MovementSystem;
 import Systems.RoomBuildSystem;
 import Systems.SpriteRenderSystem;
 import Systems.UIRenderSystem;
+import Systems.city.ResidentialSystem;
 
 import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
@@ -70,6 +71,8 @@ public class World {
 		get_world().setSystem(new BuildSystem(_camera));
 		//get_world().setSystem(new KeyboardPlayerControllerInputSystem(_camera));//Platformer controller
 		get_world().setSystem(new MovementSystem(0.0f)); //todo fix speed?
+		
+		get_world().setSystem(new ResidentialSystem(1f));
 		
 		get_world().setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));
@@ -146,7 +149,7 @@ public class World {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		_camera.update();
 		//_uiCamera.update();
-		
+		Logger.Log(""+delta);
 		get_world().setDelta(delta);
 		get_world().process();
 		//_guiGameGUI.render();

@@ -78,6 +78,7 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 			_bBuilding = false;
 			_bCLicked = false;
 			_entity.removeComponent(c);
+			
 			_entity = null;
 			//todo check for allowed placement
 			

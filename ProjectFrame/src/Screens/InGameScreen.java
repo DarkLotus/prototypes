@@ -23,7 +23,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void render(float delta) {
 		world.render(delta);// TODO Auto-generated method stub
-		fpsLogger.log();
+		//fpsLogger.log();
 		
 	}
 

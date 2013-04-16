@@ -10,20 +10,11 @@ import com.artemis.Component;
  * Stores player data, Score,Lives,Money etc
  */
 public class ResidentialComponent extends Component {
-
-	/**
-	 * @param i
-	 * @param j
-	 * @param k
-	 */
-	public ResidentialComponent(int i, int j, int k) {
-		Score = i;
-		Life = j;
-		Money = k;
-	}
-	public int Score;
-	public int Life;
-	public int Money;
+	public int Population = 0;
+	public int MaxPop = 100;
+	public int Happiness = 50;
+	public int Employeed = 0;
+	
 	
 	public ResidentialComponent()
 	{}
