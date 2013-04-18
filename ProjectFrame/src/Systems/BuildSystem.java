@@ -7,24 +7,20 @@ import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
+import com.artemis.managers.GroupManager;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.mythiksoftware.ProjectFrame.GameEngine;
 
 import components.OnCursorComponent;
-import components.RoomComponent;
-import components.VelocityComponent;
 import components.WorldPositionComponent;
 
 /**
  * @author James
- * Provides a build system ala sim city. 
+ * Provides a build system ala sim city.
  * When an entity has onCursor, it moves the entity till a click places it, should handle checking for collisions
  */
 public class BuildSystem extends EntityProcessingSystem implements InputProcessor  {
@@ -34,22 +30,22 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 	@Mapper
 	ComponentMapper<WorldPositionComponent> wc;
 	private OrthographicCamera _camera;
-	
+
 	//Track current entity being moved?
 	private Entity _entity;
-	
+
 	private boolean _bCLicked = false;
 	private boolean _bBuilding = false;
-	
-	
-	
+
+
+
 	/**
 	 * @param aspect
 	 */
 	public BuildSystem(OrthographicCamera camera) {
 		super(Aspect.getAspectForAll(OnCursorComponent.class));
 		// TODO Auto-generated constructor stub
-		_camera = camera;
+		this._camera = camera;
 		GameEngine.addInputHandler(this);
 	}
 
@@ -63,25 +59,25 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 	@Override
 	protected void process(Entity e) {
 		// only called while were building, since no entity will have cursor component unless its being built.
-		OnCursorComponent c = cc.getSafe(e);
+		OnCursorComponent c = this.cc.getSafe(e);
 		if(c == null)
 			return;
-		WorldPositionComponent w = wc.getSafe(e);
-		mouseLocVector2.set(Gdx.input.getX(),Gdx.input.getY(),0);
-		_camera.unproject(mouseLocVector2);
-		w.x = Rnd(mouseLocVector2.x);
-		w.y = Rnd(mouseLocVector2.y);
-		_entity = e;
-		_bBuilding = true;
-		if(_bCLicked)
+		WorldPositionComponent w = this.wc.getSafe(e);
+		this.mouseLocVector2.set(Gdx.input.getX(),Gdx.input.getY(),0);
+		this._camera.unproject(this.mouseLocVector2);
+		w.x = Rnd(this.mouseLocVector2.x);
+		w.y = Rnd(this.mouseLocVector2.y);
+		this._entity = e;
+		this._bBuilding = true;
+		if(this._bCLicked)
 		{
-			_bBuilding = false;
-			_bCLicked = false;
-			_entity.removeComponent(c);
-			
-			_entity = null;
+			this._bBuilding = false;
+			this._bCLicked = false;
+			this._entity.removeComponent(c);
+			e.getWorld().getManager(GroupManager.class).add(this._entity, "persist");
+			this._entity = null;
 			//todo check for allowed placement
-			
+
 		}
 	}
 
@@ -126,8 +122,9 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 	 */
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(_bBuilding)
-		_bCLicked = true;
+		if(this._bBuilding) {
+			this._bCLicked = true;
+		}
 		return false;
 	}
 
@@ -158,6 +155,6 @@ public class BuildSystem extends EntityProcessingSystem implements InputProcesso
 		return false;
 	}
 
-	
-	
+
+
 }

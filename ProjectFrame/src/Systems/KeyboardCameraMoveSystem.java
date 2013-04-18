@@ -4,13 +4,11 @@
 package Systems;
 
 import com.artemis.systems.VoidEntitySystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.mythiksoftware.ProjectFrame.GameEngine;
-import com.mythiksoftware.ProjectFrame.Logger;
 
 /**
  * @author James
@@ -21,23 +19,25 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	private OrthographicCamera _camera;
 
 	public KeyboardCameraMoveSystem(OrthographicCamera camera){
-		_camera = camera;
+		this._camera = camera;
 		GameEngine.addInputHandler(this);
-		_camDir.limit(1.4f);
+		this._camDir.limit(1.4f);
 	}
-	
-		
+
+
 	/* (non-Javadoc)
 	 * @see com.artemis.systems.VoidEntitySystem#processSystem()
 	 */
 	@Override
 	protected void processSystem() {
-		if(_camDir.x < camSpeed && _camDir.x > -camSpeed)//_camDir.y < camSpeed && && _camDir.y > -camSpeed)
-			_camDir.mul(1.1f, 1);
-		if(_camDir.y < camSpeed && _camDir.y > -camSpeed)
-			_camDir.mul(1,1.1f);
-		_camera.translate(_camDir);
-		
+		if(this._camDir.x < this.camSpeed && this._camDir.x > -this.camSpeed) {
+			this._camDir.mul(1.1f, 1);
+		}
+		if(this._camDir.y < this.camSpeed && this._camDir.y > -this.camSpeed) {
+			this._camDir.mul(1,1.1f);
+		}
+		this._camera.translate(this._camDir);
+
 		//_camera.translate(_camDir);
 		//_camera.translate(_camDir);
 	}
@@ -49,19 +49,19 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	@Override
 	public boolean keyDown(int keycode) {
 		switch(keycode){
-		case Input.Keys.UP:
-			_camDir.add(0, 1);
-			break;
-		case Input.Keys.DOWN:
-			_camDir.add(0, -1);
-			break;
-		case Input.Keys.RIGHT:
-			_camDir.add(1, 0);
-			break;
-		case Input.Keys.LEFT:
-			_camDir.add(-1, 0);
-			break;
-				
+			case Input.Keys.UP:
+				this._camDir.add(0, 1);
+				break;
+			case Input.Keys.DOWN:
+				this._camDir.add(0, -1);
+				break;
+			case Input.Keys.RIGHT:
+				this._camDir.add(1, 0);
+				break;
+			case Input.Keys.LEFT:
+				this._camDir.add(-1, 0);
+				break;
+
 		}
 		return false;
 	}
@@ -73,19 +73,19 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
 		switch(keycode){
-		case Input.Keys.UP:
-			_camDir.mul(1, 0);
-			break;
-		case Input.Keys.DOWN:
-			_camDir.mul(1, 0);
-			break;
-		case Input.Keys.RIGHT:
-			_camDir.mul(0, 1);
-			break;
-		case Input.Keys.LEFT:
-			_camDir.mul(0, 1);
-			break;
-				
+			case Input.Keys.UP:
+				this._camDir.mul(1, 0);
+				break;
+			case Input.Keys.DOWN:
+				this._camDir.mul(1, 0);
+				break;
+			case Input.Keys.RIGHT:
+				this._camDir.mul(0, 1);
+				break;
+			case Input.Keys.LEFT:
+				this._camDir.mul(0, 1);
+				break;
+
 		}
 		return false;
 	}
@@ -140,7 +140,7 @@ public class KeyboardCameraMoveSystem extends VoidEntitySystem implements InputP
 	 */
 	@Override
 	public boolean scrolled(int amount) {
-		_camera.zoom += (float)amount /15;
+		this._camera.zoom += (float)amount /15;
 		return false;
 	}
 

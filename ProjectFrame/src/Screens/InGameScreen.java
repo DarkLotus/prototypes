@@ -1,6 +1,5 @@
 package Screens;
 
-import GUI.InGameGUI;
 import World.World;
 
 import com.badlogic.gdx.Screen;
@@ -10,21 +9,21 @@ public class InGameScreen implements Screen  {
 
 	World world;
 	private FPSLogger fpsLogger;
-	
+
 	public InGameScreen()
 	{
-		world = new World();
-		fpsLogger = new FPSLogger();
+		this.world = new World();
+		this.fpsLogger = new FPSLogger();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.Screen#render(float)
 	 */
 	@Override
 	public void render(float delta) {
-		world.render(delta);// TODO Auto-generated method stub
+		this.world.render(delta);// TODO Auto-generated method stub
 		//fpsLogger.log();
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -32,8 +31,8 @@ public class InGameScreen implements Screen  {
 	 */
 	@Override
 	public void resize(int width, int height) {
-		
-		
+
+
 	}
 
 	/* (non-Javadoc)
@@ -42,7 +41,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +50,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -60,7 +59,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -69,7 +68,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +77,7 @@ public class InGameScreen implements Screen  {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

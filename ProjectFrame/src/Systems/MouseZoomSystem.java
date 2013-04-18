@@ -4,7 +4,6 @@
 package Systems;
 
 import com.artemis.systems.VoidEntitySystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mythiksoftware.ProjectFrame.GameEngine;
@@ -18,18 +17,18 @@ public class MouseZoomSystem extends VoidEntitySystem implements InputProcessor 
 	private OrthographicCamera _camera;
 
 	public MouseZoomSystem(OrthographicCamera camera){
-		_camera = camera;
+		this._camera = camera;
 		GameEngine.addInputHandler(this);
 	}
-	
-		
+
+
 	/* (non-Javadoc)
 	 * @see com.artemis.systems.VoidEntitySystem#processSystem()
 	 */
 	@Override
 	protected void processSystem() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -100,7 +99,7 @@ public class MouseZoomSystem extends VoidEntitySystem implements InputProcessor 
 	 */
 	@Override
 	public boolean scrolled(int amount) {
-		_camera.zoom += (float)amount /15;
+		this._camera.zoom += (float)amount /15;
 		return false;
 	}
 

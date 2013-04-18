@@ -8,15 +8,11 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
-import com.artemis.systems.VoidEntitySystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.mythiksoftware.ProjectFrame.GameEngine;
-import com.mythiksoftware.ProjectFrame.Logger;
-
 import components.PlayerComponent;
 import components.VelocityComponent;
 import components.WorldPositionComponent;
@@ -32,57 +28,57 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 	ComponentMapper<WorldPositionComponent> wc;
 	@Mapper
 	ComponentMapper<PlayerComponent> pc;
-	
+
 	private OrthographicCamera _camera;
 
 	public KeyboardPlayerControllerInputSystem(OrthographicCamera camera){
 		super(Aspect.getAspectForAll(PlayerComponent.class, VelocityComponent.class));
-		_camera = camera;
+		this._camera = camera;
 		GameEngine.addInputHandler(this);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.artemis.systems.EntityProcessingSystem#process(com.artemis.Entity)
 	 */
 	@Override
 	protected void process(Entity e) {
 		// TODO Auto-generated method stub
-		VelocityComponent v = vc.getSafe(e);
-		WorldPositionComponent w = wc.getSafe(e);
-		_camera.position.set(w.x, w.y, 0);
-		if(!_usedBoolean){
-		v.x = _camDir.x;
-		v.y = _camDir.y;
-		_usedBoolean = true;
+		VelocityComponent v = this.vc.getSafe(e);
+		WorldPositionComponent w = this.wc.getSafe(e);
+		this._camera.position.set(w.x, w.y, 0);
+		if(!this._usedBoolean){
+			v.x = this._camDir.x;
+			v.y = this._camDir.y;
+			this._usedBoolean = true;
 		}
-		
-		
+
+
 		//Logger.Log(_camera.position.toString() + " player@ " + w.x + " " + w.y);
-		
+
 	}
 	Boolean _usedBoolean = false;
 	Vector2 _camDir = new Vector2();
-	
+
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.InputProcessor#keyDown(int)
 	 */
 	@Override
 	public boolean keyDown(int keycode) {
 		switch(keycode){
-		case Input.Keys.UP:
-			_camDir.add(0, 1);
-			_usedBoolean = false;
-			break;
-		case Input.Keys.DOWN:
-			_camDir.add(0, -1);_usedBoolean = false;
-			break;
-		case Input.Keys.RIGHT:
-			_camDir.add(1, 0);_usedBoolean = false;
-			break;
-		case Input.Keys.LEFT:
-			_camDir.add(-1, 0);_usedBoolean = false;
-			break;
-				
+			case Input.Keys.UP:
+				this._camDir.add(0, 1);
+				this._usedBoolean = false;
+				break;
+			case Input.Keys.DOWN:
+				this._camDir.add(0, -1);this._usedBoolean = false;
+				break;
+			case Input.Keys.RIGHT:
+				this._camDir.add(1, 0);this._usedBoolean = false;
+				break;
+			case Input.Keys.LEFT:
+				this._camDir.add(-1, 0);this._usedBoolean = false;
+				break;
+
 		}
 		return true;
 	}
@@ -94,21 +90,21 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
 		switch(keycode){
-		case Input.Keys.UP:
-			_camDir.sub(0, 1);
-			break;
-		case Input.Keys.DOWN:
-			_camDir.sub(0, -1);
-			break;
-		case Input.Keys.RIGHT:
-			_camDir.sub(1, 0);
-			break;
-		case Input.Keys.LEFT:
-			_camDir.sub(-1, 0);
-			break;
-				
+			case Input.Keys.UP:
+				this._camDir.sub(0, 1);
+				break;
+			case Input.Keys.DOWN:
+				this._camDir.sub(0, -1);
+				break;
+			case Input.Keys.RIGHT:
+				this._camDir.sub(1, 0);
+				break;
+			case Input.Keys.LEFT:
+				this._camDir.sub(-1, 0);
+				break;
+
 		}
-		_usedBoolean = false;
+		this._usedBoolean = false;
 		return true;
 	}
 
@@ -162,11 +158,11 @@ public class KeyboardPlayerControllerInputSystem extends EntityProcessingSystem 
 	 */
 	@Override
 	public boolean scrolled(int amount) {
-		
+
 		return false;
 	}
 
 
-	
+
 
 }

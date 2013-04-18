@@ -19,10 +19,10 @@ public class VelocityComponent extends Component {
 
 	public VelocityComponent()
 	{}
-	
+
 	public VelocityComponent(float x, float y){
 		this.x = x;
 		this.y = y;
 	}
-		
+
 }

@@ -36,7 +36,7 @@ public class RoomBuildSystem extends EntityProcessingSystem {
 	 */
 	public void StartBuild(RoomComponent roomComponent) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

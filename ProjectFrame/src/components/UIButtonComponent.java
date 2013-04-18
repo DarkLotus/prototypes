@@ -20,14 +20,14 @@ public class UIButtonComponent extends Component {
 	 * @param name
 	 */
 	public UIButtonComponent(String label, Vector2 Location, ChangeListener listener) {
-		LabelString = label;
+		this.LabelString = label;
 		this.Location = Location;
 		this.Listener = listener;
 	}
 	public UIButtonComponent(){
-		
+
 	}
-	
-	
+
+
 
 }

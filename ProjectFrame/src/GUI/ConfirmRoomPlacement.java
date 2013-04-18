@@ -14,25 +14,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
  *
  */
 public class ConfirmRoomPlacement extends Table {
-	
+
 	Skin _skinSkin;
 	/**
 	 * 
 	 */
 	public ConfirmRoomPlacement(Skin skin) {
 		super(skin);
-		_skinSkin = skin;
+		this._skinSkin = skin;
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
 	/**
 	 * @param Table
 	 * @param Button Label
 	 * @param Listener
 	 */
 	private void addButon(Table table, String label, ChangeListener buildButton2) {
-		TextButton button = new TextButton(label, _skinSkin);
+		TextButton button = new TextButton(label, this._skinSkin);
 		button.addListener(buildButton2);
 		table.add(button);
 		Stage s = new Stage();

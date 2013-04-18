@@ -3,16 +3,11 @@
  */
 package Systems;
 
-import java.sql.Time;
-import java.util.Date;
-
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.IntervalEntityProcessingSystem;
-import com.mythiksoftware.ProjectFrame.Logger;
-
 import components.VelocityComponent;
 import components.WorldPositionComponent;
 
@@ -39,8 +34,8 @@ public class MovementSystem extends IntervalEntityProcessingSystem {
 	 */
 	@Override
 	protected void process(Entity e) {
-		WorldPositionComponent w = wc.getSafe(e);
-		VelocityComponent v = vc.getSafe(e);
+		WorldPositionComponent w = this.wc.getSafe(e);
+		VelocityComponent v = this.vc.getSafe(e);
 		//Logger.Log("set X to " + w.x + "" + System.currentTimeMillis());
 		w.x += v.x;
 		w.y += v.y;
@@ -48,7 +43,7 @@ public class MovementSystem extends IntervalEntityProcessingSystem {
 		{
 			v.x *= 1.1f;
 			v.y *= 1.1f;
-			
+
 		}
 		v.x = Math.max(Math.min(v.x, 10f), -10f);
 		v.y = Math.max(Math.min(v.y, 10f), -10f);

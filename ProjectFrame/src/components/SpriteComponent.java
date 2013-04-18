@@ -12,18 +12,18 @@ import com.artemis.Component;
 public class SpriteComponent extends Component {
 	public int SpriteID;
 	public String SpriteName;
-	
+
 	public SpriteComponent() {
-		
+
 	}
-	
+
 	public SpriteComponent(int ID) {
-		SpriteID = ID;
+		this.SpriteID = ID;
 	}
 	public SpriteComponent(String Spritename) {
-		SpriteName = Spritename;
+		this.SpriteName = Spritename;
 	}
-	
-	
+
+
 
 }

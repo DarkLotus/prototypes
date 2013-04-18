@@ -16,13 +16,13 @@ public class RoomComponent extends Component {
 	 * @param name
 	 */
 	public RoomComponent(String name) {
-		MapNameString = name;
+		this.MapNameString = name;
 	}
 	public RoomComponent() {
-		
-	}
-	
 
-	
+	}
+
+
+
 
 }

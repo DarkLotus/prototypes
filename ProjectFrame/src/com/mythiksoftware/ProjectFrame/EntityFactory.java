@@ -3,8 +3,6 @@
  */
 package com.mythiksoftware.ProjectFrame;
 
-import Managers.PersistenceManager;
-
 import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
@@ -16,7 +14,6 @@ import components.OnCursorComponent;
 import components.PlayerComponent;
 import components.SpriteComponent;
 import components.UIButtonComponent;
-import components.VelocityComponent;
 import components.WorldPositionComponent;
 import components.city.ComercialComponent;
 import components.city.IndustrialComponent;
@@ -29,8 +26,8 @@ import components.city.ResidentialComponent;
  */
 public class EntityFactory {
 
-	
-	
+
+
 	public static Entity createMap(World world, String name)
 	{
 		Entity entity = world.createEntity();
@@ -75,7 +72,7 @@ public class EntityFactory {
 		//world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
-	
+
 	public static Entity createResidential(World world) {
 		Entity entity = world.createEntity();
 		//entity.addComponent(new WorldPositionComponent(5*64,5*64));
@@ -88,12 +85,12 @@ public class EntityFactory {
 		//world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
-	
+
 	public static Entity createComercial(World world) {
 		Entity entity = world.createEntity();
 		entity.addComponent(new WorldPositionComponent());
 		entity.addComponent(new OnCursorComponent());
-		entity.addComponent(new SpriteComponent("Comercial"));
+		entity.addComponent(new SpriteComponent("Commercial"));
 		entity.addComponent(new ComercialComponent());
 		entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
@@ -119,5 +116,5 @@ public class EntityFactory {
 		//world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
-	
+
 }

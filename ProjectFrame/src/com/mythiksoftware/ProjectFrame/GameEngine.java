@@ -2,35 +2,27 @@ package com.mythiksoftware.ProjectFrame;
 
 import Screens.InGameScreen;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.FPSLogger;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class GameEngine extends Game {
 
-	 GameEngine StaticRefrence;
-	 
+	GameEngine StaticRefrence;
+
 	@Override
-	public void create() {		
+	public void create() {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-	
+
 		//inputManager = new InputManager();
 		//Gdx.input.setInputProcessor(inputManager);
 		setScreen(new InGameScreen());
-		if(StaticRefrence == null)
-			StaticRefrence = this;
-		
+		if(this.StaticRefrence == null) {
+			this.StaticRefrence = this;
+		}
+
 	}
 
 	public static void addInputHandler(InputProcessor inputProcessor){
@@ -38,9 +30,9 @@ public class GameEngine extends Game {
 		{
 			InputMultiplexer multiplexer = (InputMultiplexer) Gdx.input.getInputProcessor();
 			multiplexer.addProcessor(inputProcessor);
-		}
-		else
+		} else {
 			Gdx.input.setInputProcessor(new InputMultiplexer(inputProcessor));
+		}
 	}
 
 	@Override
@@ -48,7 +40,7 @@ public class GameEngine extends Game {
 
 	}
 
-	
+
 
 	@Override
 	public void resize(int width, int height) {

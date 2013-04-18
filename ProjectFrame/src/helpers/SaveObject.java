@@ -13,16 +13,16 @@ import com.artemis.Component;
  */
 public class SaveObject {
 
-		/**
+	/**
 	 * @param id2
 	 */
 	public SaveObject(int id2) {
-		ID = id2;
+		this.ID = id2;
 	}
 	public SaveObject() {
-		
+
 	}
-		public int ID;
-		public ArrayList<Component> components = new ArrayList<Component>();
+	public int ID;
+	public ArrayList<Component> components = new ArrayList<Component>();
 
 }
