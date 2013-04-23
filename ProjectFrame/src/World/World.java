@@ -3,7 +3,6 @@
  */
 package World;
 
-import GUI.InGameGUI;
 import Managers.PersistenceManager;
 import Systems.BuildSystem;
 import Systems.KeyboardCameraMoveSystem;
@@ -12,6 +11,7 @@ import Systems.MouseZoomSystem;
 import Systems.MovementSystem;
 import Systems.SpriteRenderSystem;
 import Systems.UIRenderSystem;
+import Systems.city.ComercialSystem;
 import Systems.city.ResidentialSystem;
 
 import com.artemis.Entity;
@@ -32,8 +32,6 @@ import com.mythiksoftware.ProjectFrame.Logger;
 public class World extends com.artemis.World {
 	OrthographicCamera _camera;
 	OrthographicCamera _uiCamera;
-
-	private InGameGUI _guiGameGUI;
 
 	public World(){
 		super();
@@ -57,7 +55,7 @@ public class World extends com.artemis.World {
 		setSystem(new MovementSystem(0.0f)); //todo fix speed?
 
 		setSystem(new ResidentialSystem(1f));
-
+		setSystem(new ComercialSystem(1f));
 		setSystem(new UIRenderSystem());
 		//_world.setSystem(new AISystem(1));
 		setManager(new GroupManager());
@@ -138,6 +136,17 @@ public class World extends com.artemis.World {
 				//TODO check for gold would be in this phase i guess.
 				//getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
 				addEntity(EntityFactory.createPowerPlant(getWorld()));
+
+			}}));
+		
+		addEntity(EntityFactory.createButton(getWorld(), "Road", null, new ChangeListener(){
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Logger.Log("clicked road");
+				//TODO check for gold would be in this phase i guess.
+				//getSystem(RoomBuildSystem.class).StartBuild(new RoomComponent());
+				addEntity(EntityFactory.createRoad(getWorld()));
 
 			}}));
 

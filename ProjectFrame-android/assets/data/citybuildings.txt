@@ -1,5 +1,6 @@
 // No blank lines, colons as dividers, name x/y/w/h
 Power Plant:0:0:1:1
+Road:0:1:1:1
 Commercial:2:0:2:2
 Industrial:4:0:2:2
 Residential:6:0:2:2

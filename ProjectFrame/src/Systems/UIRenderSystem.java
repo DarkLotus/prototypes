@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import com.mythiksoftware.ProjectFrame.GameEngine;
 import components.UIButtonComponent;
+import components.WorldPositionComponent;
+import components.city.ResidentialComponent;
 
 /**
  * @author James
@@ -64,6 +66,8 @@ public class UIRenderSystem extends EntityProcessingSystem {
 	 */
 	@Override
 	protected void process(Entity e) {
+		//Draw residential overlay info
+
 		if(this.bc.has(e))
 		{
 			UIButtonComponent b = this.bc.getSafe(e);

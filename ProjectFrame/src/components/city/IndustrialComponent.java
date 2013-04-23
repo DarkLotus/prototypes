@@ -21,6 +21,7 @@ public class IndustrialComponent extends Component {
 	public int Customers = 0;
 
 	public int Tax;
+	public int Density,MaxDensity; // poloution?
 
 	public IndustrialComponent()
 	{}

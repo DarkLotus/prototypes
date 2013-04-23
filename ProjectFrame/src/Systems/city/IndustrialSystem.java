@@ -6,14 +6,11 @@ package Systems.city;
 import java.util.Random;
 
 
-import Managers.ZoneManager;
-
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.IntervalEntityProcessingSystem;
-import com.artemis.utils.ImmutableBag;
 import com.mythiksoftware.ProjectFrame.Logger;
 
 import components.OnCursorComponent;
@@ -23,7 +20,7 @@ import components.city.ResidentialComponent;
  * @author James
  *
  */
-public class ResidentialSystem extends IntervalEntityProcessingSystem {
+public class IndustrialSystem extends IntervalEntityProcessingSystem {
 	@Mapper
 	ComponentMapper<ResidentialComponent> rc;
 
@@ -34,7 +31,7 @@ public class ResidentialSystem extends IntervalEntityProcessingSystem {
 	 * @param aspect
 	 * @param interval
 	 */
-	public ResidentialSystem(float interval) {
+	public IndustrialSystem(float interval) {
 		super(Aspect.getAspectForAll(ResidentialComponent.class), interval);
 		// TODO Auto-generated constructor stub
 	}
@@ -51,29 +48,16 @@ public class ResidentialSystem extends IntervalEntityProcessingSystem {
 	 */
 	@Override
 	protected void process(Entity e) {
-		
 		ResidentialComponent r = this.rc.getSafe(e);
 		OnCursorComponent o = this.oc.getSafe(e);
 		if(o != null)
 			return; // skip if item is on cursor.
-		
-		ImmutableBag<Entity> shops = ZoneManager.GetZonesInRange(e,ZoneTypes.Com,10);
-		ImmutableBag<Entity> industrial = ZoneManager.GetZonesInRange(e,ZoneTypes.Ind,10);
-		r.Happiness = 50 + (shops.size() * 10) - (industrial.size() * 10);
-
-		int rand = this.rand.nextInt(r.Happiness);
-		if(rand > 40) {
+		if(r.Population < r.MaxPop && this.rand.nextInt(10) < 6){
 			r.Population++;
 		}
-		else if(rand < 20){
+		if(this.rand.nextInt(10) < 2) {
 			r.Population--;
 		}
-		
-		
-		if(r.Population > r.MaxPop){
-			r.Population = r.MaxPop;
-		}
-		if(r.Population < 0){ r.Population = 0;}
 		Logger.Log("Residential zone reached :" + r.Population);
 
 	}

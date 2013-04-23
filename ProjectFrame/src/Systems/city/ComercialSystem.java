@@ -17,16 +17,18 @@ import com.artemis.utils.ImmutableBag;
 import com.mythiksoftware.ProjectFrame.Logger;
 
 import components.OnCursorComponent;
+import components.city.ComercialComponent;
 import components.city.ResidentialComponent;
 
 /**
  * @author James
  *
  */
-public class ResidentialSystem extends IntervalEntityProcessingSystem {
+public class ComercialSystem extends IntervalEntityProcessingSystem {
+	@Mapper
+	ComponentMapper<ComercialComponent> cc;
 	@Mapper
 	ComponentMapper<ResidentialComponent> rc;
-
 	@Mapper
 	ComponentMapper<OnCursorComponent> oc;
 	Random rand = new Random();
@@ -34,8 +36,8 @@ public class ResidentialSystem extends IntervalEntityProcessingSystem {
 	 * @param aspect
 	 * @param interval
 	 */
-	public ResidentialSystem(float interval) {
-		super(Aspect.getAspectForAll(ResidentialComponent.class), interval);
+	public ComercialSystem(float interval) {
+		super(Aspect.getAspectForAll(ComercialComponent.class), interval);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -51,30 +53,27 @@ public class ResidentialSystem extends IntervalEntityProcessingSystem {
 	 */
 	@Override
 	protected void process(Entity e) {
-		
-		ResidentialComponent r = this.rc.getSafe(e);
+		ComercialComponent c = this.cc.getSafe(e);
 		OnCursorComponent o = this.oc.getSafe(e);
 		if(o != null)
 			return; // skip if item is on cursor.
-		
-		ImmutableBag<Entity> shops = ZoneManager.GetZonesInRange(e,ZoneTypes.Com,10);
-		ImmutableBag<Entity> industrial = ZoneManager.GetZonesInRange(e,ZoneTypes.Ind,10);
-		r.Happiness = 50 + (shops.size() * 10) - (industrial.size() * 10);
-
-		int rand = this.rand.nextInt(r.Happiness);
-		if(rand > 40) {
-			r.Population++;
+		c.Customers = 0;
+		c.Employees = 0;
+		ImmutableBag<Entity> residental = ZoneManager.GetZonesInRange(e,ZoneTypes.Res,10);
+		for (int _i = 0; _i < residental.size(); _i++) {
+			Entity _entity = residental.get(_i);;
+			ResidentialComponent residentialComponent = this.rc.get(_entity);
+			c.Customers += residentialComponent.Population;
+			c.Employees += (residentialComponent.Population / 5);
+			
 		}
-		else if(rand < 20){
-			r.Population--;
+		if(c.Employees == 0) {
+			return;
 		}
-		
-		
-		if(r.Population > r.MaxPop){
-			r.Population = r.MaxPop;
-		}
-		if(r.Population < 0){ r.Population = 0;}
-		Logger.Log("Residential zone reached :" + r.Population);
+		if(c.Employees > c.MaxEmployees)
+			c.Employees = c.MaxEmployees;
+		c.Tax = (c.Customers - c.Employees) * 10;
+		Logger.Log("Comercial zone had :" + c.Customers + " customers, " + c.Employees + " Employees " + c.Tax + " Paid");
 
 	}
 

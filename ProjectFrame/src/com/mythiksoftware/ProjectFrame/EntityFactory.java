@@ -19,6 +19,7 @@ import components.city.ComercialComponent;
 import components.city.IndustrialComponent;
 import components.city.PowerDeltaComponent;
 import components.city.ResidentialComponent;
+import components.city.TrafficComponent;
 
 /**
  * @author James
@@ -83,6 +84,7 @@ public class EntityFactory {
 		entity.addComponent(new ResidentialComponent());
 		entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
+		world.getManager(GroupManager.class).add(entity, "Residential");
 		return entity;
 	}
 
@@ -94,6 +96,7 @@ public class EntityFactory {
 		entity.addComponent(new ComercialComponent());
 		entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
+		world.getManager(GroupManager.class).add(entity, "Commercial");
 		return entity;
 	}
 	public static Entity createIndustrial(World world) {
@@ -104,6 +107,7 @@ public class EntityFactory {
 		entity.addComponent(new IndustrialComponent());
 		entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
+		world.getManager(GroupManager.class).add(entity, "Industrial");
 		return entity;
 	}
 	public static Entity createPowerPlant(World world) {
@@ -113,6 +117,21 @@ public class EntityFactory {
 		entity.addComponent(new SpriteComponent("Power Plant"));
 		//entity.addComponent(new IndustrialComponent());
 		entity.addComponent(new PowerDeltaComponent());
+		//world.getManager(GroupManager.class).add(entity, "persist");
+		return entity;
+	}
+	/**
+	 * @param world
+	 * @return
+	 */
+	public static Entity createRoad(World world) {
+		Entity entity = world.createEntity();
+		entity.addComponent(new WorldPositionComponent());
+		entity.addComponent(new OnCursorComponent());
+		entity.addComponent(new SpriteComponent("Road"));
+		entity.addComponent(new TrafficComponent());
+		//entity.addComponent(new IndustrialComponent());
+		//entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
 	}
