@@ -41,14 +41,14 @@ public class EntityFactory {
 		entity.addComponent(new UIButtonComponent(label,loc,handler));
 		return entity;
 	}
-	public static Entity createObject(World world, String name)
+	/*public static Entity createObject(World world, String name)
 	{
 		Entity entity = world.createEntity();
 		entity.addComponent(new WorldPositionComponent(5*64,5*64));
 		entity.addComponent(new SpriteComponent(5));
 		world.getManager(GroupManager.class).add(entity, "persist");
 		return entity;
-	}
+	}*/
 	public static Entity createPlayer(World world, String name)
 	{
 		Entity entity = world.createEntity();
@@ -63,16 +63,6 @@ public class EntityFactory {
 	 * @param _world
 	 * @return
 	 */
-	public static Entity createMovable(World world) {
-		Entity entity = world.createEntity();
-		//entity.addComponent(new WorldPositionComponent(5*64,5*64));
-		//entity.addComponent(new VelocityComponent());
-		entity.addComponent(new WorldPositionComponent());
-		entity.addComponent(new OnCursorComponent());
-		entity.addComponent(new SpriteComponent("Residential"));
-		//world.getManager(GroupManager.class).add(entity, "persist");
-		return entity;
-	}
 
 	public static Entity createResidential(World world) {
 		Entity entity = world.createEntity();
@@ -118,6 +108,7 @@ public class EntityFactory {
 		//entity.addComponent(new IndustrialComponent());
 		entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
+		world.getManager(GroupManager.class).add(entity, "Power");
 		return entity;
 	}
 	/**
@@ -133,6 +124,7 @@ public class EntityFactory {
 		//entity.addComponent(new IndustrialComponent());
 		//entity.addComponent(new PowerDeltaComponent());
 		//world.getManager(GroupManager.class).add(entity, "persist");
+		world.getManager(GroupManager.class).add(entity, "Road");
 		return entity;
 	}
 

@@ -58,8 +58,11 @@ public class PersistenceManager  {
 			for (Component component : saveObject.components) {
 				entity.addComponent(component);
 			}
-			_world.getManager(GroupManager.class).add(entity, "persist");
-
+			//_world.getManager(GroupManager.class).add(entity, "persist");
+			for (int _i = 0; _i < saveObject.Groups.size(); _i++) {
+				_world.getManager(GroupManager.class).add(entity, saveObject.Groups.get(_i));
+			}
+			
 			_world.addEntity(entity);
 		}
 
@@ -71,7 +74,7 @@ public class PersistenceManager  {
 			Entity entity = entities.get(i);
 			SaveObject saveObject = new SaveObject(entity.getId());
 			save.entities.add(saveObject);
-
+			saveObject.Groups = _world.getManager(GroupManager.class).getGroups(entity);
 			Bag<Component> components = new Bag<Component>();
 			_world.getComponentManager().getComponentsFor(entity, components);
 			for (int x = components.size()-1;x >=0;x--) {

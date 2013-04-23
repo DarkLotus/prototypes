@@ -82,7 +82,7 @@ public class InGameGUI{
 		public void changed(ChangeEvent event, Actor actor) {
 			Logger.Log("clicked");
 
-			InGameGUI.this._world.addEntity(EntityFactory.createObject(InGameGUI.this._world, "test"));
+			//InGameGUI.this._world.addEntity(EntityFactory.createObject(InGameGUI.this._world, "test"));
 		}
 	};
 

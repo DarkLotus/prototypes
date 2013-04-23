@@ -6,6 +6,7 @@ package helpers;
 import java.util.ArrayList;
 
 import com.artemis.Component;
+import com.artemis.utils.ImmutableBag;
 
 /**
  * @author James
@@ -23,6 +24,7 @@ public class SaveObject {
 
 	}
 	public int ID;
+	public ImmutableBag<String> Groups;
 	public ArrayList<Component> components = new ArrayList<Component>();
 
 }
