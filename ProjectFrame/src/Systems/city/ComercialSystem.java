@@ -59,7 +59,7 @@ public class ComercialSystem extends IntervalEntityProcessingSystem {
 			return; // skip if item is on cursor.
 		c.Customers = 0;
 		c.Employees = 0;
-		ImmutableBag<Entity> residental = ZoneManager.GetZonesInRange(e,ZoneTypes.Res,10);
+		ImmutableBag<Entity> residental = ZoneManager.GetZonesInRange(e,ZoneTypes.Res,300);
 		for (int _i = 0; _i < residental.size(); _i++) {
 			Entity _entity = residental.get(_i);;
 			ResidentialComponent residentialComponent = this.rc.get(_entity);
