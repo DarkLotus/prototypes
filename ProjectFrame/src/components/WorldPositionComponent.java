@@ -17,7 +17,6 @@ public class WorldPositionComponent extends Component {
 	@Persistant
 	public float y;
 
-
 	public WorldPositionComponent()
 	{
 
@@ -28,10 +27,4 @@ public class WorldPositionComponent extends Component {
 		this.y = y;
 
 	}
-	
-	public float[] GetCoords()
-	{
-		return new float[] {this.x,this.y};
-	}
-
 }

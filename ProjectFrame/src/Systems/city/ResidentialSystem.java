@@ -57,8 +57,8 @@ public class ResidentialSystem extends IntervalEntityProcessingSystem {
 		if(o != null)
 			return; // skip if item is on cursor.
 		
-		ImmutableBag<Entity> shops = ZoneManager.GetZonesInRange(e,ZoneTypes.Com,300);
-		ImmutableBag<Entity> industrial = ZoneManager.GetZonesInRange(e,ZoneTypes.Ind,10);
+		ImmutableBag<Entity> shops = ZoneManager.GetZonesInRange(e,ZoneTypes.Commercial,300);
+		ImmutableBag<Entity> industrial = ZoneManager.GetZonesInRange(e,ZoneTypes.Industrial,10);
 		r.Happiness = 50 + (shops.size() * 10) - (industrial.size() * 10);
 
 		int rand = this.rand.nextInt(r.Happiness);

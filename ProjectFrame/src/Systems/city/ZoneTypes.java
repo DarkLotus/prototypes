@@ -8,9 +8,9 @@ package Systems.city;
  *
  */
 public enum ZoneTypes {
-	Res,
-	Com,
-	Ind,
+	Residential,
+	Commercial,
+	Industrial,
 	Road,
 	Power
 }
