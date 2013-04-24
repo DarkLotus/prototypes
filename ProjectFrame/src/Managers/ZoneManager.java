@@ -58,6 +58,9 @@ public class ZoneManager  {
 		//Logger.Log("Entity Caller Coords:" + "X" + (entityCallerPosition.GetCoords())[0] + "Y" + (entityCallerPosition.GetCoords())[1]);
 		
 		//Grab the entities within range of the caller entity.
+		//	TODO: James: Might need another approach in which we don't iterate through all the entities
+		//	of a given type in order to filter the ones in range, not sure but this might negatively affect
+		//  performance in a larger scope.
 		foundEntities = e.getWorld().getManager(GroupManager.class).getEntities(Ttype.name());				
 		for(int i = 0; i < foundEntities.size(); i++)
 		{
