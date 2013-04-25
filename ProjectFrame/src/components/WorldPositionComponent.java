@@ -17,9 +17,6 @@ public class WorldPositionComponent extends Component {
 	@Persistant
 	public float y;
 
-
-
-
 	public WorldPositionComponent()
 	{
 
@@ -30,6 +27,4 @@ public class WorldPositionComponent extends Component {
 		this.y = y;
 
 	}
-
-
 }
