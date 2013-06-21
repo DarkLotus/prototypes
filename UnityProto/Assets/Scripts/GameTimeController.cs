@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class GameTimeController : MonoBehaviour {
-
+    public int Money = 50000;
     public float _elapsedTime = 0;
     public int Day, Month, Year = 1970;
 	// Use this for initialization
@@ -19,6 +19,8 @@ public class GameTimeController : MonoBehaviour {
         }
         if (Day > 30)
         {
+            Money -= getMonthsExpenses();
+
             Month++; Day = 1;
         }
         if (Month > 12)
@@ -28,9 +30,13 @@ public class GameTimeController : MonoBehaviour {
         }
         
 	}
+
+    private int getMonthsExpenses() {
+        throw new System.NotImplementedException();
+    }
     void OnGUI()
     {
         GUI.Label(new Rect(Screen.width - 100, 0, 100, 50), "" + Day + "/" + Month + "/" + Year);
-        
+        GUI.Label(new Rect(Screen.width - 200, 0, 100, 50), "$" + Money);
     }
 }
