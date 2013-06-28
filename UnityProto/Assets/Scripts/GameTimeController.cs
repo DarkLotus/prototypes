@@ -1,7 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameTimeController : MonoBehaviour {
+    public delegate void MonthElaspedHandler();
+    public event MonthElaspedHandler MonthElasped;
+    public delegate void DayElaspedHandler();
+    public event DayElaspedHandler DayElasped;
+
     public int Money = 50000;
     public float _elapsedTime = 0;
     public int Day, Month, Year = 1970;
@@ -16,12 +22,15 @@ public class GameTimeController : MonoBehaviour {
         if (_elapsedTime > 2)
         {
             Day++; _elapsedTime = 0;
+            if (DayElasped != null)
+                DayElasped();
         }
         if (Day > 30)
         {
             Money -= getMonthsExpenses();
-
             Month++; Day = 1;
+            if (MonthElasped != null)
+                MonthElasped();
         }
         if (Month > 12)
         {

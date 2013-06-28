@@ -15,7 +15,7 @@ public class StaffController : MonoBehaviour {
 	}
     void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 300, 0, 100, 50), "$" + Staff.Count + "Staff Members");
+        GUI.Label(new Rect(Screen.width - 400, 0, 100, 50), Staff.Count + "Staff Members");
         
     }
 
