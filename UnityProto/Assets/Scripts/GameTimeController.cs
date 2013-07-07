@@ -8,12 +8,16 @@ public class GameTimeController : MonoBehaviour {
     public delegate void DayElaspedHandler();
     public event DayElaspedHandler DayElasped;
 
-    public int Money = 50000;
+    public int Money = 10000;
     public float _elapsedTime = 0;
     public int Day, Month, Year = 1970;
+
+    public string Date { get { return "" + Day + "-" + Month + "-" + Year; } }
 	// Use this for initialization
 	void Start () {
-
+        if (StartMenu.StartValues.bLoadSaveGame) {
+            Console.WriteLine("Load Saved Game");
+        }
 	}
 	
 	// Update is called once per frame
@@ -41,7 +45,8 @@ public class GameTimeController : MonoBehaviour {
 	}
 
     private int getMonthsExpenses() {
-        throw new System.NotImplementedException();
+        return 0;
+        //throw new System.NotImplementedException();
     }
     void OnGUI()
     {

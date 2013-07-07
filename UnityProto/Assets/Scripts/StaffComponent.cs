@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StaffComponent : MonoBehaviour {
     public int Wage = 0;
-    public int Tech, Design, Speed;
+    public int Programming, Art, Managment;
     public HumanState State = HumanState.Idle;
 
     Animator Anim;

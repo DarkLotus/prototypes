@@ -9,10 +9,11 @@ public class TopMenuBar : MonoBehaviour {
 	private bool bShowDropDown = false;
     private bool bShowDesignWindow = false;
     public GameItem _currentGame;
+
 	// Use this for initialization
 	void Start () {
-		
 
+        _gtc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameTimeController>();
 		
 	}
 	
@@ -38,6 +39,18 @@ public class TopMenuBar : MonoBehaviour {
 			if (GUI.Button (new Rect (0,100,100,50), "Research...")) {
 				bShowDropDown = false;
 			}
+            if (GUI.Button(new Rect(0, 150, 100, 50), "Save Game")) {
+                bShowDropDown = false;
+                LevelSerializer.SaveGame(_gtc.Date);
+            }
+
+            if (GUI.Button(new Rect(0, 200, 100, 50), "Load Game")) {
+                bShowDropDown = false;
+                var g = LevelSerializer.SavedGames[LevelSerializer.PlayerName].ToArray()[0];
+                        g.Load();
+                    
+                
+            }
 			
 		}
 		GUI.EndGroup();
@@ -93,14 +106,14 @@ public class TopMenuBar : MonoBehaviour {
             GUILayout.BeginHorizontal();
             string genrebutton = "Genre";
             if (_currentGame.Genre != 0xFFF)
-                genrebutton = "Genre:" + genreStrings[_currentGame.Genre];
+                genrebutton = "Genre:" + GameValues.genreStrings[_currentGame.Genre];
             if (GUILayout.Button(genrebutton)) {
                 bShowGenreWindow = true;
             }
 
             string subgenrebutton = "Subgenre:";
             if (_currentGame.SubGenre != 0xFFF)
-                subgenrebutton = "Subgenre:" + genreStrings[_currentGame.SubGenre];
+                subgenrebutton = "Subgenre:" + GameValues.genreStrings[_currentGame.SubGenre];
             if (GUILayout.Button(subgenrebutton)) {
                 bShowSubgenreWindow = true;
             }
@@ -121,15 +134,15 @@ public class TopMenuBar : MonoBehaviour {
     }
 
     private void createGame() {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameReleaseManager>().InDevGame = _currentGame;
+        
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameReleaseManager>().CreateNewGame(_currentGame);
         _currentGame = null;
         
     }
 
     private bool bShowSubgenreWindow = false;
 
-    public static string[] genreStrings = new string[] { "Fighting","Maze","Pinball","Platformer","FPS","Third-Person Shooter","Action","Adventure","RPG","Simulation","RTS","Turn-based Strategy","Casual","Music","Sports","Trivia","Board","Card" };
-  
+   
 
     private void DrawGenreSelect() {
         if (_currentGame.Genre != 0xFFF)
@@ -138,7 +151,7 @@ public class TopMenuBar : MonoBehaviour {
         GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
         GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
         GUILayout.BeginHorizontal();
-        _currentGame.Genre = GUILayout.SelectionGrid(_currentGame.Genre, genreStrings, 5);
+        _currentGame.Genre = GUILayout.SelectionGrid(_currentGame.Genre, GameValues.genreStrings, 5);
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
     }
@@ -150,9 +163,11 @@ public class TopMenuBar : MonoBehaviour {
         GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
         GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
         GUILayout.BeginHorizontal();
-        _currentGame.SubGenre = GUILayout.SelectionGrid(_currentGame.SubGenre, genreStrings, 5);
+        _currentGame.SubGenre = GUILayout.SelectionGrid(_currentGame.SubGenre, GameValues.genreStrings, 5);
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
     }
-	
+
+
+    public GameTimeController _gtc { get; set; }
 }
