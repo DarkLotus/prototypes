@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{1944AA79-5D64-CA5A-CBEA-3D8D5F560A0F}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_1_5;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\GUI\DropDownMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\StartMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\TopMenuBar.cs" />
+     <Compile Include="Assets\Scripts\GameFeature.cs" />
+     <Compile Include="Assets\Scripts\GameItem.cs" />
+     <Compile Include="Assets\Scripts\GameReleaseManager.cs" />
+     <Compile Include="Assets\Scripts\GameTimeController.cs" />
+     <Compile Include="Assets\Scripts\GameValues.cs" />
+     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
+     <Compile Include="Assets\Scripts\StaffComponent.cs" />
+     <Compile Include="Assets\Scripts\StaffController.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\AddSomeForce.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\AdditionalData.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\AdditionalDataStorage.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\ArrayOfPrefabs.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\CentreAndPointMe.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\ChangeColor.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\ColorMe.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\CreateChildSphere.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\CreateTexture.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\DeleteComponent.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\DeletedComponent.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\IsDeserializing.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\KeepAReference.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\OpenDoor.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\RenameObject.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\SaveAndLoad.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\SaveAndLoadToServer.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\SaveAndReload.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\ScaleObject.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\SwitchMesh.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\TestCoroutines.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\TestJSON.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\TestLoading.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\TestSerialization.cs" />
+     <Compile Include="Assets\UnitySerializer\Scripts\VariablesToSave.cs" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Plugins\whydoidoit.com\license.txt" />
+     <None Include="Assets\UnitySerializer\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{6F26782D-132D-D589-C364-1F01A90BE1A6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{8769A3D2-B5E1-E5E9-B004-42F57358A676}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
