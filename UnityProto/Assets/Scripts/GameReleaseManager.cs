@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
 using System;
+
 //[SerializeAll]
 public class GameReleaseManager : MonoBehaviour
 {
@@ -36,7 +37,10 @@ public class GameReleaseManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-       
+        if (complete == 5)
+            bShowAddEngFeature = true;
+        if (complete == 50)
+            bShowAddGameFeature = true;
 
     }
 
@@ -45,12 +49,19 @@ public class GameReleaseManager : MonoBehaviour
             return false;
             _inDevGame = game;
         _sc.StartWork();
+        GUIHelpers.resetGameFeatures();
         return true;
     }
    
     void OnGUI() {
         if(_inDevGame != null)
         GUI.Label(new Rect(Screen.width /2, 100, 100, 50), "Complete %" + complete);
+        if (bShowAddEngFeature)
+           bShowAddEngFeature = GUIHelpers.DrawAddEngFeaturesMenu(_inDevGame);
         
     }
+
+    public bool bShowAddEngFeature { get; set; }
+
+    public bool bShowAddGameFeature { get; set; }
 }

@@ -24,21 +24,35 @@ public class TopMenuBar : MonoBehaviour {
 
 
 	void OnGUI () {
-		GUI.BeginGroup(new Rect(0,0,Screen.width,500));
-		if (GUI.Button (new Rect (0,0,100,50), ButtonText)) {
-			bShowDropDown = true;
-		}
+        DrawTopMenuBar();
 		
-		if(bShowDropDown){
-		
-			if (GUI.Button (new Rect (0,50,100,50), "Develop a Game...")) {
+
+        if (bShowDesignWindow && !bShowGenreWindow && !bShowSubgenreWindow)
+            DrawDesignGameWindow();
+        if (bShowGenreWindow)
+            DrawGenreSelect();
+        if (bShowSubgenreWindow)
+            DrawSubgenreSelect();
+
+	}
+
+    private void DrawTopMenuBar() {
+        //TODO use guilayout
+        GUI.BeginGroup(new Rect(0, 0, Screen.width, 500));
+        if (GUI.Button(new Rect(0, 0, 100, 50), ButtonText)) {
+            bShowDropDown = true;
+        }
+
+        if (bShowDropDown) {
+
+            if (GUI.Button(new Rect(0, 50, 100, 50), "Develop a Game...")) {
                 bShowDesignWindow = true;
-				bShowDropDown = false;
+                bShowDropDown = false;
                 _currentGame = new GameItem();
-			}
-			if (GUI.Button (new Rect (0,100,100,50), "Research...")) {
-				bShowDropDown = false;
-			}
+            }
+            if (GUI.Button(new Rect(0, 100, 100, 50), "Research...")) {
+                bShowDropDown = false;
+            }
             if (GUI.Button(new Rect(0, 150, 100, 50), "Save Game")) {
                 bShowDropDown = false;
                 LevelSerializer.SaveGame(_gtc.Date);
@@ -47,22 +61,19 @@ public class TopMenuBar : MonoBehaviour {
             if (GUI.Button(new Rect(0, 200, 100, 50), "Load Game")) {
                 bShowDropDown = false;
                 var g = LevelSerializer.SavedGames[LevelSerializer.PlayerName].ToArray()[0];
-                        g.Load();
-                    
-                
+                g.Load();
             }
-			
-		}
-		GUI.EndGroup();
+            if (GUI.Button(new Rect(0, 250, 100, 50), "Quit Game")) {
+                bShowDropDown = false;
+                Application.Quit();
 
-        if (bShowDesignWindow)
-            DrawDesignGameWindow();
-        if (bShowGenreWindow)
-            DrawGenreSelect();
-        if (bShowSubgenreWindow)
-            DrawSubgenreSelect();
 
-	}
+            }
+
+
+        }
+        GUI.EndGroup();
+    }
 
    
 

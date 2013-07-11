@@ -13,5 +13,13 @@ namespace Assets.Scripts
         public float FeatureDesire; // -1 1 range for now.
 
 
+        public GameFeature(string title, string Desc,float timeDefficet, float desirbility) {
+            Title = title;
+            Description = Desc;
+            timeDefficet = timeDefficet;
+            FeatureDesire = desirbility;
+        }
+
+
     }
 }
