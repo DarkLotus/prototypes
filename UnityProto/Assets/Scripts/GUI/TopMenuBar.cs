@@ -37,42 +37,47 @@ public class TopMenuBar : MonoBehaviour {
 	}
 
     private void DrawTopMenuBar() {
+        
         //TODO use guilayout
-        GUI.BeginGroup(new Rect(0, 0, Screen.width, 500));
-        if (GUI.Button(new Rect(0, 0, 100, 50), ButtonText)) {
-            bShowDropDown = true;
+        GUILayout.BeginArea(new Rect(0, 0, Screen.width / 3, Screen.height));
+        //GUILayout.BeginHorizontal();
+        GUILayout.BeginVertical();
+        if (GUILayout.Button(ButtonText)) {
+            if (!bShowDropDown) {
+                bShowDropDown = true;
+            }
+            else
+                bShowDropDown = false;
+            
         }
 
         if (bShowDropDown) {
-
-            if (GUI.Button(new Rect(0, 50, 100, 50), "Develop a Game...")) {
+            if (GUILayout.Button("Develop a Game...")) {
                 bShowDesignWindow = true;
                 bShowDropDown = false;
                 _currentGame = new GameItem();
             }
-            if (GUI.Button(new Rect(0, 100, 100, 50), "Research...")) {
+            if (GUILayout.Button("Research...")) {
                 bShowDropDown = false;
             }
-            if (GUI.Button(new Rect(0, 150, 100, 50), "Save Game")) {
+            if (GUILayout.Button("Save Game")) {
                 bShowDropDown = false;
                 LevelSerializer.SaveGame(_gtc.Date);
             }
 
-            if (GUI.Button(new Rect(0, 200, 100, 50), "Load Game")) {
+            if (GUILayout.Button("Load Game")) {
                 bShowDropDown = false;
                 var g = LevelSerializer.SavedGames[LevelSerializer.PlayerName].ToArray()[0];
                 g.Load();
             }
-            if (GUI.Button(new Rect(0, 250, 100, 50), "Quit Game")) {
+            if (GUILayout.Button("Quit Game")) {
                 bShowDropDown = false;
                 Application.Quit();
-
-
             }
-
-
         }
-        GUI.EndGroup();
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
+
     }
 
    

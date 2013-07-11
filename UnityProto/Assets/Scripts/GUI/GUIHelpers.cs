@@ -51,5 +51,61 @@ using UnityEngine;
                 _engFeatures.Add(i++, false);
             }
         }
+
+        internal static bool DrawAddGameFeaturesMenu(GameItem _inDevGame) {
+            GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
+            GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
+            int i = 0, x = 0;
+            foreach (GameFeature f in GameValues.AvailableEngFeatures) {
+                if (x == 0) {
+                    GUILayout.BeginHorizontal();
+                }
+                if (x == 3) {
+                    GUILayout.EndHorizontal();
+                    x = -1;// lol
+                }
+                _engFeatures[i] = GUILayout.Toggle(_engFeatures[i], f.Title);
+                i++; x++;
+            }
+            if (x != 0)
+                GUILayout.EndHorizontal();
+            bool close = false;
+            if (GUILayout.Button("Done")) {
+                close = true;
+            }
+
+            GUILayout.EndArea();
+            if (close) {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool DrawReviewScreen(GameItem _inDevGame) {
+             GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
+            GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
+            GUILayout.BeginVertical();
+            for(int i = 0;i < 6;i++){
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(getScore(_inDevGame) + " / 10");
+                GUILayout.EndHorizontal();
+            }
+            bool close = false;
+            if (GUILayout.Button("Done")) {
+                close = true;
+            }
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+            if (close)
+                return false;
+            return true;
+            
+        }
+
+        private static int getScore(GameItem _inDevGame) {
+            int score = UnityEngine.Random.Range(0, 10);
+
+            return score;
+        }
     }
 
