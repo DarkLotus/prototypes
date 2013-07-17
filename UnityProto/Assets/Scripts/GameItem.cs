@@ -14,6 +14,8 @@ namespace Assets.Scripts
         public int Rating;
         public int SubGenre = 0xFFF;
         public List<GameFeature> Features = new List<GameFeature>();
+
+        //Higher scope = more allowed features.
         public int Scope;
 
         //Sales data

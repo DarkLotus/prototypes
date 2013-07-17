@@ -20,6 +20,8 @@ public class GameTimeController : MonoBehaviourEx
 	
 	// Update is called once per frame
 	void Update () {
+        if (GUIOpen)
+            return;
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime > 2)
         {
@@ -46,4 +48,6 @@ public class GameTimeController : MonoBehaviourEx
     {
         GUI.Label(new Rect(Screen.width - 100, 0, 100, 50), "" + Day + "/" + Month + "/" + Year);
     }
+
+    public bool GUIOpen { get; set; }
 }

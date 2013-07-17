@@ -26,7 +26,10 @@ public class TopMenuBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (bShowDesignWindow || bShowHireStaffWindow || bShowResearchWindow)
+            _gtc.GUIOpen = true;
+        else
+            _gtc.GUIOpen = false;
 	}
 
 

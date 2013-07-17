@@ -9,8 +9,15 @@ namespace Assets.Scripts
     {
         public int Money;
 
+
+        GameTimeController _gtc;
+        StaffController _sc;
+
+
         void Start() {
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameTimeController>().MonthElasped += MonthElapsed;
+            _gtc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameTimeController>();
+            _sc = GameObject.FindGameObjectWithTag("GameController").GetComponent<StaffController>();
+            _gtc.MonthElasped += MonthElapsed;
         }
 
         private void MonthElapsed() {
@@ -18,12 +25,14 @@ namespace Assets.Scripts
         }
 
         private int getExpenses() {
-            throw new NotImplementedException();
+            return _sc.GetWages();
         }
         void Update() {
         }
 
-        
+        void OnGUI() {
+            GUI.Label(new Rect(Screen.width - 200, 0, 100, 50), "$" + Money);
+        }
 
     }
 }

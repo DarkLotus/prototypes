@@ -6,12 +6,12 @@ public class StaffController : MonoBehaviour {
 
 
 
-        public StaffComponent[] Staff = new StaffComponent[5];
+    public StaffComponent[] Staff;
     
         public int StaffCount = 0;
 
 	void Start () {
-
+        Staff = new StaffComponent[5];
 	}
 	
 	// Update is called once per frame
@@ -33,12 +33,14 @@ public class StaffController : MonoBehaviour {
 
     public void StartWork() {
         foreach (StaffComponent sc in Staff) {
+            if(sc != null)
             sc.State = StaffComponent.HumanState.Typing;
         }
     }
 
     public void StopWork() {
         foreach (StaffComponent sc in Staff) {
+            if (sc != null)
             sc.State = StaffComponent.HumanState.Idle;
         }
     }
@@ -48,12 +50,22 @@ public class StaffController : MonoBehaviour {
     /// </summary>0-1 range returned for now.
     /// <param name="game"></param>
     /// <returns></returns>
-    public float GetDaysWorkPercent(GameItem game) {
-        float val = 0;
+    internal int GetDaysWorkPercent(GameItem game) {
+        int val = 0;
         foreach (StaffComponent s in Staff) {
-            val += (s.Programming + s.Art);
+            val += (s.Programming + s.Art) / 100;
         }
         //val /= game.Scope;
+        return val;
+    }
+
+    internal int GetWages() {
+        int val = 0;
+        foreach (StaffComponent s in Staff) {
+            if(s != null)
+            val += (s.Wage);
+        }
+        
         return val;
     }
 }
