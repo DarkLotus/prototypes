@@ -5,7 +5,7 @@ using Assets.Scripts;
 using System;
 
 //[SerializeAll]
-public class GameReleaseManager : MonoBehaviour
+public class GameReleaseManager : MonoBehaviourEx
 {
    
     

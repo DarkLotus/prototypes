@@ -9,8 +9,11 @@ public class StaffComponent : MonoBehaviour {
     Animator Anim;
 	// Use this for initialization
 	void Start () {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<StaffController>().addStaff(this);
         Anim = GetComponent<Animator>();
+        if (LevelSerializer.IsDeserializing)
+            return;
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<StaffController>().addStaff(this);
+        
 	}
 	
 

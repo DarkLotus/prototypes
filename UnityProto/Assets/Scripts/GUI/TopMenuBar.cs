@@ -6,13 +6,20 @@ using Assets.Scripts;
 //Not for the bar, just single drop down button, rename later
 public class TopMenuBar : MonoBehaviour {
 	public string ButtonText = "Actions";
-	private bool bShowDropDown = false;
-    private bool bShowDesignWindow = false;
+
     public GameItem _currentGame;
+    public GameTimeController _gtc { get; set; }
+
+
+    private bool bShowResearchWindow = false;
+    private bool bShowSubgenreWindow = false;
+    private bool bShowGenreWindow = false;
+    private bool bShowHireStaffWindow = false;
+    private bool bShowDropDown = false;
+    private bool bShowDesignWindow = false;
 
 	// Use this for initialization
 	void Start () {
-
         _gtc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameTimeController>();
 		
 	}
@@ -30,12 +37,17 @@ public class TopMenuBar : MonoBehaviour {
         if (bShowDesignWindow && !bShowGenreWindow && !bShowSubgenreWindow)
             DrawDesignGameWindow();
         if (bShowGenreWindow)
-            DrawGenreSelect();
+            bShowGenreWindow = GUIHelpers.DrawGenreSelect(_currentGame);
         if (bShowSubgenreWindow)
-            DrawSubgenreSelect();
+            bShowSubgenreWindow = GUIHelpers.DrawSubGenreSelect(_currentGame); ;
+        if (bShowHireStaffWindow)
+            bShowHireStaffWindow = GUIHelpers.DrawHireStaff();
+        if (bShowResearchWindow)
+            bShowResearchWindow = GUIHelpers.DrawResearchWindow();
 
 	}
 
+   
     private void DrawTopMenuBar() {
         
         //TODO use guilayout
@@ -57,7 +69,12 @@ public class TopMenuBar : MonoBehaviour {
                 bShowDropDown = false;
                 _currentGame = new GameItem();
             }
-            if (GUILayout.Button("Research...")) {
+            if (GUILayout.Button("Research Features...")) {
+                bShowResearchWindow = true;
+                bShowDropDown = false;
+            }
+            if (GUILayout.Button("Hire Staff")) {
+                bShowHireStaffWindow = true;
                 bShowDropDown = false;
             }
             if (GUILayout.Button("Save Game")) {
@@ -65,10 +82,13 @@ public class TopMenuBar : MonoBehaviour {
                 LevelSerializer.SaveGame(_gtc.Date);
             }
 
-            if (GUILayout.Button("Load Game")) {
-                bShowDropDown = false;
+            if (GUILayout.Button("Load Last Game")) {
+                //Application.LoadLevel(0);
                 var g = LevelSerializer.SavedGames[LevelSerializer.PlayerName].ToArray()[0];
-                g.Load();
+                LevelSerializer.LoadNow(g.Data, false, true);
+                bShowDropDown = false;
+                
+               // g.Load();
             }
             if (GUILayout.Button("Quit Game")) {
                 bShowDropDown = false;
@@ -87,7 +107,7 @@ public class TopMenuBar : MonoBehaviour {
 
     public static string[] ratingStrings = new string[] { "All", "PG", "M", "MA", "R" };
 
-    private bool bShowGenreWindow = false;
+    
     private void DrawDesignGameWindow() {
         if (bShowDesignWindow) {
             GUI.BeginGroup(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
@@ -114,10 +134,12 @@ public class TopMenuBar : MonoBehaviour {
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
+            
             GUILayout.Label("Atmosphere: Light/Dark");
             _currentGame.FeelFactor = GUILayout.HorizontalSlider(_currentGame.FeelFactor, 0.0f, 10f);
             GUILayout.EndHorizontal();
             GUILayout.BeginVertical();
+            _currentGame.Scope = GUILayout.SelectionGrid(_currentGame.Scope, GameValues.GameScope, 4);
             _currentGame.Rating = GUILayout.SelectionGrid(_currentGame.Rating, ratingStrings, 5);
             GUILayout.BeginHorizontal();
             string genrebutton = "Genre";
@@ -149,6 +171,10 @@ public class TopMenuBar : MonoBehaviour {
 
     }
 
+
+    /// <summary>
+    /// Called when player hits Okay on create game.
+    /// </summary>
     private void createGame() {
         
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameReleaseManager>().CreateNewGame(_currentGame);
@@ -156,34 +182,13 @@ public class TopMenuBar : MonoBehaviour {
         
     }
 
-    private bool bShowSubgenreWindow = false;
-
+   
    
 
-    private void DrawGenreSelect() {
-        if (_currentGame.Genre != 0xFFF)
-            bShowGenreWindow = false;
-        
-        GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
-        GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
-        GUILayout.BeginHorizontal();
-        _currentGame.Genre = GUILayout.SelectionGrid(_currentGame.Genre, GameValues.genreStrings, 5);
-        GUILayout.EndHorizontal();
-        GUILayout.EndArea();
-    }
 
-    private void DrawSubgenreSelect() {
-        if (_currentGame.SubGenre != 0xFFF)
-            bShowSubgenreWindow = false;
+  
 
-        GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
-        GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
-        GUILayout.BeginHorizontal();
-        _currentGame.SubGenre = GUILayout.SelectionGrid(_currentGame.SubGenre, GameValues.genreStrings, 5);
-        GUILayout.EndHorizontal();
-        GUILayout.EndArea();
-    }
+    
 
-
-    public GameTimeController _gtc { get; set; }
+   
 }

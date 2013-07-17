@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using Assets.Scripts;
 public class StaffController : MonoBehaviour {
 
-    public List<StaffComponent> Staff = new List<StaffComponent>();
+
+
+        public StaffComponent[] Staff = new StaffComponent[5];
+    
+        public int StaffCount = 0;
+
 	void Start () {
 
 	}
@@ -16,12 +21,14 @@ public class StaffController : MonoBehaviour {
 	}
     void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 400, 0, 100, 50), Staff.Count + "Staff Members");
+        GUI.Label(new Rect(Screen.width - 400, 0, 100, 50), StaffCount + "Staff Members");
         
     }
 
     internal void addStaff(StaffComponent staffComponent) {
-        Staff.Add(staffComponent);
+        Logger.Log("addstaff Called");
+        Staff[StaffCount] = staffComponent;
+        StaffCount++;
     }
 
     public void StartWork() {

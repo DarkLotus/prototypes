@@ -8,6 +8,7 @@ namespace Assets.Scripts
    public static class GameValues
     {
        public static string[] genreStrings = new string[] { "Fighting", "Maze", "Pinball", "Platformer", "FPS", "Third-Person Shooter", "Action", "Adventure", "RPG", "Simulation", "RTS", "Turn-based Strategy", "Casual", "Music", "Sports", "Trivia", "Board", "Card" };
+       public static string[] GameScope = new string[] { "Small","Medium","Large","Massive" };
 
 
        public static List<GameFeature> AvailableEngFeatures { get; set; }

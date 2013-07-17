@@ -689,7 +689,7 @@ public class UnitySerializerWindow : EditorWindow
 				
 			}
 			GUILayout.Space (4);
-			GUILayout.EndVertical ();
+			
 		}
 		Repaint ();
 	
