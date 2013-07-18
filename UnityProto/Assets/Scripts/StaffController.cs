@@ -50,13 +50,14 @@ public class StaffController : MonoBehaviour {
     /// </summary>0-1 range returned for now.
     /// <param name="game"></param>
     /// <returns></returns>
-    internal int GetDaysWorkPercent(GameItem game) {
+    internal float GetDaysWorkPercent(GameItem game) {
         int val = 0;
         foreach (StaffComponent s in Staff) {
+            if (s != null)
             val += (s.Programming + s.Art) / 100;
         }
         //val /= game.Scope;
-        return val;
+        return val / (game.Scope+1); // 0=small 1=medium
     }
 
     internal int GetWages() {

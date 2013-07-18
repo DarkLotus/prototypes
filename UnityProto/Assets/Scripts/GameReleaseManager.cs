@@ -12,7 +12,7 @@ public class GameReleaseManager : MonoBehaviourEx
     public List<GameItem> ReleasedGames = new List<GameItem>();
     [SerializeField]
     private GameItem _inDevGame;
-    public int complete = 0;
+    public float complete = 0;
 
 
     GameTimeController _gtc;
@@ -44,9 +44,9 @@ public class GameReleaseManager : MonoBehaviourEx
             _gtc.GUIOpen = true;
         else
             _gtc.GUIOpen = false;
-        if (complete == 25)
+        if (complete > 25 && !bShownEngFeatures)
             bShowAddEngFeature = true;
-        if (complete == 50)
+        if (complete > 50 && !bShownGameFeatures)
             bShowAddGameFeature = true;
         if (complete >= 100 && !bShownReview) {
             //TODO let them remove bugs etc longer QA etc.
@@ -72,10 +72,14 @@ public class GameReleaseManager : MonoBehaviourEx
     void OnGUI() {
         if(_inDevGame != null)
             GUI.Label(new Rect(Screen.width /2, 100, 100, 50), "Complete %" + complete);
-        if (bShowAddEngFeature)
-           bShowAddEngFeature = GUIHelpers.DrawAddEngFeaturesMenu(_inDevGame);
-        if (bShowAddGameFeature)
+        if (bShowAddEngFeature) {
+            bShowAddEngFeature = GUIHelpers.DrawAddEngFeaturesMenu(_inDevGame);
+            bShownEngFeatures = !bShowAddEngFeature;
+        }
+        if (bShowAddGameFeature) {
             bShowAddGameFeature = GUIHelpers.DrawAddGameFeaturesMenu(_inDevGame);
+            bShownGameFeatures = !bShowAddGameFeature;
+        }
         if (bShowReviews) {
             bShowReviews = GUIHelpers.DrawReviewScreen(_inDevGame);
             bShownReview = !bShowReviews;
@@ -92,4 +96,8 @@ public class GameReleaseManager : MonoBehaviourEx
     public bool bShowReviews { get; set; }
 
     public bool bShownReview { get; set; }
+
+    public bool bShownEngFeatures { get; set; }
+
+    public bool bShownGameFeatures { get; set; }
 }

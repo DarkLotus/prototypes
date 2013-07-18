@@ -23,7 +23,7 @@ public class GameTimeController : MonoBehaviourEx
         if (GUIOpen)
             return;
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime > 2)
+        if (_elapsedTime > 0.5f)
         {
             Day++; _elapsedTime = 0;
             if (DayElasped != null)
