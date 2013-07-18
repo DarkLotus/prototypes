@@ -18,7 +18,7 @@ using UnityEngine;
           GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
             GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
             int i = 0,x = 0;
-            foreach (GameFeature f in GameValues.AvailableEngFeatures) {
+            foreach (GameFeature f in GameValues.Features) {
                 if (x == 0) {
                     GUILayout.BeginHorizontal();
                 }
@@ -50,7 +50,7 @@ using UnityEngine;
         internal static void resetGameFeatures() {
             _engFeatures = new Dictionary<int, bool>();
             int i = 0;
-            foreach (GameFeature f in GameValues.AvailableEngFeatures) {
+            foreach (GameFeature f in GameValues.Features) {
                 _engFeatures.Add(i++, false);
             }
         }
@@ -59,7 +59,7 @@ using UnityEngine;
             GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
             GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
             int i = 0, x = 0;
-            foreach (GameFeature f in GameValues.AvailableEngFeatures) {
+            foreach (GameFeature f in GameValues.Features) {
                 if (x == 0) {
                     GUILayout.BeginHorizontal();
                 }
@@ -155,5 +155,37 @@ using UnityEngine;
         internal static bool DrawResearchWindow() {
             throw new NotImplementedException();
         }
+
+        internal static bool DrawTrainStaffMenu(StaffComponent staffComponent, PlayerManager _pm) {
+            bool res = true;
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH,SMLBOXBUFFERWIDTH), "");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
+            GUILayout.BeginVertical();
+            GUILayout.Label("Train");
+            foreach(Training t in GameValues.Training){
+                GUILayout.BeginHorizontal();
+            if (GUILayout.Button(t.Name)) {
+            if(_pm.Money > t.Price)
+                staffComponent.BeginTraining(t);
+                res = false;
+            }
+                GUILayout.Label(t.Description);
+                GUILayout.EndHorizontal();
+            }
+           
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+            return res;
+        }
+
+        private static Rect getRect(int Xbuffer, int Ybuffer) {
+            return new Rect(Xbuffer, Ybuffer, Screen.width - Xbuffer * 2, Screen.height - Ybuffer * 2);
+    }
+
+        private const int SMLBOXBUFFERWIDTH = 200;
+        private const int LBOXBUFFER = 100;
+
+
+        
     }
 
