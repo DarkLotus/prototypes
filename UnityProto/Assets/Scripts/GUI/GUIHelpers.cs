@@ -15,8 +15,8 @@ using UnityEngine;
         internal static Dictionary<int, bool> _engFeatures = new Dictionary<int, bool>();
 
         internal static bool DrawAddEngFeaturesMenu(GameItem _inDevGame) {
-          GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
-            GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "Features!");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
             int i = 0,x = 0;
             foreach (GameFeature f in GameValues.Features) {
                 if (x == 0) {
@@ -56,8 +56,8 @@ using UnityEngine;
         }
 
         internal static bool DrawAddGameFeaturesMenu(GameItem _inDevGame) {
-            GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Features!");
-            GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "Features!");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
             int i = 0, x = 0;
             foreach (GameFeature f in GameValues.Features) {
                 if (x == 0) {
@@ -85,8 +85,8 @@ using UnityEngine;
         }
 
         internal static bool DrawReviewScreen(GameItem _inDevGame) {
-             GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "Reviews are in!");
-            GUILayout.BeginArea(new Rect(200, 175, Screen.width - 400, Screen.height - 200));
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "Reviews are in!");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
             GUILayout.BeginVertical();
             for(int i = 0;i < 6;i++){
                 GUILayout.BeginHorizontal();
@@ -125,8 +125,8 @@ using UnityEngine;
             if (_currentGame.Genre != 0xFFF)
                 return false;
 
-            GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
-            GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
             GUILayout.BeginHorizontal();
             _currentGame.Genre = GUILayout.SelectionGrid(_currentGame.Genre, GameValues.genreStrings, 5);
             GUILayout.EndHorizontal();
@@ -138,8 +138,8 @@ using UnityEngine;
             if (_currentGame.SubGenre != 0xFFF)
                 return false;
 
-            GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
-            GUILayout.BeginArea(new Rect(200, 150, Screen.width - 400, Screen.height - 200));
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "");
+            GUILayout.BeginArea(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH));
             GUILayout.BeginHorizontal();
             _currentGame.SubGenre = GUILayout.SelectionGrid(_currentGame.SubGenre, GameValues.genreStrings, 5);
             GUILayout.EndHorizontal();
@@ -148,12 +148,13 @@ using UnityEngine;
         }
 
         internal static bool DrawHireStaff() {
-            GUI.Box(new Rect(200, 150, Screen.width - 400, Screen.height - 200), "");
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "");
             return true;
         }
 
         internal static bool DrawResearchWindow() {
-            throw new NotImplementedException();
+            GUI.Box(getRect(SMLBOXBUFFERWIDTH, SMLBOXBUFFERWIDTH), "");
+            return true;
         }
 
         internal static bool DrawTrainStaffMenu(StaffComponent staffComponent, PlayerManager _pm) {
@@ -164,9 +165,11 @@ using UnityEngine;
             GUILayout.Label("Train");
             foreach(Training t in GameValues.Training){
                 GUILayout.BeginHorizontal();
-            if (GUILayout.Button(t.Name)) {
-            if(_pm.Money > t.Price)
-                staffComponent.BeginTraining(t);
+            if (GUILayout.Button(new GUIContent(t.Name,t.Description))) {
+                if (_pm.Money > t.Price) {
+                    _pm.Money -= t.Price;
+                    staffComponent.BeginTraining(t);
+                }
                 res = false;
             }
                 GUILayout.Label(t.Description);
