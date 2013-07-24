@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 
 // Require a character controller to be attached to the same game object
 [RequireComponent(typeof(CharacterController))]
@@ -190,14 +191,17 @@ public class CharacterMotor : MonoBehaviour
 
     private CharacterController controller;
 
+    private NetworkManager manager;
     void Awake()
     {
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>();
         controller = GetComponent<CharacterController>();
         tr = transform;
     }
 
     private void UpdateFunction()
     {
+        
         // We copy the actual velocity into a temporary variable that we can manipulate.
         Vector3 velocity = movement.velocity;
 
@@ -336,8 +340,10 @@ public class CharacterMotor : MonoBehaviour
             movingPlatform.activeGlobalRotation = tr.rotation;
             movingPlatform.activeLocalRotation = Quaternion.Inverse(movingPlatform.activePlatform.rotation) * movingPlatform.activeGlobalRotation;
         }
+        if (velocity.magnitude > 1f)
+            manager.SyncPlayer(this);
         GetComponent<Animator>().SetFloat("Velocity", velocity.magnitude);
-        Debug.Log(velocity.magnitude + " vel");
+       // Debug.Log(velocity.magnitude + " vel");
     }
 
     void FixedUpdate()

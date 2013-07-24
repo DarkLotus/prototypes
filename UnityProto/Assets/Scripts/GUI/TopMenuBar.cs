@@ -96,6 +96,10 @@ public class TopMenuBar : MonoBehaviour {
             if (GUILayout.Button("Quit Game")) {
                 bShowDropDown = false;
                 Application.Quit();
+            } 
+            if (GUILayout.Button("Connect")) {
+                bShowDropDown = false;
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>().Connect();
             }
         }
         GUILayout.EndVertical();

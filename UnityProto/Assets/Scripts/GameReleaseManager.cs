@@ -22,6 +22,14 @@ public class GameReleaseManager : MonoBehaviourEx
         _gtc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameTimeController>();
         _sc = GameObject.FindGameObjectWithTag("GameController").GetComponent<StaffController>();
         _gtc.DayElasped += _gtc_DayElasped;
+
+        if (Application.platform == RuntimePlatform.Android) {
+            Debug.Log("Trying to Call finish");
+            AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            
+            activity.Call("finish");
+        }
     }
 
     void _gtc_DayElasped() {
