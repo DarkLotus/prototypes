@@ -16,11 +16,13 @@ namespace ProtoServer
 {
     class Program
     {
+        
         static TcpListener tcpListener;
         private static List<Player> Players = new List<Player>();
 
         static void Main(string[] args)
         {
+            MessageTypes.Init();
             tcpListener = new TcpListener(IPAddress.Any, 2594);
             tcpListener.Start();
             Console.WriteLine("Started Listening on " + IPAddress.Loopback.ToString());
@@ -88,7 +90,7 @@ namespace ProtoServer
                         Logger.Log("incoming, len: " + len + " / " + client.Available);
                         //client.GetStream().Read(buf, 0, buf.Length);
                         var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(client.GetStream(), PrefixStyle.Base128);
-                        Logger.Log(data.GetType().ToString());
+                        Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
                         switch (data.PacketType)
                         {
                             case PacketType.LoginRequest:

@@ -13,5 +13,6 @@ namespace ProtoShared.Packets.FromClient
         public string UserName;
          [ProtoMember(3)]
         public string Password;
+        public LoginRequest() : base(PacketType.LoginRequest){}
     }
 }

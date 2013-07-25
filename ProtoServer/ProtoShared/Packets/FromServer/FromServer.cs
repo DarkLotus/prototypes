@@ -11,7 +11,7 @@ namespace ProtoShared.Packets.FromServer
     {
         [ProtoMember(2)]
         public int ResultCode;
-        
+        public LoginResponse() : base(PacketType.LoginResponse){}
     }
 
     public class EnterWorld : ProtoShared.Packets.BaseMessage
@@ -20,5 +20,7 @@ namespace ProtoShared.Packets.FromServer
         public string CharacterName;
         [ProtoMember(3)]
         public Vector3 CharLocation;
+
+        public EnterWorld() : base(PacketType.EnterWorld) { }
     }
 }
