@@ -93,10 +93,10 @@ namespace ProtoServer
                         Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
                         switch (data.PacketType)
                         {
-                            case PacketType.LoginRequest:
+                            case 1:
                                 p = _handleClientAuthReq(client, (LoginRequest)data);
                                 break;
-                            case PacketType.SyncClient:
+                            case 2:
                                 _handleSyncClient(p, (SyncClient)data);
                                 break;
 

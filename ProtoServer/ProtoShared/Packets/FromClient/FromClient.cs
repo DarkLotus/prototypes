@@ -13,6 +13,7 @@ namespace ProtoShared.Packets.FromClient
     [ProtoContract]
     public class SyncClient : BaseMessage
     {
+        public static Int16 ID;
         [ProtoMember(2)]
         public float x;
 
@@ -23,7 +24,7 @@ namespace ProtoShared.Packets.FromClient
 
         
         public SyncClient(float x, float y, float z)
-            : base(PacketType.SyncClient) {
+            : base(ID) {
             this.x = x;
             this.y = y;
             this.z = z;
@@ -31,7 +32,7 @@ namespace ProtoShared.Packets.FromClient
         }
 
         public SyncClient()
-            : base(PacketType.SyncClient) {
+            : base(ID) {
         }
 
     }

@@ -7,15 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
 namespace ProtoShared.Packets
 {
 
     public static class MessageTypes {
         public static void Init() {
-            int i = 100;
-            foreach(var t in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BaseMessage)))){
-                RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i++,t);   
+            int i = 1;
+            foreach(var t in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BaseMessage))).OrderBy(type => type.Name)){
+                FieldInfo info = t.GetField("ID", BindingFlags.Public | BindingFlags.Static);
+                info.SetValue(null, (Int16)i);
+                Console.WriteLine("Added Message: " + t.Name + " With ID: " + i);
+                try {
+                    UnityEngine.Debug.Log("Added Message: " + t.Name + " With ID: " + i);
+                }
+                catch { }
+                RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i++,t);
+                
+       
         }
         }
     }
@@ -38,10 +46,10 @@ namespace ProtoShared.Packets
     public class BaseMessage
     {
         [ProtoMember(1)]
-        public PacketType PacketType;
+        public Int16 PacketType;
 
-        public BaseMessage(PacketType type) {
-            PacketType = type;
+        public BaseMessage(Int16 ID) {
+            PacketType = ID;
         }
         public BaseMessage() {
         }

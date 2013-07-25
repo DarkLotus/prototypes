@@ -1,35 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ProtoShared.Packets.FromClient.SyncClient">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="5.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
       <FileName>Packets\FromClient\FromClient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.BaseMessage">
-    <Position X="1" Y="0.75" Width="1.5" />
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Packets\BaseMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromClient.LoginRequest">
-    <Position X="5.25" Y="3" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromClient.SelectCharacter">
+    <Position X="2.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
-      <FileName>Packets\FromClient\LoginRequest.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Packets\FromClient\SelectCharacter.cs</FileName>
+      <NewMemberFileName>Packets\FromClient\LoginRequest.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.FromServer.LoginResponse">
-    <Position X="3" Y="4.25" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgAAA=</HashCode>
       <FileName>Packets\FromServer\FromServer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromServer.EnterWord">
-    <Position X="7.25" Y="3" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromServer.EnterWorld">
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Packets\FromServer\FromServer.cs</FileName>
