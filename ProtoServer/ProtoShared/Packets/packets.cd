@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ProtoShared.Packets.FromClient.SyncClient">
-    <Position X="5.75" Y="5" Width="1.5" />
+    <Position X="10" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
-      <FileName>Packets\FromClient\FromClient.cs</FileName>
+      <FileName>Packets\FromClient\SyncClient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.BaseMessage">
@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.FromClient.SelectCharacter">
-    <Position X="2.25" Y="5" Width="1.5" />
+    <Position X="5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Packets\FromClient\SelectCharacter.cs</FileName>
@@ -23,17 +23,25 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.FromServer.LoginResponse">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="3.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgAAA=</HashCode>
-      <FileName>Packets\FromServer\FromServer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAgAAA=</HashCode>
+      <FileName>Packets\FromServer\LoginResponse.cs</FileName>
+      <NewMemberFileName>Packets\FromServer\EnterWorld.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.FromServer.EnterWorld">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>Packets\FromServer\FromServer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAgAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromServer\EnterWorld.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.LoginRequest">
+    <Position X="2" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromClient\LoginRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

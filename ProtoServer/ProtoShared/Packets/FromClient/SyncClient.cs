@@ -6,10 +6,6 @@ using ProtoBuf;
 
 namespace ProtoShared.Packets.FromClient
 {
-
-
-   
-
     [ProtoContract]
     public class SyncClient : BaseMessage
     {

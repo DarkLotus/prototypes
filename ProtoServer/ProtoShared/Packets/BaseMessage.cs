@@ -12,13 +12,14 @@ namespace ProtoShared.Packets
 
     public static class MessageTypes {
         public static void Init() {
-            int i = 1;
+            int i = 100;
             foreach(var t in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BaseMessage))).OrderBy(type => type.Name)){
                 FieldInfo info = t.GetField("ID", BindingFlags.Public | BindingFlags.Static);
                 info.SetValue(null, (Int16)i);
-                Console.WriteLine("Added Message: " + t.Name + " With ID: " + i);
+               
+                Console.WriteLine("Added Message: " + t.Name + " With NetworkID: " + i);
                 try {
-                    UnityEngine.Debug.Log("Added Message: " + t.Name + " With ID: " + i);
+                    UnityEngine.Debug.Log("Added Message: " + t.Name + " With NetworkID: " + i);
                 }
                 catch { }
                 RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i++,t);

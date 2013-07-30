@@ -8,25 +8,17 @@ using ProtoShared.Data;
 
 namespace ProtoShared.Packets.FromServer
 {
+     [ProtoContract]
     public class LoginResponse : ProtoShared.Packets.BaseMessage
     {
         public static Int16 ID;
         [ProtoMember(2)]
         public int ResultCode;
-
-        public Toon[] Characters;
+        [ProtoMember(3)]
+        public string[] Characters;
     
         public LoginResponse() : base(ID){}
     }
 
-    public class EnterWorld : ProtoShared.Packets.BaseMessage
-    {
-        public static Int16 ID;
-        [ProtoMember(2)]
-        public string CharacterName;
-        [ProtoMember(3)]
-        public Vector3 CharLocation;
-
-        public EnterWorld() : base(ID) { }
-    }
+   
 }

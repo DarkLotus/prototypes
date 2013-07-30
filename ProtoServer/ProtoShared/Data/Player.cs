@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using System.Text;
 using ProtoBuf;
+using UnityEngine;
+using System.IO;
+using ProtoShared.Data;
 
-namespace ProtoShared.Player
+namespace ProtoShared
 {
     [ProtoContract]
     public class Player
@@ -13,12 +15,13 @@ namespace ProtoShared.Player
         [ProtoMember(1)]
         public int Serial;
         [ProtoMember(2)]
-        public float CharPosX { get; set; }
+        public Vector3 Location;
         [ProtoMember(3)]
-        public float CharPosY { get; set; }
-        [ProtoMember(4)]
         public string Name { get; set; }
-         
+        [ProtoMember(4)]
+        public int GraphicID;
+        [ProtoMember(5)]
+        public List<Attributes> Attributes;
 
 
 
@@ -27,22 +30,12 @@ namespace ProtoShared.Player
 
 
 
-        public NetworkStream Stream { get; set; }
+        public Stream Stream { get; set; }
     }
 
 
 
-    [ProtoContract]
-    public class Account
-    {
-        [ProtoMember(1)]
-        public Player Player{ get; set; }
-        [ProtoMember(2)]
-        public string UserName{ get; set; }
-        [ProtoMember(3)]
-        private string _password{ get; set; }
-    }
-
+    
 
   
 }

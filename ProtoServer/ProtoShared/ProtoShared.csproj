@@ -46,14 +46,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Attributes.cs" />
     <Compile Include="Data\Toon.cs" />
     <Compile Include="Packets\FromClient\SelectCharacter.cs" />
     <Compile Include="Packets\FromClient\LoginRequest.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Packets\BaseMessage.cs" />
     <Compile Include="Packets\Bidirectional.cs" />
-    <Compile Include="Packets\FromClient\FromClient.cs" />
-    <Compile Include="Packets\FromServer\FromServer.cs" />
+    <Compile Include="Packets\FromClient\SyncClient.cs" />
+    <Compile Include="Packets\FromServer\LoginResponse.cs" />
+    <Compile Include="Packets\FromServer\EnterWorld.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vector3D.cs" />
