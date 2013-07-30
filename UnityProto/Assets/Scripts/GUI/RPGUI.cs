@@ -12,7 +12,8 @@ namespace Assets.Scripts.gui
 
         // Use this for initialization
         void Start() {
-
+            
+ 
         }
 
         // Update is called once per frame
@@ -21,10 +22,11 @@ namespace Assets.Scripts.gui
         }
 
         void OnGUI() {
+
             GUILayout.BeginArea(new Rect(Screen.width / 2, Screen.height / 2, 300, 600));
             if (GUILayout.Button("Connect")) {
 
-                GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>().Connect();
+                //GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>().Connect();
             }
 
 

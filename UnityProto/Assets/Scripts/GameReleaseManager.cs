@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
 using System;
+using System.Threading;
 
 //[SerializeAll]
 public class GameReleaseManager : MonoBehaviourEx
@@ -23,13 +24,7 @@ public class GameReleaseManager : MonoBehaviourEx
         _sc = GameObject.FindGameObjectWithTag("GameController").GetComponent<StaffController>();
         _gtc.DayElasped += _gtc_DayElasped;
 
-        if (Application.platform == RuntimePlatform.Android) {
-            Debug.Log("Trying to Call finish");
-            AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            
-            activity.Call("finish");
-        }
+      
     }
 
     void _gtc_DayElasped() {
@@ -78,6 +73,7 @@ public class GameReleaseManager : MonoBehaviourEx
     }
    
     void OnGUI() {
+
         if(_inDevGame != null)
             GUI.Label(new Rect(Screen.width /2, 100, 100, 50), "Complete %" + complete);
         if (bShowAddEngFeature) {
