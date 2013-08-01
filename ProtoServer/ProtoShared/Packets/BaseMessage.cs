@@ -4,6 +4,7 @@ using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets.FromServer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,6 +13,8 @@ namespace ProtoShared.Packets
 
     public static class MessageTypes {
         public static void Init() {
+            var outstream = new System.IO.StreamWriter("OpCodes.cs", false);
+            outstream.Write("namespace ProtoShared\n{\npublic static class OpCodes\n{\n");
             int i = 100;
             foreach(var t in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsSubclassOf(typeof(BaseMessage))).OrderBy(type => type.Name)){
                 FieldInfo info = t.GetField("ID", BindingFlags.Public | BindingFlags.Static);
@@ -22,10 +25,19 @@ namespace ProtoShared.Packets
                     UnityEngine.Debug.Log("Added Message: " + t.Name + " With NetworkID: " + i);
                 }
                 catch { }
-                RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i++,t);
-                
+                RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i,t);
+                var name = "";
+                if(t.FullName.Contains("FromServer."))
+                    name += "S_";
+                else
+                    name += "C_";
+                name += t.Name;
+                outstream.WriteLine("public const short " + name + " = " + i + ";");
+                i++;
        
         }
+            outstream.WriteLine("}\n}");
+            outstream.Close();
         }
     }
 
@@ -53,6 +65,13 @@ namespace ProtoShared.Packets
             PacketType = ID;
         }
         public BaseMessage() {
+        }
+
+        
+
+        public void Send(Stream stream) {
+            var t = this.GetType();
+            Serializer.SerializeWithLengthPrefix<BaseMessage>(stream, this, PrefixStyle.Base128);
         }
 
     }

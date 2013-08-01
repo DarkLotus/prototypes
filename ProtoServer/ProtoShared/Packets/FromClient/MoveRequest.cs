@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace ProtoShared.Packets.FromClient
 {
     [ProtoContract]
-    public class SyncClient : BaseMessage
+    public class MoveRequest : BaseMessage
     {
         public static Int16 ID;
         [ProtoMember(2)]
@@ -19,7 +19,7 @@ namespace ProtoShared.Packets.FromClient
         public float z;
 
         
-        public SyncClient(float x, float y, float z)
+        public MoveRequest(float x, float y, float z)
             : base(ID) {
             this.x = x;
             this.y = y;
@@ -27,7 +27,7 @@ namespace ProtoShared.Packets.FromClient
 
         }
 
-        public SyncClient()
+        public MoveRequest()
             : base(ID) {
         }
 

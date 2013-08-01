@@ -13,5 +13,8 @@ namespace ProtoShared.Packets.FromClient
         [ProtoMember(2)]
         public int Index;
          public SelectCharacter() : base(ID) { }
+
+         public SelectCharacter(int index) : base(ID) { Index = index; }
+         
     }
 }

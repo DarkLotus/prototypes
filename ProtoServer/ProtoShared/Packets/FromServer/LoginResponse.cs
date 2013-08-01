@@ -18,6 +18,11 @@ namespace ProtoShared.Packets.FromServer
         public string[] Characters;
     
         public LoginResponse() : base(ID){}
+
+        public LoginResponse(string[] chars) {
+            // TODO: Complete member initialization
+            this.Characters = chars;
+        }
     }
 
    
