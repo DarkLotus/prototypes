@@ -65,7 +65,7 @@ namespace ProtoServer
 
        
 
-        private static void _handleSyncClient(Player client, SyncClient syncClient) {
+        private static void _handleSyncClient(Player client, MoveRequest syncClient) {
             Logger.Log(client.Name + " Moved to " + syncClient.x + "," + syncClient.y);
             client.Location.x = syncClient.x;
             client.Location.y = syncClient.y;

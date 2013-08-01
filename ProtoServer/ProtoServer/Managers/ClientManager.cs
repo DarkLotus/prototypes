@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using ProtoServer.DataBase;
 using ProtoShared;
 using ProtoShared.Packets;
 using ProtoShared.Packets.FromClient;
@@ -24,7 +25,6 @@ namespace ProtoServer
             p.Serial = ID;
             p.Location = new Vector3(1460, 0, 250);
             p.Name = "ToonTest";
-            Clients.Add(ID, p);
             return getPlayer(ID);
 
         }
@@ -48,7 +48,7 @@ namespace ProtoServer
         private static void ClientMessageLoop(object obj) {
             Console.WriteLine("Client Socket Opened");
             TcpClient client = (TcpClient)obj;
-            AccountData p = null; Player pp = null;
+            Player pp = null;
             while (client.Connected) {
                 Thread.Sleep(16);
                 if (client.Available > 0) {
@@ -61,15 +61,15 @@ namespace ProtoServer
                         var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(client.GetStream(), PrefixStyle.Base128);
                         Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
                         switch (data.PacketType) {
-                            case OpCodes.C_LOGIN_REQUEST:
-                                p = handleClientAuthReq(client, (LoginRequest)data);
+                            case OpCodes.C_LoginRequest:
+                                handleClientAuthReq(client, (LoginRequest)data);
                                 break;
-                            case OpCodes.C_SELECT_CHARACTER:
+                            case OpCodes.C_SelectCharacter:
                                 pp = handleSelectToon(client, (SelectCharacter)data);
                                 ClientManager.AddPlayer(pp);
                                 break;
-                            case OpCodes.C_SYNC_CLIENT:
-                                handleSyncClient(pp, (SyncClient)data);
+                            case OpCodes.C_MoveRequest:
+                                handleSyncClient(pp, (MoveRequest)data);
                                 break;
 
                         }
@@ -80,10 +80,11 @@ namespace ProtoServer
 
                 }
             }
+            Clients.Remove(pp.Serial);
             Logger.Log(client.ToString() + " Dissconnected");
         }
 
-        private static void handleSyncClient(Player p, SyncClient syncClient) {
+        private static void handleSyncClient(Player p, MoveRequest syncClient) {
             Logger.Log(p.Name + " Moved to " + syncClient.x + "," + syncClient.y);
             p.Location.x = syncClient.x;
             p.Location.y = syncClient.y;
@@ -113,17 +114,14 @@ namespace ProtoServer
 
         }
 
-        private static AccountData handleClientAuthReq(TcpClient client, LoginRequest loginRequest) {
+        private static void handleClientAuthReq(TcpClient client, LoginRequest loginRequest) {
+            int accountid = Database.LoadAccount(loginRequest.UserName, loginRequest.Password);
+            new LoginResponse(Database.LoadCharactersForAccountID(accountid)).Send(client.GetStream());
             //TODO Load from DB
-            AccountData a = new AccountData();
-            a.Characters = new String[] { "testChar1", "testchar2" };
-            LoginResponse x = new LoginResponse();
-            x.Characters = a.Characters;
-            x.ResultCode = 1;
-            Serializer.SerializeWithLengthPrefix<LoginResponse>(client.GetStream(), x, PrefixStyle.Base128);
+           
+           
             Logger.Log("Sent Login Response");
-            return a;
-
+            return;
         }
 
     }

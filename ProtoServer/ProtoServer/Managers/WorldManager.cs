@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ProtoServer
+namespace ProtoServer.Managers
 {
-    class AccountData
+    class WorldManager
     {
-        public string[] Characters;
-     
     }
 }
