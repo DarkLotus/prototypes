@@ -25,7 +25,7 @@ namespace Assets.Scripts.network
 
 
         public override bool CanRead {
-            get { throw new NotImplementedException(); }
+            get { if (_socket != null)return true; return false; }
         }
 
         public override bool CanSeek {
@@ -33,11 +33,11 @@ namespace Assets.Scripts.network
         }
 
         public override bool CanWrite {
-            get { throw new NotImplementedException(); }
+            get { if (_socket != null)return true; return false; }
         }
 
         public override void Flush() {
-            throw new NotImplementedException();
+            return;
         }
 
         public override long Length {

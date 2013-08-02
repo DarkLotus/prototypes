@@ -12,6 +12,7 @@ using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets;
 using System.IO;
 using Assets.Scripts.network;
+using ProtoShared.Packets.FromServer;
 namespace Assets.Scripts
 {
     public class NetworkManager : MonoBehaviourEx
@@ -67,9 +68,35 @@ namespace Assets.Scripts
 #endif
             if (_stream != null && length > 0) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(_stream, PrefixStyle.Base128);
-               // switch (data.PacketType) {}
+               switch (data.PacketType) {
+                   case OpCodes.S_LOGIN_RESPONSE:
+                       handleLoginResponse((LoginResponse)data);
+                       break;
+                   case OpCodes.S_ENTER_WORLD:
+                       handleEnterWorld((EnterWorld)data);
+                       break;
+                  
+               }
                 Logger.Log(data.GetType().ToString());
             }
+        }
+
+        private void handleEnterWorld(EnterWorld enterWorld) {
+            
+        }
+
+        private void handleLoginResponse(LoginResponse loginResponse) {
+            if (loginResponse.ResultCode != 1 && loginResponse.Characters.Length > 0) {
+                Debug.Log("Login Denied");
+                return;
+            }
+           
+                SelectCharacter a = new SelectCharacter();
+                new SelectCharacter(0).Send(_stream);
+                Debug.Log("Send Select Char");
+            
+                
+
         }
 
         public void SyncPlayer(CharacterMotor m) {
@@ -83,8 +110,6 @@ namespace Assets.Scripts
 
 
 
-        private void HandleConnection(IAsyncResult ar) {
-            
-        }
+        
     }
 }
