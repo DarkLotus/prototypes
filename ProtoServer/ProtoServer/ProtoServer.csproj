@@ -71,6 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\ServerToon.cs" />
     <Compile Include="Managers\ClientManager.cs" />
     <Compile Include="DataBase\Database.cs" />
     <Compile Include="IDFactory.cs" />
@@ -112,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataBase\DB.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +134,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -32,7 +32,7 @@ namespace ProtoServer
             {
             if(tcpListener.Pending())
                 tcpListener.BeginAcceptTcpClient(new AsyncCallback(AcceptClientConnection), tcpListener);
-            Thread.Sleep(10);
+            Thread.Sleep(100);
             }
         }
 
@@ -42,40 +42,27 @@ namespace ProtoServer
             while (true) {
             //Do game loop
                 ClientManager.Update(sw.ElapsedMilliseconds);
-                if (sw.ElapsedMilliseconds < 16f)
+                if (sw.ElapsedMilliseconds < 16)
                     Thread.Sleep((int)(16 - sw.ElapsedMilliseconds));
-                Thread.Sleep(1);
+                if (sw.ElapsedMilliseconds > 16)
+                    Logger.Log("Update running behind : " + sw.ElapsedMilliseconds);
+                sw.Reset();
+                sw.Start();
             }
         }
 
 
 
-        private static void AcceptClientConnection(IAsyncResult ar)
-        {
+        private static void AcceptClientConnection(IAsyncResult ar) {
             Console.WriteLine("Accepted a Connection");
             TcpListener client = (TcpListener)ar.AsyncState;
 
             TcpClient Client = client.EndAcceptTcpClient(ar);
             ClientManager.ClientConnected(Client);
-            
+
             //client.BeginAcceptTcpClient(new AsyncCallback(AcceptClientConnection), tcpListener);
 
-            
-        }
 
-       
-
-        private static void _handleSyncClient(Player client, MoveRequest syncClient) {
-            Logger.Log(client.Name + " Moved to " + syncClient.x + "," + syncClient.y);
-            client.Location.x = syncClient.x;
-            client.Location.y = syncClient.y;
-            client.Location.z = syncClient.z;
-        }
-
-            
-
-
-       
-      
+        }  
     }
 }
