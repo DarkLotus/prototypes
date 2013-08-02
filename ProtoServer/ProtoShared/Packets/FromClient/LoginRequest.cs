@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using ProtoShared.Packets.FromServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace ProtoShared.Packets.FromClient
          [ProtoMember(3)]
         public string Password;
         public LoginRequest() : base(ID){}
+
+      
     }
 }

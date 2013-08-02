@@ -48,10 +48,11 @@
   <ItemGroup>
     <Compile Include="Data\Attributes.cs" />
     <Compile Include="Data\Toon.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="OpCodes.cs" />
     <Compile Include="Packets\FromClient\UseObject.cs" />
     <Compile Include="Packets\FromClient\SelectCharacter.cs" />
     <Compile Include="Packets\FromClient\LoginRequest.cs" />
-    <Compile Include="Network.cs" />
     <Compile Include="Packets\BaseMessage.cs" />
     <Compile Include="Packets\Bidirectional.cs" />
     <Compile Include="Packets\FromClient\MoveRequest.cs" />

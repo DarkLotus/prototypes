@@ -12,9 +12,14 @@ namespace ProtoShared.Packets.FromServer
     {
         public static Int16 ID;
         [ProtoMember(2)]
-        public Player Player;
+        public Toon Toon;
 
 
         public EnterWorld() : base(ID) { }
+
+        public EnterWorld(Toon toon)
+            : base(ID) {
+                this.Toon = toon;
+        }
     }
 }

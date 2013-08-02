@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using ProtoShared.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,18 @@ using UnityEngine;
 namespace ProtoShared.Data
 {
      [ProtoContract]
-    public class ToonWorldEntryData
+    public class Toon
     {
-        public int GraphicID;
-
-        public int NetworkID;
-
         public Vector3 Location;
 
         public List<Attributes> Attributes;
+        public string Name;
+        public int Serial;
 
+
+      
+
+
+       
     }
 }

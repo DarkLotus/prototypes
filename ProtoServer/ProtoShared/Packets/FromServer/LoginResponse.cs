@@ -16,13 +16,17 @@ namespace ProtoShared.Packets.FromServer
         public int ResultCode;
         [ProtoMember(3)]
         public string[] Characters;
+
     
         public LoginResponse() : base(ID){}
 
         public LoginResponse(string[] chars) {
             // TODO: Complete member initialization
             this.Characters = chars;
+            ResultCode = 1;
         }
+
+     
     }
 
    

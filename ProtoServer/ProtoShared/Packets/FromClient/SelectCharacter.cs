@@ -11,10 +11,10 @@ namespace ProtoShared.Packets.FromClient
     {
         public static Int16 ID;
         [ProtoMember(2)]
-        public int Index;
+        public int ToonID;
          public SelectCharacter() : base(ID) { }
 
-         public SelectCharacter(int index) : base(ID) { Index = index; }
+         public SelectCharacter(int toonid) : base(ID) { ToonID = toonid; }
          
     }
 }
