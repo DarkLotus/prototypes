@@ -6,6 +6,7 @@ using ProtoShared.Data;
 using ProtoShared.Packets;
 using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets.FromServer;
+using ProtoShared.Packets.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,17 +39,36 @@ namespace ProtoServer
                             case OpCodes.C_LoginRequest:
                                 handleClientAuthReq(p.Client.GetStream(), (LoginRequest)data,p);
                                 break;
+                            case OpCodes.C_CreateCharacter:
+                                handleCreateToon(p, (CreateCharacter)data);
+                                break;
                             case OpCodes.C_SelectCharacter:
                                 handleSelectToon(p.Client.GetStream(), (SelectCharacter)data, p);
                                 break;
                             case OpCodes.C_MoveRequest:
                                 handleMoveRequest(p.CurrentToon, (MoveRequest)data);
                                 break;
+                            case OpCodes.S_ChatMessage:
+                                handleChatMessage(p, (ChatMessage)data);
+                                break;
 
                         }
 
             }
 
+        }
+
+        private static void handleChatMessage(Account a, ChatMessage chatMessage) {
+            Logger.Log(chatMessage.Sender + ": " + chatMessage.Message);
+            foreach (var p in OnlineAccounts)
+                if(a.Serial != p.Serial)
+                chatMessage.Send(p.Client.GetStream());
+        }
+
+        private static void handleCreateToon(Account p, CreateCharacter createCharacter) {
+            Database.CreateToon(p, createCharacter);
+            //set cur toon?
+            new EnterWorld((Toon)p.CurrentToon).Send(p.Client.GetStream());
         }
 
         internal static void ClientConnected(System.Net.Sockets.TcpClient Client) {
@@ -74,12 +94,16 @@ namespace ProtoServer
             m.Serial = serial;
             m.Location = new Vector3(syncClient.x, syncClient.y, syncClient.z);
             foreach (Account p in ClientManager.OnlineAccounts)
+                if(p.Serial != serial)
                 m.Send(p.Client.GetStream());
             Logger.Log("Sent SyncMobile to: " + ClientManager.OnlineAccounts.Count + " players");
         }
 
         private static void handleSelectToon(NetworkStream client, SelectCharacter selectCharacter, Account account) {
-            account.CurrentToon = account.Toons[selectCharacter.ToonID];
+            if (account.Toons.Count == 0)
+                Database.CreateToon(account);
+            int index = Math.Max(0,Math.Min(selectCharacter.ToonID, account.Toons.Count));
+            account.CurrentToon = account.Toons[index];
             new EnterWorld((Toon)account.CurrentToon).Send(client);
             return;
             

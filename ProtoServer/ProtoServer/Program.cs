@@ -42,10 +42,11 @@ namespace ProtoServer
             while (true) {
             //Do game loop
                 ClientManager.Update(sw.ElapsedMilliseconds);
-                if (sw.ElapsedMilliseconds < 16)
-                    Thread.Sleep((int)(16 - sw.ElapsedMilliseconds));
                 if (sw.ElapsedMilliseconds > 16)
                     Logger.Log("Update running behind : " + sw.ElapsedMilliseconds);
+                if (sw.ElapsedMilliseconds < 16)
+                    Thread.Sleep((int)(16 - sw.ElapsedMilliseconds));
+               
                 sw.Reset();
                 sw.Start();
             }

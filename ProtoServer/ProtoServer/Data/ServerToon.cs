@@ -17,8 +17,16 @@ namespace ProtoServer.Data
             LoadDataBlob(row.serialized_data);
         }
 
+        public ServerToon() {
+            // TODO: Complete member initialization
+        }
+
         private void LoadDataBlob(byte[] p) {
             return;
+        }
+
+        internal byte[] GetData() {
+            throw new NotImplementedException();
         }
     }
 }

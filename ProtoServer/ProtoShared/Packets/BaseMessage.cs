@@ -27,10 +27,12 @@ namespace ProtoShared.Packets
                 catch { }
                 RuntimeTypeModel.Default.Add(typeof(BaseMessage),true).AddSubType(i,t);
                 var name = "";
-                if(t.FullName.Contains("FromServer."))
+                if (t.FullName.Contains("FromServer."))
                     name += "S_";
-                else
+                else if (t.FullName.Contains("FromClient."))
                     name += "C_";
+                else
+                    name += "S_";
                 name += t.Name;
                 outstream.WriteLine("public const short " + name + " = " + i + ";");
                 i++;

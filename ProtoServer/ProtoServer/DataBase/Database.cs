@@ -68,5 +68,9 @@ namespace ProtoServer.DataBase
             toon.Location = new UnityEngine.Vector3(905, 13, 593);
             _characters.Insert(account.Serial, toon.Name, toon.GetData());
         }
+
+        internal static void CreateToon(Account p, ProtoShared.Packets.FromClient.CreateCharacter createCharacter) {
+            throw new NotImplementedException();
+        }
     }
 }
