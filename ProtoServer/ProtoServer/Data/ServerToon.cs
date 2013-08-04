@@ -26,7 +26,7 @@ namespace ProtoServer.Data
         }
 
         internal byte[] GetData() {
-            throw new NotImplementedException();
+            return new byte[0];
         }
     }
 }

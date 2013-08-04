@@ -26,7 +26,7 @@ namespace ProtoServer.DataBase
             Account a = new Account();
             a.UserName = p1;
             a.Serial = data[0].id;
-            a.Toons = LoadToonsForAccountID(a);
+            LoadToonsForAccountID(a);
             return a;
             
         }
@@ -44,33 +44,32 @@ namespace ProtoServer.DataBase
             Logger.Log("Found User..." + p1 + "  " + data[0].id);
             a.UserName = p1;
             a.Serial = data[0].id;
-            a.Toons = LoadToonsForAccountID(a);
+            LoadToonsForAccountID(a);
             return;
         }
 
-        private static List<ServerToon> LoadToonsForAccountID(Account a) {
+        private static void LoadToonsForAccountID(Account a) {
             if (_characters == null) _characters = new AccountDBDataSetTableAdapters.charactersTableAdapter();
             var data = _characters.GetToonsByOwnerID(a.Serial);
             List<ServerToon> list = new List<ServerToon>();
             foreach (var row in data)
-                list.Add(new ServerToon(row));
-            return list;
+                a.Toons.Add(new ServerToon(row));
 
         }
 
 
 
 
-        internal static void CreateToon(Account account) {
+       
+
+        internal static ServerToon CreateToon(Account p, ProtoShared.Packets.FromClient.CreateCharacter createCharacter) {
             if (_characters == null) _characters = new AccountDBDataSetTableAdapters.charactersTableAdapter();
             ServerToon toon = new ServerToon();
-            toon.Name = account.UserName + "Char";
+            toon.Name = createCharacter.Name;
             toon.Location = new UnityEngine.Vector3(905, 13, 593);
-            _characters.Insert(account.Serial, toon.Name, toon.GetData());
-        }
-
-        internal static void CreateToon(Account p, ProtoShared.Packets.FromClient.CreateCharacter createCharacter) {
-            throw new NotImplementedException();
+            _characters.Insert(p.Serial, toon.Name, toon.GetData());
+            LoadToonsForAccountID(p);
+            return p.Toons.Where(t => t.Name.Equals(createCharacter.Name)).First();
         }
     }
 }

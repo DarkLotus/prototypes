@@ -13,7 +13,7 @@ namespace ProtoServer.Data
 
         public string UserName;
 
-        public List<ServerToon> Toons;
+        public List<ServerToon> Toons = new List<ServerToon>();
 
         public Toon CurrentToon;
 
@@ -26,6 +26,7 @@ namespace ProtoServer.Data
         }
         public Account() { }
         internal string[] GetToonNames() {
+            
             string[] toons = new string[Toons.Count];
             int i = 0;
             foreach(var t in Toons)

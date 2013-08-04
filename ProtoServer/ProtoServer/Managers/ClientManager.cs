@@ -22,16 +22,26 @@ namespace ProtoServer
 
         public static List<Account> OnlineAccounts = new List<Account>();
 
-       
+        private static List<Account> RemoveMe = new List<Account>();
         internal static void Update(long delta) {
+            
             foreach (Account p in OnlineAccounts) {
-                HandleClientMessages(p);
+                if (!HandleClientMessages(p)) {
+                    RemoveMe.Add(p);
+                }
             }
+            foreach (var serial in RemoveMe) {
+                Logger.Log("Account : " + serial.Serial + " Logged off");
+                OnlineAccounts.Remove(serial);
+            }
+            RemoveMe.Clear();
+
+
         }
 
-        private static void HandleClientMessages(Account p) {
+        private static bool HandleClientMessages(Account p) {
             if (p.Client == null || !p.Client.Connected)
-                return;
+                return false;
             while (p.Client.Available > 1) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(p.Client.GetStream(), PrefixStyle.Base128);
                 //Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
@@ -55,7 +65,7 @@ namespace ProtoServer
                         }
 
             }
-
+            return true;
         }
 
         private static void handleChatMessage(Account a, ChatMessage chatMessage) {
@@ -66,7 +76,7 @@ namespace ProtoServer
         }
 
         private static void handleCreateToon(Account p, CreateCharacter createCharacter) {
-            Database.CreateToon(p, createCharacter);
+            p.CurrentToon = Database.CreateToon(p, createCharacter);
             //set cur toon?
             new EnterWorld((Toon)p.CurrentToon).Send(p.Client.GetStream());
         }
@@ -100,8 +110,6 @@ namespace ProtoServer
         }
 
         private static void handleSelectToon(NetworkStream client, SelectCharacter selectCharacter, Account account) {
-            if (account.Toons.Count == 0)
-                Database.CreateToon(account);
             int index = Math.Max(0,Math.Min(selectCharacter.ToonID, account.Toons.Count));
             account.CurrentToon = account.Toons[index];
             new EnterWorld((Toon)account.CurrentToon).Send(client);

@@ -20,7 +20,7 @@ namespace ProtoShared.Packets.FromServer
     
         public LoginResponse() : base(ID){}
 
-        public LoginResponse(string[] chars) {
+        public LoginResponse(string[] chars) : base(ID) {
             // TODO: Complete member initialization
             this.Characters = chars;
             ResultCode = 1;

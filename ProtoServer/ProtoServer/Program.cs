@@ -11,6 +11,7 @@ using System.Diagnostics;
 using ProtoShared.Packets.FromServer;
 using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets;
+using System.IO;
 namespace ProtoServer
 {
     class Program

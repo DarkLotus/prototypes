@@ -75,6 +75,14 @@ namespace ProtoShared.Packets
             var t = this.GetType();
             Serializer.SerializeWithLengthPrefix<BaseMessage>(stream, this, PrefixStyle.Base128);
             stream.Flush();
+            Logger.Log("Sent" + this.ToString()) ;
+        }
+
+        public override string ToString() {
+            string str = this.GetType().Name + ">";
+            foreach (var x in this.GetType().GetFields())
+                str += x.Name + ":" + x.GetValue(this) + ",";
+            return str;
         }
 
     }
