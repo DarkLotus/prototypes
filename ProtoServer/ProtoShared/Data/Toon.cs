@@ -11,11 +11,15 @@ namespace ProtoShared.Data
      [ProtoContract]
     public class Toon
     {
-        public Vector3 Location;
+        [ProtoMember(1)]
+        public Vector3D Location;
 
+         [ProtoMember(2)]
         public List<Attributes> Attributes;
-        public string Name;
-        public int Serial;
+        [ProtoMember(3)]
+         public string Name;
+        [ProtoMember(4)]
+         public int Serial;
 
 
       

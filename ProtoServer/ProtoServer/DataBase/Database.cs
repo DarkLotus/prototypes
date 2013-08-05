@@ -1,4 +1,5 @@
 ﻿using ProtoServer.Data;
+using ProtoShared;
 using ProtoShared.Data;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace ProtoServer.DataBase
             if (_characters == null) _characters = new AccountDBDataSetTableAdapters.charactersTableAdapter();
             ServerToon toon = new ServerToon();
             toon.Name = createCharacter.Name;
-            toon.Location = new UnityEngine.Vector3(905, 13, 593);
+            toon.Location = new Vector3D(905, 13, 593);
             _characters.Insert(p.Serial, toon.Name, toon.GetData());
             LoadToonsForAccountID(p);
             return p.Toons.Where(t => t.Name.Equals(createCharacter.Name)).First();

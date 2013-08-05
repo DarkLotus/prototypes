@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,14 +24,14 @@ namespace ProtoShared
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-  
+        [ProtoContract]
         public class Vector3D
         {
-            
+            [ProtoMember(1)]
             public float X { get; set; }
-            
+            [ProtoMember(2)]
             public float Y { get; set; }
-            
+            [ProtoMember(3)]
             public float Z { get; set; }
 
             public Vector3D() {

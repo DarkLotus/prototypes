@@ -1,4 +1,5 @@
-﻿using ProtoShared.Data;
+﻿using ProtoBuf;
+using ProtoShared.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 
 namespace ProtoServer.Data
 {
+    [ProtoContract, ProtoInclude(400,typeof(Toon))]
     public class ServerToon : Toon
     {
         

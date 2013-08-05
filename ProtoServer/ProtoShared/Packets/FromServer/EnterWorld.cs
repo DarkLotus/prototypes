@@ -8,6 +8,7 @@ using ProtoShared.Data;
 
 namespace ProtoShared.Packets.FromServer
 {
+    [ProtoContract]
     public class EnterWorld : ProtoShared.Packets.BaseMessage
     {
         public static Int16 ID;
@@ -19,7 +20,7 @@ namespace ProtoShared.Packets.FromServer
 
         public EnterWorld(Toon toon)
             : base(ID) {
-                this.Toon = toon;
+                this.Toon = (Toon)toon;
         }
     }
 }

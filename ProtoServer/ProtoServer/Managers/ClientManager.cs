@@ -92,9 +92,9 @@ namespace ProtoServer
 
         private static void handleMoveRequest(Toon p, MoveRequest syncClient) {
             Logger.Log(p.Name + " Moved to " + syncClient.x + "," + syncClient.y);
-            p.Location.x = syncClient.x;
-            p.Location.y = syncClient.y;
-            p.Location.z = syncClient.z;
+            p.Location.X = syncClient.x;
+            p.Location.Y = syncClient.y;
+            p.Location.Z = syncClient.z;
             SendMovementUpdate(syncClient,p.Serial);
             
         }
@@ -112,6 +112,7 @@ namespace ProtoServer
         private static void handleSelectToon(NetworkStream client, SelectCharacter selectCharacter, Account account) {
             int index = Math.Max(0,Math.Min(selectCharacter.ToonID, account.Toons.Count));
             account.CurrentToon = account.Toons[index];
+            Logger.Log("Entering world..." + account.CurrentToon.Name);
             new EnterWorld((Toon)account.CurrentToon).Send(client);
             return;
             
