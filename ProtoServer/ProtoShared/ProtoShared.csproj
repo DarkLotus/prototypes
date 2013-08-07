@@ -46,7 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Attributes.cs" />
+    <Compile Include="Data\Attrib.cs" />
+    <Compile Include="Data\Scene.cs" />
     <Compile Include="Data\Toon.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="OpCodes.cs" />

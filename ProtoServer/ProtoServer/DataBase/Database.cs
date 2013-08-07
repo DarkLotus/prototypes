@@ -54,7 +54,7 @@ namespace ProtoServer.DataBase
             var data = _characters.GetToonsByOwnerID(a.Serial);
             List<ServerToon> list = new List<ServerToon>();
             foreach (var row in data)
-                a.Toons.Add(new ServerToon(row));
+                a.Toons.Add(ServerToon.LoadDataBlob(row.serialized_data));
 
         }
 
@@ -68,6 +68,8 @@ namespace ProtoServer.DataBase
             ServerToon toon = new ServerToon();
             toon.Name = createCharacter.Name;
             toon.Location = new Vector3D(905, 13, 593);
+            toon.Attributes.Add(new Attrib() { ID = AttribType.Health, Value = 50 });
+            toon.Attributes.Add(new Attrib() { ID = AttribType.MaxHealth, Value = 50 });
             _characters.Insert(p.Serial, toon.Name, toon.GetData());
             LoadToonsForAccountID(p);
             return p.Toons.Where(t => t.Name.Equals(createCharacter.Name)).First();

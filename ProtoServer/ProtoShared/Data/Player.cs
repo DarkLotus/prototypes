@@ -21,7 +21,7 @@ namespace ProtoShared
         [ProtoMember(4)]
         public int GraphicID;
         [ProtoMember(5)]
-        public List<Attributes> Attributes;
+        public List<Attrib> Attributes;
 
 
 
