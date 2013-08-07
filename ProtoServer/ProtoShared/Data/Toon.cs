@@ -2,6 +2,7 @@
 using ProtoShared.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace ProtoShared.Data
         public Vector3D Location;
 
          [ProtoMember(2)]
-        public List<Attrib> Attributes;
+        public List<Attrib> Attributes = new List<Attrib>();
         [ProtoMember(3)]
          public string Name;
         [ProtoMember(4)]
@@ -29,8 +30,13 @@ namespace ProtoShared.Data
         [ProtoMember(5)]
         public int SceneSerial;
 
-      
 
+        public byte[] GetData() {
+            using (var stream = new MemoryStream()) {
+                Serializer.SerializeWithLengthPrefix<Toon>(stream, this, PrefixStyle.Base128);
+                return stream.GetBuffer();
+            }
+        }
 
        
     }

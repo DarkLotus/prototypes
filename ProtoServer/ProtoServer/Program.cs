@@ -39,15 +39,16 @@ namespace ProtoServer
 
         private static void MainLoop() {
             Stopwatch sw = new Stopwatch();
+            long timer = 0;
             sw.Start();
             while (true) {
             //Do game loop
-                ClientManager.Update(sw.ElapsedMilliseconds);
+                ClientManager.Update(timer);
                 if (sw.ElapsedMilliseconds > 16)
                     Logger.Log("Update running behind : " + sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds < 16)
                     Thread.Sleep((int)(16 - sw.ElapsedMilliseconds));
-               
+                timer = sw.ElapsedMilliseconds;
                 sw.Reset();
                 sw.Start();
             }

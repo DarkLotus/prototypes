@@ -26,12 +26,15 @@ namespace ProtoServer
         internal static void Update(long delta) {
             
             foreach (Account p in OnlineAccounts) {
-                if (!HandleClientMessages(p)) {
+                
+                if (!HandleClientMessages(p,delta)) {
                     RemoveMe.Add(p);
                 }
             }
             foreach (var serial in RemoveMe) {
                 Logger.Log("Account : " + serial.Serial + " Logged off");
+                if (serial.Client != null && serial.Client.Connected)
+                    serial.Client.Close();
                 OnlineAccounts.Remove(serial);
             }
             RemoveMe.Clear();
@@ -39,9 +42,16 @@ namespace ProtoServer
 
         }
 
-        private static bool HandleClientMessages(Account p) {
+        private static bool HandleClientMessages(Account p,long delta) {
             if (p.Client == null || !p.Client.Connected)
                 return false;
+            if (p.Client.Available == 0) {
+                p.idleTime += delta;
+                if(p.idleTime > (60*1000))
+                return false;
+                return true;
+            }
+            p.idleTime = 0;// TODO only some packets unidle?
             while (p.Client.Available > 1) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(p.Client.GetStream(), PrefixStyle.Base128);
                 //Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
@@ -83,6 +93,7 @@ namespace ProtoServer
 
         internal static void ClientConnected(System.Net.Sockets.TcpClient Client) {
             Client.NoDelay = true;
+            
             OnlineAccounts.Add(new Account(Client));
             Logger.Log(Client.Client.RemoteEndPoint.ToString() + " Connected");
         }

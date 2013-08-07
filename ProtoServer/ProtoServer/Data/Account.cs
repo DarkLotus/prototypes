@@ -13,12 +13,13 @@ namespace ProtoServer.Data
 
         public string UserName;
 
-        public List<ServerToon> Toons = new List<ServerToon>();
+        public List<Toon> Toons = new List<Toon>();
 
         public Toon CurrentToon;
 
 
         public TcpClient Client;
+        public long idleTime;
 
         public Account(System.Net.Sockets.TcpClient Client) {
             // TODO: Complete member initialization
