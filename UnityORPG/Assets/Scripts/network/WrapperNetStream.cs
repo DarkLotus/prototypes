@@ -9,23 +9,41 @@ namespace Assets.Scripts.network
 {
     public class WrapperNetStream : Stream
     {
+
+         #if UNITY_ANDROID
+
         AndroidJavaObject _socket;
         AndroidJavaObject _inStream;
         AndroidJavaObject _outStream;
-
+#elif UNITY_STANDALONE
+        System.Net.Sockets.TcpClient _client;
+        System.Net.Sockets.NetworkStream _inStream;
+        System.Net.Sockets.NetworkStream _outStream { get {return _inStream;}}
+#endif
         public WrapperNetStream() {
             if (Application.platform == RuntimePlatform.Android) {
+#if UNITY_ANDROID
                 Debug.Log("Trying to Call finish");
                 _socket = new AndroidJavaObject("java.net.Socket", new object[] { "192.168.1.3", 2594 });
                 _inStream = _socket.Call<AndroidJavaObject>("getInputStream");
                 _outStream = _socket.Call<AndroidJavaObject>("getOutputStream");
+#elif UNITY_STANDALONE
+                //TODO init windows socket here.
+                _client.Connect("192.168.1.3", 2594);
+                _inStream = _client.GetStream();
+
+#endif
             }
             
         }
 
 
         public override bool CanRead {
+#if UNITY_ANDROID
             get { if (_socket != null)return true; return false; }
+#elif UNITY_STANDALONE
+            get{ return _inStream.CanRead;}
+#endif
         }
 
         public override bool CanSeek {
@@ -33,15 +51,30 @@ namespace Assets.Scripts.network
         }
 
         public override bool CanWrite {
+            #if UNITY_ANDROID
             get { if (_socket != null)return true; return false; }
+#elif UNITY_STANDALONE
+            get { return _inStream.CanWrite; }
+#endif
         }
 
         public override void Flush() {
-            return;
+                        #if UNITY_ANDROID
+            _inStream.Call("flush");
+#elif UNITY_STANDALONE
+            _inStream.Flush();
+#endif
         }
 
         public override long Length {
-            get { return _inStream.Call<int>("available"); }
+            get { 
+                #if UNITY_ANDROID
+                return _inStream.Call<int>("available"); 
+#elif UNITY_STANDALONE
+
+                return _inStream.Length;
+#endif
+            }
         }
 
         public override long Position {
@@ -54,9 +87,14 @@ namespace Assets.Scripts.network
         }
 
         public override int Read(byte[] buffer, int offset, int count) {
+            #if UNITY_ANDROID
             int result = _inStream.Call<int>("read",new object[]{buffer,offset,count});
 
-            return 0;
+            return result;// was 0
+#elif UNITY_STANDALONE
+
+            return _inStream.Read(buffer, offset, count);
+#endif
         }
 
         public override long Seek(long offset, SeekOrigin origin) {
@@ -68,7 +106,13 @@ namespace Assets.Scripts.network
         }
 
         public override void Write(byte[] buffer, int offset, int count) {
+             #if UNITY_ANDROID
             _outStream.Call("write", new object[] { buffer, offset, count });
+#elif UNITY_STANDALONE
+
+             _outStream.Write(buffer, offset, count);
+             return;
+#endif
             
         }
     }

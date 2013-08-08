@@ -1,4 +1,6 @@
-﻿using ProtoShared.Data;
+﻿using ProtoShared;
+using ProtoShared.Data;
+using ProtoShared.Packets.FromServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace Assets.Scripts
     public class SceneController : MonoBehaviour
     {
         PlayerController player;
+        List<PlayerController> OtherPlayers = new List<PlayerController>();
 
         void Start() {
             if (NetworkManager.Instance == null)
@@ -21,10 +24,34 @@ namespace Assets.Scripts
         }
 
         void Instance_OnPacketarrival(ProtoShared.Packets.BaseMessage msg) {
-            throw new NotImplementedException();
+            switch (msg.PacketType) {
+                case OpCodes.S_ShowOtherToon:
+                    handleOtherToon((ShowOtherToon)msg);
+                    break;
+                case OpCodes.S_SyncMobile:
+                    handleSyncMobile((SyncMobile)msg);
+                    break;
+            }
         }
 
-        void Update() { }
+        private void handleSyncMobile(SyncMobile syncMobile) {
+            foreach (var p in OtherPlayers)
+                if (p.Toon.Serial == syncMobile.Serial)
+                    p.handleMovementSync(syncMobile);
+        }
+
+        private void handleOtherToon(ShowOtherToon showOtherToon) {
+            
+            var newplayer = (GameObject)Instantiate(Resources.Load("otherPlayer"));
+            var newpl = newplayer.GetComponent<PlayerController>();
+            newpl.EnterWorld(showOtherToon.Toon);
+            OtherPlayers.Add(newpl);
+
+        }
+
+        void Update() {
+            foreach (var p in OtherPlayers) { }
+        }
 
 
 

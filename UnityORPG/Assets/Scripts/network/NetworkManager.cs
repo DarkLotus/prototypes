@@ -45,7 +45,7 @@ namespace Assets.Scripts
 #elif UNITY_STANDALONE
             TcpClient _client = null;
              _client = new TcpClient();           
-            _client.Connect(IPAddress.Parse("192.168.1.3"), 2594);
+            _client.Connect(IPAddress.Parse("127.0.0.1"), 2594);
             _stream = _client.GetStream();
 #endif
 
@@ -90,9 +90,6 @@ namespace Assets.Scripts
 #if UNITY_ANDROID
             length = _stream.Length;
 #elif UNITY_STANDALONE
-            if ((_stream as System.Net.Sockets.NetworkStream).DataAvailable)
-                length++;
-#elif UNITY_EDITOR
             if ((_stream as System.Net.Sockets.NetworkStream).DataAvailable)
                 length++;
 #endif

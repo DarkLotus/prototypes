@@ -46,7 +46,7 @@ public class StartMenu : MonoBehaviour {
     }
 
     private void _network_OnEnterWorld(ProtoShared.Packets.FromServer.EnterWorld msg) {
-
+        DarkGUI.Instance.ClearAllUI();
         Application.LoadLevel(msg.Toon.SceneSerial);
         Logger.Log("Entering world..." + msg.Toon.SceneSerial);
 

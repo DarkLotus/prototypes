@@ -39,5 +39,9 @@ namespace Assets.Scripts
             this.Toon = enterWorld;
             transform.position = Helpers.Helper.getVector(enterWorld.Location);
         }
+
+        internal void handleMovementSync(ProtoShared.Packets.FromServer.SyncMobile syncMobile) {
+            transform.position = Helpers.Helper.getVector(syncMobile.Location);
+        }
     }
 }
