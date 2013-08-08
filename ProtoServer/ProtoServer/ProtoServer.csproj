@@ -71,11 +71,14 @@
       <DependentUpon>DB.xsd</DependentUpon>
     </Compile>
     <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\Mobile.cs" />
+    <Compile Include="Data\Scene.cs" />
     <Compile Include="Data\ServerToon.cs" />
     <Compile Include="Managers\ClientManager.cs" />
     <Compile Include="DataBase\Database.cs" />
     <Compile Include="IDFactory.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Data\Item.cs" />
     <Compile Include="Managers\WorldManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,7 +87,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Managers\SceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DataBase\DB.xsc">

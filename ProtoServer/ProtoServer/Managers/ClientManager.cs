@@ -15,10 +15,11 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace ProtoServer
+namespace ProtoServer.Managers
 {
     public static class ClientManager
     {
+        
 
         public static List<Account> OnlineAccounts = new List<Account>();
 
@@ -45,6 +46,8 @@ namespace ProtoServer
         private static bool HandleClientMessages(Account p,long delta) {
             if (p.Client == null || !p.Client.Connected)
                 return false;
+
+            //Replace this with a counter in a Keep Alive/Ping packet
             if (p.Client.Available == 0) {
                 p.idleTime += delta;
                 if(p.idleTime > (60*1000))
@@ -87,7 +90,7 @@ namespace ProtoServer
 
         private static void handleCreateToon(Account p, CreateCharacter createCharacter) {
             p.CurrentToon = Database.CreateToon(p, createCharacter);
-            //set cur toon?
+            WorldManager.PlayerJoinScene(p);
             new EnterWorld((Toon)p.CurrentToon).Send(p.Client.GetStream());
         }
 
@@ -113,7 +116,7 @@ namespace ProtoServer
         private static void SendMovementUpdate(MoveRequest syncClient,int serial) {
             SyncMobile m = new SyncMobile();
             m.Serial = serial;
-            m.Location = new Vector3(syncClient.x, syncClient.y, syncClient.z);
+            m.Location = new Vector3D(syncClient.x, syncClient.y, syncClient.z);
             foreach (Account p in ClientManager.OnlineAccounts)
                 if(p.Serial != serial)
                 m.Send(p.Client.GetStream());
@@ -124,6 +127,7 @@ namespace ProtoServer
             int index = Math.Max(0,Math.Min(selectCharacter.ToonID, account.Toons.Count));
             account.CurrentToon = account.Toons[index];
             Logger.Log("Entering world..." + account.CurrentToon.Name);
+            WorldManager.PlayerJoinScene(account);
             new EnterWorld((Toon)account.CurrentToon).Send(client);
             return;
             

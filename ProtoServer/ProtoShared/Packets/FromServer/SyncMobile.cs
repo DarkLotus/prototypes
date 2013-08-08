@@ -18,7 +18,7 @@ namespace ProtoShared.Packets.FromServer
         public int Serial;
 
         [ProtoMember(3)]
-        public Vector3 Location;
+        public Vector3D Location;
 
 
         public SyncMobile() : base(ID) { }

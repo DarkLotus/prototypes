@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\projects\UnityORPG\Assets\</OutputPath>
+    <OutputPath>..\..\UnityORPG\Assets\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Attrib.cs" />
-    <Compile Include="Data\Scene.cs" />
     <Compile Include="Data\Toon.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="OpCodes.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="Packets\BaseMessage.cs" />
     <Compile Include="Packets\Bidirectional.cs" />
     <Compile Include="Packets\FromClient\MoveRequest.cs" />
+    <Compile Include="Packets\FromServer\ShowOtherToon.cs" />
     <Compile Include="Packets\FromServer\SyncMobile.cs" />
     <Compile Include="Packets\FromServer\LoginResponse.cs" />
     <Compile Include="Packets\FromServer\EnterWorld.cs" />

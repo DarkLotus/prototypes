@@ -12,6 +12,7 @@ using ProtoShared.Packets.FromServer;
 using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets;
 using System.IO;
+using ProtoServer.Managers;
 namespace ProtoServer
 {
     class Program
@@ -44,6 +45,7 @@ namespace ProtoServer
             while (true) {
             //Do game loop
                 ClientManager.Update(timer);
+                WorldManager.Update(timer);
                 if (sw.ElapsedMilliseconds > 16)
                     Logger.Log("Update running behind : " + sw.ElapsedMilliseconds);
                 if (sw.ElapsedMilliseconds < 16)
