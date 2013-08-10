@@ -28,6 +28,10 @@ namespace ProtoServer.Managers
 
             Scenes[player.CurrentToon.SceneSerial].ToonJoinWorld(player);//.Toons.Add(player);
         }
+
+        internal static void PlayerLeaveScene(Account player) {
+            Scenes[player.CurrentToon.SceneSerial].ToonLeaveWorld(player);
+        }
     }
 
     

@@ -53,7 +53,7 @@ namespace ProtoServer.DataBase
             if (_characters == null) { _characters = new AccountDBDataSetTableAdapters.charactersTableAdapter(); }
             var data = _characters.GetToonsByOwnerID(a.Serial);
             foreach (var row in data)
-                a.Toons.Add(ServerToon.LoadDataBlob(row.serialized_data));
+                a.Toons.Add(ServerToon.LoadDataBlob(row));
 
         }
 

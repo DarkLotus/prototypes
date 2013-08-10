@@ -17,10 +17,17 @@ namespace ProtoServer.Data
         public ServerToon() {
         }
 
-        public static Toon LoadDataBlob(byte[] p) {
+       /* public static Toon LoadDataBlob(byte[] p) {
             return Serializer.DeserializeWithLengthPrefix<Toon>(new MemoryStream(p), PrefixStyle.Base128);
-        }
+        }*/
 
-        
+
+
+        internal static Toon LoadDataBlob(DataBase.AccountDBDataSet.charactersRow row) {
+            Toon t = Serializer.DeserializeWithLengthPrefix<Toon>(new MemoryStream(row.serialized_data), PrefixStyle.Base128);
+            t.Serial = row.toonid;
+            t.Name = row.name;
+            return t;
+        }
     }
 }

@@ -32,5 +32,12 @@ namespace ProtoServer.Data
                 show.Send(t.Client.GetStream());
             Toons.Add(player);
         }
+
+        internal void ToonLeaveWorld(Account player) {
+            Logger.Log(player.CurrentToon.Name + " Left Scene : " + Serial + " Sending Remove to " + Toons.Count + " clients");
+            //TODO send player gone packet.
+
+            Toons.Remove(player);
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace ProtoServer.Managers
                 }
             }
             foreach (var serial in RemoveMe) {
+                WorldManager.PlayerLeaveScene(serial);
                 Logger.Log("Account : " + serial.Serial + " Logged off");
                 if (serial.Client != null && serial.Client.Connected)
                     serial.Client.Close();
@@ -50,8 +51,8 @@ namespace ProtoServer.Managers
             //Replace this with a counter in a Keep Alive/Ping packet
             if (p.Client.Available == 0) {
                 p.idleTime += delta;
-                if(p.idleTime > (60*1000))
-                return false;
+                /*if(p.idleTime > (60*1000))
+                return false;*/
                 return true;
             }
             p.idleTime = 0;// TODO only some packets unidle?
@@ -118,7 +119,7 @@ namespace ProtoServer.Managers
             m.Serial = serial;
             m.Location = new Vector3D(syncClient.x, syncClient.y, syncClient.z);
             foreach (Account p in ClientManager.OnlineAccounts)
-                if(p.Serial != serial)
+                if(p.CurrentToon.Serial != serial)
                 m.Send(p.Client.GetStream());
             Logger.Log("Sent SyncMobile to: " + ClientManager.OnlineAccounts.Count + " players");
         }
