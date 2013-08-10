@@ -25,13 +25,11 @@ namespace ProtoServer.Managers
 
         private static List<Account> RemoveMe = new List<Account>();
         internal static void Update(long delta) {
-            
-            foreach (Account p in OnlineAccounts) {
-                
-                if (!HandleClientMessages(p,delta)) {
-                    RemoveMe.Add(p);
-                }
+            for (int i = OnlineAccounts.Count -1; i >= 0; i--) {
+            if(!HandleClientMessages(OnlineAccounts[i],delta))
+                RemoveMe.Add(OnlineAccounts[i]);
             }
+               
             foreach (var serial in RemoveMe) {
                 WorldManager.PlayerLeaveScene(serial);
                 Logger.Log("Account : " + serial.Serial + " Logged off");
@@ -55,7 +53,7 @@ namespace ProtoServer.Managers
                 return false;*/
                 return true;
             }
-            p.idleTime = 0;// TODO only some packets unidle?
+
             while (p.Client.Available > 1) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(p.Client.GetStream(), PrefixStyle.Base128);
                 //Logger.Log(data.GetType().ToString() + "    " + data.PacketType);
@@ -137,6 +135,8 @@ namespace ProtoServer.Managers
         private static void handleClientAuthReq(NetworkStream client, LoginRequest loginRequest,Account p) {
             Logger.Log("User: " + loginRequest.UserName + " Connecting...");
             Database.LoadAccountInto(p,loginRequest.UserName, loginRequest.Password);
+            //if (OnlineAccounts.Where(a => a.Serial == p.Serial).Count() > 1)
+            //    OnlineAccounts.Remove(OnlineAccounts.Where(a => a.Serial == p.Serial).First());
             new LoginResponse(p.GetToonNames()).Send(client);
             Logger.Log("Sent Login Response");
             return;

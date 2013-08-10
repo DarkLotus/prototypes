@@ -11,6 +11,7 @@ namespace ProtoShared.Packets.FromServer
     /// <summary>
     /// Sent when a mobile has moved
     /// </summary>
+    [ProtoContract]
     public class SyncMobile : ProtoShared.Packets.BaseMessage
     {
         public static Int16 ID;
