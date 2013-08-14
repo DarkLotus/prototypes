@@ -17,17 +17,22 @@ using UnityEngine;
 
 namespace ProtoServer.Managers
 {
-    public static class ClientManager
+    public class ClientManager
     {
-        
+        private static ClientManager _instance;
+        public static ClientManager Instance { get { if(_instance == null) _instance = new ClientManager();return _instance;}}
+       
+        public delegate void PacketHandler(Account owner,BaseMessage msg);
+        public event PacketHandler OnPacketarrival;
 
-        public static List<Account> OnlineAccounts = new List<Account>();
+        public  List<Account> OnlineAccounts = new List<Account>();
 
-        private static List<Account> RemoveMe = new List<Account>();
-        internal static void Update(long delta) {
+        private  List<Account> RemoveMe = new List<Account>();
+
+        internal void Update(long delta) {
             for (int i = OnlineAccounts.Count -1; i >= 0; i--) {
-            if(!HandleClientMessages(OnlineAccounts[i],delta))
-                RemoveMe.Add(OnlineAccounts[i]);
+                if (!HandleClientMessages(OnlineAccounts[i], delta))
+                    RemoveMe.Add(OnlineAccounts[i]);
             }
                
             foreach (var serial in RemoveMe) {
@@ -42,7 +47,15 @@ namespace ProtoServer.Managers
 
         }
 
-        private static bool HandleClientMessages(Account p,long delta) {
+        internal void ClientConnected(System.Net.Sockets.TcpClient Client) {
+            Client.NoDelay = true;
+
+            OnlineAccounts.Add(new Account(Client));
+            Logger.Log(Client.Client.RemoteEndPoint.ToString() + " Connected");
+        }
+
+
+        private bool HandleClientMessages(Account p,long delta) {
             if (p.Client == null || !p.Client.Connected)
                 return false;
 
@@ -67,11 +80,9 @@ namespace ProtoServer.Managers
                             case OpCodes.C_SelectCharacter:
                                 handleSelectToon(p.Client.GetStream(), (SelectCharacter)data, p);
                                 break;
-                            case OpCodes.C_MoveRequest:
-                                handleMoveRequest(p.CurrentToon, (MoveRequest)data);
-                                break;
-                            case OpCodes.S_ChatMessage:
-                                handleChatMessage(p, (ChatMessage)data);
+                            default:
+                                if (OnPacketarrival != null)
+                                    OnPacketarrival(p, data);
                                 break;
 
                         }
@@ -80,49 +91,19 @@ namespace ProtoServer.Managers
             return true;
         }
 
-        private static void handleChatMessage(Account a, ChatMessage chatMessage) {
-            Logger.Log(chatMessage.Sender + ": " + chatMessage.Message);
-            foreach (var p in OnlineAccounts)
-                if(a.Serial != p.Serial)
-                chatMessage.Send(p.Client.GetStream());
-        }
+     
 
-        private static void handleCreateToon(Account p, CreateCharacter createCharacter) {
+        private void handleCreateToon(Account p, CreateCharacter createCharacter) {
             p.CurrentToon = Database.CreateToon(p, createCharacter);
             WorldManager.PlayerJoinScene(p);
             new EnterWorld((Toon)p.CurrentToon).Send(p.Client.GetStream());
         }
 
-        internal static void ClientConnected(System.Net.Sockets.TcpClient Client) {
-            Client.NoDelay = true;
-            
-            OnlineAccounts.Add(new Account(Client));
-            Logger.Log(Client.Client.RemoteEndPoint.ToString() + " Connected");
-        }
 
 
-   
+           
 
-        private static void handleMoveRequest(Toon p, MoveRequest syncClient) {
-            Logger.Log(p.Name + " Moved to " + syncClient.x + "," + syncClient.y);
-            p.Location.X = syncClient.x;
-            p.Location.Y = syncClient.y;
-            p.Location.Z = syncClient.z;
-            SendMovementUpdate(syncClient,p.Serial);
-            
-        }
-
-        private static void SendMovementUpdate(MoveRequest syncClient,int serial) {
-            SyncMobile m = new SyncMobile();
-            m.Serial = serial;
-            m.Location = new Vector3D(syncClient.x, syncClient.y, syncClient.z);
-            foreach (Account p in ClientManager.OnlineAccounts)
-                if(p.CurrentToon.Serial != serial)
-                m.Send(p.Client.GetStream());
-            Logger.Log("Sent SyncMobile to: " + ClientManager.OnlineAccounts.Count + " players");
-        }
-
-        private static void handleSelectToon(NetworkStream client, SelectCharacter selectCharacter, Account account) {
+        private void handleSelectToon(NetworkStream client, SelectCharacter selectCharacter, Account account) {
             int index = Math.Max(0,Math.Min(selectCharacter.ToonID, account.Toons.Count));
             account.CurrentToon = account.Toons[index];
             Logger.Log("Entering world..." + account.CurrentToon.Name);
@@ -132,7 +113,7 @@ namespace ProtoServer.Managers
             
         }
 
-        private static void handleClientAuthReq(NetworkStream client, LoginRequest loginRequest,Account p) {
+        private void handleClientAuthReq(NetworkStream client, LoginRequest loginRequest,Account p) {
             Logger.Log("User: " + loginRequest.UserName + " Connecting...");
             Database.LoadAccountInto(p,loginRequest.UserName, loginRequest.Password);
             //if (OnlineAccounts.Where(a => a.Serial == p.Serial).Count() > 1)

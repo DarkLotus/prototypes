@@ -74,6 +74,7 @@
     <Compile Include="Data\Mobile.cs" />
     <Compile Include="Data\Scene.cs" />
     <Compile Include="Data\ServerToon.cs" />
+    <Compile Include="Extentions.cs" />
     <Compile Include="Managers\ClientManager.cs" />
     <Compile Include="DataBase\Database.cs" />
     <Compile Include="IDFactory.cs" />
@@ -135,7 +136,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Packets\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

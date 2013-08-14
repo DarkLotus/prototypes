@@ -42,9 +42,10 @@ namespace ProtoServer
             Stopwatch sw = new Stopwatch();
             long timer = 0;
             sw.Start();
+            
             while (true) {
             //Do game loop
-                ClientManager.Update(timer);
+                ClientManager.Instance.Update(timer);
                 WorldManager.Update(timer);
                 if (sw.ElapsedMilliseconds > 16)
                     Logger.Log("Update running behind : " + sw.ElapsedMilliseconds);
@@ -63,7 +64,7 @@ namespace ProtoServer
             TcpListener client = (TcpListener)ar.AsyncState;
 
             TcpClient Client = client.EndAcceptTcpClient(ar);
-            ClientManager.ClientConnected(Client);
+            ClientManager.Instance.ClientConnected(Client);
 
             //client.BeginAcceptTcpClient(new AsyncCallback(AcceptClientConnection), tcpListener);
 
