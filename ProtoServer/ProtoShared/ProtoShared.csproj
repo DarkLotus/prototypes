@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +51,10 @@
     <Compile Include="Data\Toon.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="OpCodes.cs" />
+    <Compile Include="Packets\FromClient\UseSkill.cs" />
+    <Compile Include="Packets\FromClient\PickupItem.cs" />
+    <Compile Include="Packets\FromClient\DropItem.cs" />
+    <Compile Include="Packets\FromClient\DissconnectRequest.cs" />
     <Compile Include="Packets\FromClient\CreateCharacter.cs" />
     <Compile Include="Packets\FromClient\UseObject.cs" />
     <Compile Include="Packets\FromClient\SelectCharacter.cs" />
@@ -58,12 +62,16 @@
     <Compile Include="Packets\BaseMessage.cs" />
     <Compile Include="Packets\Bidirectional.cs" />
     <Compile Include="Packets\FromClient\MoveRequest.cs" />
+    <Compile Include="Packets\FromServer\ShowObject.cs" />
+    <Compile Include="Packets\FromServer\PlayAnimation.cs" />
+    <Compile Include="Packets\FromServer\DeleteObject.cs" />
     <Compile Include="Packets\FromServer\ShowOtherToon.cs" />
-    <Compile Include="Packets\FromServer\SyncMobile.cs" />
+    <Compile Include="Packets\FromServer\SyncObjectLocation.cs" />
     <Compile Include="Packets\FromServer\LoginResponse.cs" />
     <Compile Include="Packets\FromServer\EnterWorld.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Packets\Shared\ChatMessage.cs" />
+    <Compile Include="Packets\Shared\Ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vector3D.cs" />
   </ItemGroup>

@@ -10,16 +10,16 @@ namespace ProtoShared.Packets.Shared
     /// Sent when a mobile has moved
     /// </summary>
     [ProtoContract]
-    public class ChatMessage : ProtoShared.Packets.BaseMessage
+    public class Ping : ProtoShared.Packets.BaseMessage
     {
         public static Int16 ID;
         [ProtoMember(2)]
-        public string Sender;
+        public int TickID;
 
-        [ProtoMember(3)]
-        public string Message;
+        [ProtoMember(2)]
+        public long TimeStamp;
 
 
-        public ChatMessage() : base(ID) { }
+        public Ping() : base(ID) { }
     }
 }

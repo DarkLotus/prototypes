@@ -1,5 +1,6 @@
 ﻿using ProtoBuf;
 using ProtoBuf.Meta;
+using ProtoShared.Data;
 using ProtoShared.Packets.FromClient;
 using ProtoShared.Packets.FromServer;
 using System;

@@ -8,20 +8,19 @@ using ProtoShared.Data;
 
 namespace ProtoShared.Packets.FromServer
 {
-    /// <summary>
-    /// Sent when a mobile has moved
-    /// </summary>
     [ProtoContract]
-    public class SyncMobile : ProtoShared.Packets.BaseMessage
+    public class DeleteObject : ProtoShared.Packets.BaseMessage
     {
         public static Int16 ID;
         [ProtoMember(2)]
         public int Serial;
 
-        [ProtoMember(3)]
-        public Vector3D Location;
 
+        public DeleteObject() : base(ID) { }
 
-        public SyncMobile() : base(ID) { }
+        public DeleteObject(int Serial)
+            : base(ID) {
+                this.Serial = Serial;
+        }
     }
 }
