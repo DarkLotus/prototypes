@@ -36,6 +36,7 @@ namespace ProtoServer.Managers
             }
                
             foreach (var serial in RemoveMe) {
+                Database.SaveToon(serial.CurrentToon);
                 WorldManager.PlayerLeaveScene(serial);
                 Logger.Log("Account : " + serial.Serial + " Logged off");
                 if (serial.Client != null && serial.Client.Connected)
@@ -54,18 +55,23 @@ namespace ProtoServer.Managers
             Logger.Log(Client.Client.RemoteEndPoint.ToString() + " Connected");
         }
 
-
+        
         private bool HandleClientMessages(Account p,long delta) {
             if (p.Client == null || !p.Client.Connected)
                 return false;
-
-            //Replace this with a counter in a Keep Alive/Ping packet
-            if (p.Client.Available == 0) {
-                p.idleTime += delta;
-                /*if(p.idleTime > (60*1000))
-                return false;*/
-                return true;
+            p.TimeSincePingSent += delta;
+            //Send ping every 30 seconds
+            if (p.TimeSincePingSent > (30 * 1000)) {
+                if (!new ProtoShared.Packets.Shared.Ping() { TimeStamp = System.DateTime.Now.ToFileTimeUtc() }.Send(p)) { return false; }
+                p.TimeSincePingSent = 0;
             }
+
+            //If last recieved ping back was more than 30 seconds, DC
+            if (p.LastPing != 0 && p.LastPing > DateTime.Now.ToFileTimeUtc() + (30 * 1000)) {
+                Logger.Log("Dissconnecting client " + p.UserName + " due to no pings");
+                return false;
+            }
+                      
 
             while (p.Client.Available > 1) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(p.Client.GetStream(), PrefixStyle.Base128);
@@ -73,6 +79,9 @@ namespace ProtoServer.Managers
                         switch (data.PacketType) {
                             case OpCodes.C_LoginRequest:
                                 handleClientAuthReq(p.Client.GetStream(), (LoginRequest)data,p);
+                                break;
+                            case OpCodes.S_Ping:
+                                handlePing(p, (ProtoShared.Packets.Shared.Ping)data);
                                 break;
                             case OpCodes.C_CreateCharacter:
                                 handleCreateToon(p, (CreateCharacter)data);
@@ -89,6 +98,10 @@ namespace ProtoServer.Managers
 
             }
             return true;
+        }
+
+        private void handlePing(Account p, ProtoShared.Packets.Shared.Ping ping) {
+            p.LastPing = DateTime.Now.ToFileTimeUtc();
         }
 
      

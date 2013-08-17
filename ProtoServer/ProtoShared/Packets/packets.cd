@@ -1,47 +1,148 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ProtoShared.Packets.FromClient.SyncClient">
-    <Position X="10" Y="5.5" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromClient.MoveRequest" Collapsed="true">
+    <Position X="10.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
-      <FileName>Packets\FromClient\SyncClient.cs</FileName>
+      <FileName>Packets\FromClient\MoveRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProtoShared.Packets.BaseMessage">
-    <Position X="0.5" Y="3.25" Width="1.5" />
+    <Position X="13" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Packets\BaseMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromClient.SelectCharacter">
-    <Position X="5" Y="4.75" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromClient.SelectCharacter" Collapsed="true">
+    <Position X="10.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>Packets\FromClient\SelectCharacter.cs</FileName>
       <NewMemberFileName>Packets\FromClient\LoginRequest.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromServer.LoginResponse">
-    <Position X="3.5" Y="3" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromServer.LoginResponse" Collapsed="true">
+    <Position X="15.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAgAAA=</HashCode>
       <FileName>Packets\FromServer\LoginResponse.cs</FileName>
       <NewMemberFileName>Packets\FromServer\EnterWorld.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromServer.EnterWorld">
-    <Position X="6.5" Y="3" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromServer.EnterWorld" Collapsed="true">
+    <Position X="15.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAgAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Packets\FromServer\EnterWorld.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ProtoShared.Packets.FromClient.LoginRequest">
-    <Position X="2" Y="4.5" Width="1.5" />
+  <Class Name="ProtoShared.Packets.FromClient.LoginRequest" Collapsed="true">
+    <Position X="10.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
       <FileName>Packets\FromClient\LoginRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.DissconnectRequest" Collapsed="true">
+    <Position X="10.75" Y="7.5" Width="1.5" />
+    <InheritanceLine Type="ProtoShared.Packets.BaseMessage" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="2.44" />
+        <Point X="13.75" Y="7.469" />
+        <Point X="11.5" Y="7.469" />
+        <Point X="11.5" Y="7.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromClient\DissconnectRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.DropItem" Collapsed="true">
+    <Position X="10.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAIAAAAAABAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Packets\FromClient\DropItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.PickupItem" Collapsed="true">
+    <Position X="10.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromClient\PickupItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.UseObject" Collapsed="true">
+    <Position X="10.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAAQAA=</HashCode>
+      <FileName>Packets\FromClient\UseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromClient.UseSkill" Collapsed="true">
+    <Position X="10.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Packets\FromClient\UseSkill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromServer.DeleteObject" Collapsed="true">
+    <Position X="15.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromServer\DeleteObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromServer.PlayAnimation" Collapsed="true">
+    <Position X="15.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Packets\FromServer\PlayAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromServer.ShowObject" Collapsed="true">
+    <Position X="15.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAgAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromServer\ShowObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromServer.ShowOtherToon" Collapsed="true">
+    <Position X="15.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromServer\ShowOtherToon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.FromServer.SyncObjectLocation" Collapsed="true">
+    <Position X="15.75" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="ProtoShared.Packets.BaseMessage" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="2.44" />
+        <Point X="13.75" Y="10.846" />
+        <Point X="17.625" Y="10.846" />
+        <Point X="17.625" Y="10" />
+        <Point X="17.25" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAIAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\FromServer\SyncObjectLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.Shared.ChatMessage" Collapsed="true">
+    <Position X="21.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAIAAIAAA=</HashCode>
+      <FileName>Packets\Shared\ChatMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoShared.Packets.Shared.Ping" Collapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packets\Shared\Ping.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

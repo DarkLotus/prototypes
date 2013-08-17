@@ -1,7 +1,10 @@
-﻿using ProtoServer.Data;
+﻿using ProtoBuf;
+using ProtoServer.Data;
+using ProtoShared.Data;
 using ProtoShared.Packets;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -10,8 +13,10 @@ namespace ProtoServer
 {
     public static class Extentions
     {
-        public static void Send(this BaseMessage msg, Account acc) {
-            msg.Send(acc.Client.GetStream());
+     
+
+        public static bool Send(this BaseMessage msg, Account acc) {
+            return msg.Send(acc.Client.GetStream());
         }
         public static void EachParallel<T>(this IEnumerable<T> list, Action<T> action) {
             // enumerate the list so it can't change during execution

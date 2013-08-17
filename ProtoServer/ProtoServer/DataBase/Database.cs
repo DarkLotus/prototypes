@@ -75,5 +75,11 @@ namespace ProtoServer.DataBase
             LoadToonsForAccountID(p);
             return p.Toons.Where(t => t.Name.Equals(createCharacter.Name)).First();
         }
+
+        internal static void SaveToon(Toon toon) {
+            if (_characters == null) _characters = new AccountDBDataSetTableAdapters.charactersTableAdapter();
+            Logger.Log("Saved Toon " + toon.Name);
+            _characters.UpdateToon(toon.Name, toon.GetData(), toon.Serial);
+        }
     }
 }

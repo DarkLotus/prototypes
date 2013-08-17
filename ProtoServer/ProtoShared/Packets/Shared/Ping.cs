@@ -16,7 +16,7 @@ namespace ProtoShared.Packets.Shared
         [ProtoMember(2)]
         public int TickID;
 
-        [ProtoMember(2)]
+        [ProtoMember(3)]
         public long TimeStamp;
 
 

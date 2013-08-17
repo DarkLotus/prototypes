@@ -15,7 +15,7 @@ namespace ProtoShared.Packets.FromServer
         [ProtoMember(2)]
         public int Serial;
 
-        [ProtoMember(2)]
+        [ProtoMember(3)]
         public int Prefab;
 
         //TODO

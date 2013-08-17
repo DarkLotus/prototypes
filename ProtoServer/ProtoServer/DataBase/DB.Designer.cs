@@ -2386,7 +2386,7 @@ namespace ProtoServer.DataBase.AccountDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[4];
+            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [ownerid], [name], [serialized_data], [toonid] FROM [characters]";
@@ -2409,6 +2409,14 @@ namespace ProtoServer.DataBase.AccountDBDataSetTableAdapters {
                 "\nWHERE        (ownerid = @Param1)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Param1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "ownerid", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[4] = new global::System.Data.SqlServerCe.SqlCeCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "UPDATE       characters\r\nSET                name = @Param1, serialized_data = @Pa" +
+                "ram2\r\nWHERE        (toonid = @Param3)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Param1", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, true, 0, 0, "name", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Param2", global::System.Data.SqlDbType.VarBinary, 8000, global::System.Data.ParameterDirection.Input, true, 0, 0, "serialized_data", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Param3", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "toonid", global::System.Data.DataRowVersion.Original, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2533,6 +2541,42 @@ namespace ProtoServer.DataBase.AccountDBDataSetTableAdapters {
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateToon(string Param1, byte[] Param2, int Param3) {
+            global::System.Data.SqlServerCe.SqlCeCommand command = this.CommandCollection[4];
+            if ((Param1 == null)) {
+                throw new global::System.ArgumentNullException("Param1");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(Param1));
+            }
+            if ((Param2 == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((byte[])(Param2));
+            }
+            command.Parameters[2].Value = ((int)(Param3));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

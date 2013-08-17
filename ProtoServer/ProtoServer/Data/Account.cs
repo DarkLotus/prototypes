@@ -19,7 +19,9 @@ namespace ProtoServer.Data
 
 
         public TcpClient Client;
-        public long idleTime;
+        public long TimeSincePingSent;
+
+        public long LastPing = 0;
 
         public Account(System.Net.Sockets.TcpClient Client) {
             // TODO: Complete member initialization

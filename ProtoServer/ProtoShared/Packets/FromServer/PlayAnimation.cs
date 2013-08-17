@@ -16,10 +16,10 @@ namespace ProtoShared.Packets.FromServer
         [ProtoMember(2)]
         public int TargetSerial;
 
-        [ProtoMember(2)]
+        [ProtoMember(3)]
         public int AnimationID;
 
-        [ProtoMember(2)]
+        [ProtoMember(4)]
         public float Time;
 
         public PlayAnimation() : base(ID) { }

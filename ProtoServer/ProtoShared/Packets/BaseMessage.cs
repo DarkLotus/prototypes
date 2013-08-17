@@ -72,16 +72,17 @@ namespace ProtoShared.Packets
 
         
 
-        public void Send(Stream stream) {
+        public bool Send(Stream stream) {
             var t = this.GetType();
             if (stream == null || !stream.CanWrite)
-                return;
+                return false;
             try {
                 Serializer.SerializeWithLengthPrefix<BaseMessage>(stream, this, PrefixStyle.Base128);
             }
-            catch { Logger.Log("Message failed to send: " + this.ToString());return; }
+            catch { Logger.Log("Message failed to send: " + this.ToString());return false; }
             stream.Flush();
             Logger.Log("Sent" + this.ToString()) ;
+            return true;
         }
 
         public override string ToString() {
