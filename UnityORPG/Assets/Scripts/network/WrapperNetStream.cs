@@ -24,12 +24,13 @@ namespace Assets.Scripts.network
             if (Application.platform == RuntimePlatform.Android) {
 #if UNITY_ANDROID
                 Debug.Log("Trying to Call finish");
-                _socket = new AndroidJavaObject("java.net.Socket", new object[] { "192.168.1.3", 2594 });
+                _socket = new AndroidJavaObject("java.net.Socket", new object[] { "192.168.2.5", 2594 });
                 _inStream = _socket.Call<AndroidJavaObject>("getInputStream");
                 _outStream = _socket.Call<AndroidJavaObject>("getOutputStream");
 #elif UNITY_STANDALONE
                 //TODO init windows socket here.
-                _client.Connect("192.168.1.3", 2594);
+                _client = new System.Net.Sockets.TcpClient();
+                _client.Connect("192.168.2.5", 2594);
                 _inStream = _client.GetStream();
 
 #endif

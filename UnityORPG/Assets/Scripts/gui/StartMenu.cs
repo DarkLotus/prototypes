@@ -12,19 +12,14 @@ public class StartMenu : MonoBehaviour {
 	NetworkManager _network;
 	
 	
-    public static class StartValues
-    {
-        public static string SaveGameToLoad;
-        public static bool bLoadSaveGame;
-    }
-	
+   	
 	private int XCentre = Screen.width / 2;
 	private int YCentre = Screen.height / 2;
     private bool bStarted;
 	
 	// Use this for initialization
 	void Start () {
-		
+        Application.runInBackground = true;
 	}
 
     void LateStart() {

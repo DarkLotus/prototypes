@@ -45,9 +45,11 @@ namespace Assets.Scripts
 #elif UNITY_STANDALONE
             TcpClient _client = null;
              _client = new TcpClient();           
-            _client.Connect(IPAddress.Parse("127.0.0.1"), 2594);
+            _client.Connect(IPAddress.Parse("192.168.2.5"), 2594);
             _stream = _client.GetStream();
 #endif
+
+
 
             Debug.Log("Begin Connect called on local 2594");
 			if (_stream != null && !bConnected) {
@@ -95,11 +97,15 @@ namespace Assets.Scripts
 #endif
             if (_stream != null && length > 0) {
                 var data = Serializer.DeserializeWithLengthPrefix<BaseMessage>(_stream, PrefixStyle.Base128);
+                Logger.Log(data.ToString());
                switch (data.PacketType) {
                    case OpCodes.S_LoginResponse:
                        //handleLoginResponse((LoginResponse)data);
                        if (OnShowCharSelect != null)
                            OnShowCharSelect((LoginResponse)data);
+                       break;
+                   case OpCodes.S_Ping:
+                       Send(new ProtoShared.Packets.Shared.Ping() { TimeStamp = System.DateTime.Now.ToFileTimeUtc() });
                        break;
                    case OpCodes.S_EnterWorld:
                       handleEnterWorld((EnterWorld)data);
@@ -115,7 +121,7 @@ namespace Assets.Scripts
                        
                }
               
-                Logger.Log(data.ToString());
+                
             }
         }
 
@@ -152,9 +158,10 @@ namespace Assets.Scripts
         public void SyncPlayer(CharacterMotor m) {
             //Logger.Log("Syncing");
             if (_stream != null && bConnected) {
+                MoveRequest a = new MoveRequest(m.transform.position.x, m.transform.position.y, m.transform.position.z);
                 //SyncClient sync = new SyncClient(m.transform.position.x, m.transform.position.y, 0);
-               // Serializer.SerializeWithLengthPrefix<SyncClient>(_stream, sync, PrefixStyle.Base128);
-               // _stream.Flush();
+                Send(a);
+                
             }
         }
 
@@ -163,7 +170,9 @@ namespace Assets.Scripts
 
 
         internal void Send(BaseMessage message) {
+            Logger.Log("Sending: " + message.ToString());
             message.Send(_stream);
+            _stream.Flush();
         }
     }
 }

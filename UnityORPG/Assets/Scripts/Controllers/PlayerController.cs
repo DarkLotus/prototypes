@@ -6,7 +6,7 @@ using ProtoShared.Data;
 /// <summary>
 /// Home screens menu handler.
 /// </summary>
-namespace Assets.Scripts
+namespace Assets.Scripts.Controllers
 {
 
     public class PlayerController : MonoBehaviour
@@ -40,8 +40,9 @@ namespace Assets.Scripts
             transform.position = Helpers.Helper.getVector(enterWorld.Location);
         }
 
-        internal void handleMovementSync(ProtoShared.Packets.FromServer.SyncMobile syncMobile) {
+        internal void handleMovementSync(ProtoShared.Packets.FromServer.SyncObjectLocation syncMobile) {
             transform.position = Helpers.Helper.getVector(syncMobile.Location);
+            Logger.Log(syncMobile.Serial + " Moved to : " + syncMobile.Location.ToString());
         }
     }
 }

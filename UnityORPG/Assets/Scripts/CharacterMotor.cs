@@ -191,10 +191,10 @@ public class CharacterMotor : MonoBehaviour
 
     private CharacterController controller;
 
-    //private NetworkManager manager;
+    private NetworkManager manager;
     void Awake()
     {
-        //manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>();
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<NetworkManager>();
         controller = GetComponent<CharacterController>();
         tr = transform;
     }
@@ -340,8 +340,8 @@ public class CharacterMotor : MonoBehaviour
             movingPlatform.activeGlobalRotation = tr.rotation;
             movingPlatform.activeLocalRotation = Quaternion.Inverse(movingPlatform.activePlatform.rotation) * movingPlatform.activeGlobalRotation;
         }
-        //if (velocity.magnitude > 1f)
-        //    manager.SyncPlayer(this);
+        if (velocity.magnitude > 1f)
+            manager.SyncPlayer(this);
         GetComponent<Animator>().SetFloat("Velocity", velocity.magnitude);
        // Debug.Log(velocity.magnitude + " vel");
     }
