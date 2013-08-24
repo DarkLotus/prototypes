@@ -12,16 +12,21 @@ namespace ProtoShared.Packets.FromServer
     /// Sent when a mobile has moved
     /// </summary>
     [ProtoContract]
-    public class SyncObjectLocation : ProtoShared.Packets.BaseMessage
+    public class SyncObjectLocation : BaseMessage
     {
         public static Int16 ID;
-        [ProtoMember(2)]
-        public int Serial;
+        [ProtoMember(2)] public int Serial;
 
-        [ProtoMember(3)]
-        public Vector3D Location;
+        [ProtoMember(3)] public Vector3D Location;
 
 
-        public SyncObjectLocation() : base(ID) { }
+        public SyncObjectLocation() : base(ID)
+        {
+        }
+        public SyncObjectLocation(Vector3D loc)
+            : base(ID)
+        {
+            Location = new Vector3D(loc);
+        }
     }
 }

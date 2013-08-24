@@ -1,18 +1,15 @@
-﻿using ProtoBuf;
-using ProtoShared.Packets.FromServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using ProtoBuf;
 
 namespace ProtoShared.Packets.FromClient
 {
     [ProtoContract]
-    public class DissconnectRequest : ProtoShared.Packets.BaseMessage
+    public class DissconnectRequest : BaseMessage
     {
         public static Int16 ID;
-         public DissconnectRequest() : base(ID) { }
 
-      
+        public DissconnectRequest() : base(ID)
+        {
+        }
     }
 }

@@ -95,10 +95,8 @@ namespace ProtoServer.Data
         }
 
         private void handleMoveRequest(Toon p, MoveRequest syncClient) {
-            Logger.Log(p.Name + " Moved to " + syncClient.x + "," + syncClient.y);
-            p.Location.X = syncClient.x;
-            p.Location.Y = syncClient.y;
-            p.Location.Z = syncClient.z;
+            Logger.Log(p.Name + " Moved to " + syncClient.Location);
+            p.Location.Set(syncClient.Location);
             SendMovementUpdate(syncClient, p.Serial);
 
         }
@@ -110,7 +108,7 @@ namespace ProtoServer.Data
         private void SendMovementUpdate(MoveRequest syncClient, int serial) {
             SyncObjectLocation m = new SyncObjectLocation();
             m.Serial = serial;
-            m.Location = new Vector3D(syncClient.x, syncClient.y, syncClient.z);
+            m.Location = new Vector3D(syncClient.Location);
             foreach (Account p in Toons)
                 if (p.CurrentToon.Serial != serial)
                     m.Send(p.Client.GetStream());

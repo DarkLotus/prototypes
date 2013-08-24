@@ -153,6 +153,13 @@ namespace ProtoShared
             public override string ToString() {
                 return string.Format("x:{0} y:{1} z:{2}", X, Y, Z);
             }
+
+            public void Set(Vector3D vector3D)
+            {
+                this.X = vector3D.X;
+                this.Y = vector3D.Y;
+                this.Z = vector3D.Z;
+            }
         }
     }
 

@@ -64,10 +64,11 @@ namespace ProtoServer.Managers
             if (p.TimeSincePingSent > (30 * 1000)) {
                 if (!new ProtoShared.Packets.Shared.Ping() { TimeStamp = System.DateTime.Now.ToFileTimeUtc() }.Send(p)) { return false; }
                 p.TimeSincePingSent = 0;
+                p.LastPing++;
             }
 
-            //If last recieved ping back was more than 30 seconds, DC
-            if (p.LastPing != 0 && p.LastPing > DateTime.Now.ToFileTimeUtc() + (30 * 1000)) {
+            //If last recieved ping back was more than 60 seconds, DC
+            if (p.LastPing > 2) {
                 Logger.Log("Dissconnecting client " + p.UserName + " due to no pings");
                 return false;
             }
@@ -89,6 +90,8 @@ namespace ProtoServer.Managers
                             case OpCodes.C_SelectCharacter:
                                 handleSelectToon(p.Client.GetStream(), (SelectCharacter)data, p);
                                 break;
+                            case OpCodes.C_DissconnectRequest:
+                                return false;
                             default:
                                 if (OnPacketarrival != null)
                                     OnPacketarrival(p, data);
@@ -101,7 +104,7 @@ namespace ProtoServer.Managers
         }
 
         private void handlePing(Account p, ProtoShared.Packets.Shared.Ping ping) {
-            p.LastPing = DateTime.Now.ToFileTimeUtc();
+            p.LastPing = 0;
         }
 
      
