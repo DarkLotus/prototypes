@@ -21,20 +21,20 @@ namespace Assets.Scripts.gui
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (bClearNextRefresh) {
+            UIElements.Clear();
+            bClearNextRefresh = false;
+        }
+        if (toAdd.Count != 0)
+            UIElements.AddRange(toAdd);
+        toAdd.Clear();
 	}
 
     void OnGUI() {
         for(int i = 0; i < UIElements.Count;i++)
-            UIElements[i].Draw();
+           UIElements[i].Draw();
 
-            if (bClearNextRefresh) {
-                UIElements.Clear();
-                bClearNextRefresh = false;
-            }
-            if (toAdd.Count != 0)
-                UIElements.AddRange(toAdd);
-            toAdd.Clear();
+          
 
 		}
 		

@@ -15,7 +15,8 @@ namespace Assets.Scripts.network
         AndroidJavaObject _socket;
         AndroidJavaObject _inStream;
         AndroidJavaObject _outStream;
-#elif UNITY_STANDALONE
+#else
+        //#elif UNITY_STANDALONE
         System.Net.Sockets.TcpClient _client;
         System.Net.Sockets.NetworkStream _inStream;
         System.Net.Sockets.NetworkStream _outStream { get {return _inStream;}}
@@ -27,7 +28,7 @@ namespace Assets.Scripts.network
                 _socket = new AndroidJavaObject("java.net.Socket", new object[] { "192.168.2.5", 2594 });
                 _inStream = _socket.Call<AndroidJavaObject>("getInputStream");
                 _outStream = _socket.Call<AndroidJavaObject>("getOutputStream");
-#elif UNITY_STANDALONE
+#else
                 //TODO init windows socket here.
                 _client = new System.Net.Sockets.TcpClient();
                 _client.Connect("192.168.2.5", 2594);
@@ -42,7 +43,7 @@ namespace Assets.Scripts.network
         public override bool CanRead {
 #if UNITY_ANDROID
             get { if (_socket != null)return true; return false; }
-#elif UNITY_STANDALONE
+#else
             get{ return _inStream.CanRead;}
 #endif
         }
@@ -54,7 +55,7 @@ namespace Assets.Scripts.network
         public override bool CanWrite {
             #if UNITY_ANDROID
             get { if (_socket != null)return true; return false; }
-#elif UNITY_STANDALONE
+#else
             get { return _inStream.CanWrite; }
 #endif
         }
@@ -71,7 +72,7 @@ namespace Assets.Scripts.network
             get { 
                 #if UNITY_ANDROID
                 return _inStream.Call<int>("available"); 
-#elif UNITY_STANDALONE
+#else
 
                 return _inStream.Length;
 #endif
@@ -92,7 +93,7 @@ namespace Assets.Scripts.network
             int result = _inStream.Call<int>("read",new object[]{buffer,offset,count});
 
             return result;// was 0
-#elif UNITY_STANDALONE
+#else
 
             return _inStream.Read(buffer, offset, count);
 #endif
@@ -109,9 +110,9 @@ namespace Assets.Scripts.network
         public override void Write(byte[] buffer, int offset, int count) {
              #if UNITY_ANDROID
             _outStream.Call("write", new object[] { buffer, offset, count });
-#elif UNITY_STANDALONE
+#else
 
-             _outStream.Write(buffer, offset, count);
+            _outStream.Write(buffer, offset, count);
              return;
 #endif
             

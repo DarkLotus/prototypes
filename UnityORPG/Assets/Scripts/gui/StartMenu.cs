@@ -69,10 +69,4 @@ public class StartMenu : MonoBehaviour {
             LateStart();
 	}
 
-    void OnGUI() {
-           
-        
-      
-       
-    }
 }

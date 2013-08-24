@@ -12,7 +12,7 @@ namespace Assets.Scripts
     public class SceneController : MonoBehaviour
     {
         PlayerController player;
-        List<PlayerController> OtherPlayers = new List<PlayerController>();
+        List<MobileController> OtherPlayers = new List<MobileController>();
 
         void Start() {
             if (NetworkManager.Instance == null)
@@ -47,7 +47,7 @@ namespace Assets.Scripts
                 Logger.LogError("Show Other Toon was Null"); return;
             }
             var newplayer = (GameObject)Instantiate(Resources.Load("otherPlayer"));
-            var newpl = newplayer.GetComponent<PlayerController>();
+            var newpl = newplayer.GetComponent<MobileController>();
             newpl.EnterWorld(showOtherToon.Toon);
             OtherPlayers.Add(newpl);
 

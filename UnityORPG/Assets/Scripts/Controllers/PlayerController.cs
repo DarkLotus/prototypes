@@ -40,9 +40,6 @@ namespace Assets.Scripts.Controllers
             transform.position = Helpers.Helper.getVector(enterWorld.Location);
         }
 
-        internal void handleMovementSync(ProtoShared.Packets.FromServer.SyncObjectLocation syncMobile) {
-            transform.position = Helpers.Helper.getVector(syncMobile.Location);
-            Logger.Log(syncMobile.Serial + " Moved to : " + syncMobile.Location.ToString());
-        }
+       
     }
 }

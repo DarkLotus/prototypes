@@ -84,6 +84,18 @@ namespace Assets.Scripts
 
         }
 
+        void OnGUI() {
+            GUILayout.BeginArea(new Rect(0, 0, 500, 500));
+            GUILayout.BeginVertical();
+            if(bConnected)
+                if (GUILayout.Button("Dissconnect")) {
+                    Send(new ProtoShared.Packets.FromClient.DissconnectRequest());
+                    Application.LoadLevel(0);
+                }
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+        }
+
         void Update() {
             if (_stream == null)
                 return;
@@ -106,6 +118,7 @@ namespace Assets.Scripts
                        break;
                    case OpCodes.S_Ping:
                        Send(new ProtoShared.Packets.Shared.Ping() { TimeStamp = System.DateTime.Now.ToFileTimeUtc() });
+                       Logger.Log("Sent Ping response");
                        break;
                    case OpCodes.S_EnterWorld:
                       handleEnterWorld((EnterWorld)data);
@@ -160,8 +173,7 @@ namespace Assets.Scripts
             if (_stream != null && bConnected) {
                 MoveRequest a = new MoveRequest(m.transform.position.x, m.transform.position.y, m.transform.position.z);
                 //SyncClient sync = new SyncClient(m.transform.position.x, m.transform.position.y, 0);
-                Send(a);
-                
+                Send(a);    
             }
         }
 

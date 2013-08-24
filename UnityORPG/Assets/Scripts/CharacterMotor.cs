@@ -340,12 +340,17 @@ public class CharacterMotor : MonoBehaviour
             movingPlatform.activeGlobalRotation = tr.rotation;
             movingPlatform.activeLocalRotation = Quaternion.Inverse(movingPlatform.activePlatform.rotation) * movingPlatform.activeGlobalRotation;
         }
-        if (velocity.magnitude > 1f)
+        //if (velocity.magnitude > 1f)
+        if (Vector3.Distance(oldPos, this.transform.position) > 2f && isPlayer) {
             manager.SyncPlayer(this);
+            oldPos.Set(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        }
         GetComponent<Animator>().SetFloat("Velocity", velocity.magnitude);
        // Debug.Log(velocity.magnitude + " vel");
     }
 
+    Vector3 oldPos = new Vector3();
+    public bool isPlayer = false;
     void FixedUpdate()
     {
         if(movingPlatform.enabled)
